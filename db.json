@@ -1,0 +1,22 @@
+{   
+   "user1" : {
+      "name": "oti",
+      "surname": "edwin",
+      "age": "34"
+   }, 
+   "user2" : {
+      "name": "alabo",
+      "surname": "edwin",
+      "age": "20"
+   }, 
+   "user3" : {
+      "name": "david",
+      "surname": "gbade",
+      "age":  "20"
+   },
+   "user4" : {
+      "name": "emperor",
+      "surname": "oladimeji",
+      "age": "200"
+   }
+}

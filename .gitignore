@@ -1,0 +1,6 @@
+#ignores all node modules
+node_modules/
+node_modules
+
+#ignores all unnecessary files 
+/package-lock.json

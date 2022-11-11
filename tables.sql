@@ -1,0 +1,19 @@
+CREATE TABLE subscribers (
+email VARCHAR(255) PRIMARY KEY,
+firstname VARCHAR(25) NOT NULL,
+lastname VARCHAR(25)
+);
+
+CREATE TABLE feeds (
+index SERIAL PRIMARY KEY,
+title VARCHAR NOT NULL,
+message TEXT NOT NULL,
+author VARCHAR NOT NULL,
+-- TIME
+);
+
+CREATE TABLE sessions (
+id VARCHAR(36) PRIMARY KEY,
+epoch_time BIGINT NOT NULL
+);
+
