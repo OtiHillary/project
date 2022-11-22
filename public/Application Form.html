@@ -24,87 +24,107 @@
 	<link rel="stylesheet" type="text/css" href="./Application Form_files/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="./Application Form_files/util.css">
-	<link rel="stylesheet" type="text/css" href="./Application Form_files/main.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./Application Form_files/main.css"> -->
+	<link rel="stylesheet" type="text/css" href="./Login_files/dashlite.css">
 <!--===============================================================================================-->
-<style>p {
-    font-family: Poppins-Regular;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #c40909;
-    margin: 0px;
-}
+<style>
+    :root{
+   --my-teal:rgb(2, 163, 163);
+   --my-teal-dark:rgb(1, 172, 172);
+   
+    }
+    p {
+        font-family: Poppins-Regular;
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--my-teal);
+        margin: 0px;
+    }
 
-body {
-    background-color:#d2d6de;
-    font-family: unset;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #ce0909;
-}
+    body {
+        background-color:#d2d6de;
+        font-family: unset;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--my-teal);
+    }
 </style>
 </head>
 <body style="background-color:#d2d6de;">
-	
-	<div class="limiter" style="background-color:black;">
-		<div class="container-login100" style="background-color:#d2d6de;">
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-lg">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h4 class="nk-block-title" style = "color: var(--my-teal-dark);">Create an Account</h4>
+                    <div class="nk-block-des">
+                        <p>Create a bank account with us today.</p>
+                    </div>
+                </div>
+            </div>
+            <form method="POST">
+                <div class="response" style="display:none"></div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="fname" style = "color: var(--my-teal-dark);">First Name <span>*</span></label>
+                    </div>
+                    <input id="first_name" type="text" autofocus="" class="form-control form-control-lg" name="fname" placeholder="first name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="mname" style = "color: var(--my-teal-dark);">Middle Name <span>*</span></label>
+                    </div>
+                    <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="mname" placeholder="middle name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="lname" style = "color: var(--my-teal-dark);">Last Name <span>*</span></label>
+                    </div>
+                    <input id="last_name" type="text" autofocus="" class="form-control form-control-lg" name="lname" placeholder="last name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="uname" style = "color: var(--my-teal-dark);">Username <span>*</span></label>
+                    </div>
+                    <input id="user_name" type="text" autofocus="" class="form-control form-control-lg" name="uname" placeholder="username" required>
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                       <label>Password</label> 
+                    </div>
+                    <input type="password" name="upass" class="form-control form-control-lg" placeholder="Password">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Occupation</label>
+                    </div>
+                    <input type="text" name="work" class="form-control form-control-lg" placeholder="Occupation">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Phone</label>
+                    </div>
+                    <input type="text" name="phone" class="form-control form-control-lg" placeholder="Eg +62 123 456 789">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Email</label>
+                    </div>
+                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email">
+                </div>
+                
+
+            </form>
+        </div>
+    </div>
+
+
+	<div class="limiter" style="background-color:var(--my-teal-dark);">
+		<div class="container-login100" style="background-color:#f5f5f5;">
 			<div class="wrap-login100">
-				<div class="login100-form-title"><!--style="background-image: url(admin/images/bg-01.jpg);"-->
-				    <a href="https://westalliantfin.com/" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="./Application Form_files/logobank2.png" srcset="../logobank2.png 2x" alt="logo">
-                                
-                            </a><br>
-                            <br>
-					<span class="login100-form-title-1">
-						Application Form
-					</span>
-				</div>
-				<br>
-			<center>	<p style="font-size: 17px;">Create an account with us to explore the possibilities of a secured online banking.</p></center>
 				<form role="form" class="login100-form validate-form" method="POST" enctype="multipart/form-data">
-                                                              <div class="row">
-                        	<div class="wrap-input100 validate-input m-b-26" data-validate="First name is required">
-						 <label>First Name</label>
-                            <input type="text" name="fname" class="input100" placeholder="First Name">
-                            <span class="focus-input100"></span>
-                        </div>
-                        
-                        <div class="wrap-input100 " data-validate="required">
-                            <label>Middle Name (Optional)</label>
-                            <input type="text" name="mname" class="input100" placeholder="Middle Name">
-                        </div>
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Last Name</label>
-                            <input type="text" name="lname" class="input100" placeholder="Last Name">
-                        </div>
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Username</label>
-                            <input type="text" name="uname" class="input100" placeholder="Username">
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Password</label>
-                            <input type="password" name="upass" class="input100" placeholder="Password">
-                        </div>
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Occupation</label>
-                            <input type="text" name="work" class="input100" placeholder="Occupation">
-                        </div>
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Phone</label>
-                            <input type="text" name="phone" class="input100" placeholder="Eg +62 123 456 789">
-                        </div>
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-                            <label>Email</label>
-                            <input type="email" name="email" class="input100" placeholder="Email">
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
-
                             <label>Date of Birth</label>
                             <div class="input-icon datetime-pick date-only">
                                 <input data-format="dd/MM/yyyy" name="dob" type="text" placeholder="Date of Birth dd/MM/yyyy" class="form-control input-sm">
@@ -208,9 +228,6 @@ body {
                        
 
                         
-                        
-                         
-                    
                    
                             <input type="text" name="pin" class="input100" value="00" hidden="">
                        
@@ -224,31 +241,37 @@ body {
                           <div class="container-login100-form-btn">
             
            
-            <input style="background-color: #00505C;
-    border-color: #d73925;display: block;
-    width: 100%;display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;    border-radius: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    border-width: 1px;" type="submit" name="create" value="Submit Application">
+            <input 
+                style="
+                    background-color: var(--my-teal);
+                    color: white;
+                    border-color: #d73925;display: block;
+                    width: 100%;display: inline-block;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border-width: 1px;" 
+                type="submit" 
+                name="create" 
+                value="Submit Application">
 </div>
             </form></div>
 
@@ -262,8 +285,8 @@ body {
 				
 					
 				
-			</div>
 		</div>
+	</div>
 	
 <center>  <div class="footer-copyright text-center py-3">© <script type="text/javascript">
 var d = new Date()

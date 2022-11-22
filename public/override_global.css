@@ -1,32 +1,46 @@
 :root{
    --my-teal:rgb(2, 163, 163);
    --my-teal-dark:rgb(1, 172, 172);
-   
 }
 .form-group{
    display: flex;
-   margin: 1rem 0;
+   flex-direction: column;
 }
-.btn, .btn:active{
+.btn{
    /* width: 85%; */
-   color: white;
    margin: auto;
    background-color: var(--my-teal);
    border:  1px solid var(--my-teal);
 }
 .btn:hover {
-   border:  1px solid rgb(1, 117, 117);
+   border:  1px solid var(--my-teal-dark);
    background-color: rgb(1, 117, 117);
    text-decoration: none;
 }
 
-.link-primary, a{
-   color: var(--my-teal) !important;
-}
 .form-control:focus {
    color: #3c4d62;
    background-color: #f7f7f7;
    border-color: var(--my-teal-dark);
    outline: 0;
    box-shadow: 0 0 0 3px rgb(223 22 32 / 3%);
+}
+.contact-form button.btn {
+   background: none;
+   border: 2px solid var(--my-teal);
+   border-radius: 5px;
+   color: #fff;
+   width: 100%;
+   background: var(--my-teal);
+   font-size: 16px;
+   letter-spacing: 1px;
+   padding: 8px 30px;
+   display: inline-block;
+}
+.contact-address ul.list-w3 span.fa {
+   color: var(--my-teal-dark);
+}
+menu li.active a {
+   color: #fff;
+   font-weight: 600;
 }

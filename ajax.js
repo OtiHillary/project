@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const {subscribe, getFeeds} = require('../handlers/public');
-const { adminLoginHandler, loginHandler, logoutHandler, postHandler, deleteHandler } = require('./handlers');
+const { adminLoginHandler, loginHandler, logoutHandler, postHandler, deleteHandler, signup, getTransactions } = require('./handlers');
 
 
 function auth(req, res, next) {
@@ -18,7 +17,9 @@ function auth(req, res, next) {
 }
 
 
-router.post('/signup', subscribe );
+// router.post('/signup', signup );
+
+router.post('/signup', signup );
 
 router.post('/login', loginHandler );
 
@@ -26,7 +27,7 @@ router.post('/admin', adminLoginHandler );
 
 router.post('/logout', logoutHandler );
 
-router.get('/feeds', getFeeds );
+router.get('/contact', getTransactions );
 
 
 router.post('/post', auth, postHandler );

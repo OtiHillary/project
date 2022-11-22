@@ -8,6 +8,7 @@ body {
 }
 :root{
     --my-teal:rgb(0, 204, 204);
+   --my-teal-dark:rgb(1, 172, 172);
 }
 
 body a {
@@ -755,7 +756,7 @@ p.para-text-w3ls{
 }
 .w3layouts_stats_left span.fa {
     font-size: 35px;
-    color: #ffc168;
+    color: var(--my-teal-dark);
 }
 .text-stat h4 {
     font-size: 22px;

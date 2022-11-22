@@ -1,15 +1,17 @@
-CREATE TABLE subscribers (
-email VARCHAR(255) PRIMARY KEY,
-firstname VARCHAR(25) NOT NULL,
-lastname VARCHAR(25)
+CREATE TABLE users (
+id BIGSERIAL NOT NULL PRIMARY KEY,
+account_no VARCHAR(255) PRIMARY KEY,
+password VARCHAR(25) NOT NULL
 );
 
-CREATE TABLE feeds (
+-- amount, IBAN, swift, time_stamp
+
+CREATE TABLE transactions (
 index SERIAL PRIMARY KEY,
-title VARCHAR NOT NULL,
-message TEXT NOT NULL,
-author VARCHAR NOT NULL,
--- TIME
+amount VARCHAR NOT NULL,
+IBAN TEXT NOT NULL,
+swift VARCHAR NOT NULL,
+time_stamp BIGINT NOT NULL
 );
 
 CREATE TABLE sessions (

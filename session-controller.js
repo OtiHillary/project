@@ -1,5 +1,5 @@
 const {v4 : uuidv4 } = require('uuid');
-// const {SESSION_KEY } = require('./config');
+const {SESSION_KEY } = require('./config');
 
 class SessionController {
     constructor(knex_object){

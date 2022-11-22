@@ -19,7 +19,6 @@ body a {
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
-
 }
 html {
   scroll-behavior: smooth;
@@ -143,8 +142,8 @@ nav a {
 }
 nav li.last-grid a {
     background: none;
-    border: 2px solid #F3C64A;
-    color: #F3C64A;
+    border: 2px solid rgb(2, 163, 163);
+    color: rgb(2, 163, 163);
     font-size: 15px;
     letter-spacing: 1px;
     padding: 7px 25px;
@@ -219,7 +218,7 @@ li > a:only-child:after { content: ''; }
 		float: none;
 	}
 	.menu li.active a {
-		color: #da9d40;
+		color: rgb(2, 163, 163);
 	}
 	nav ul li span {
 		color: #333;
@@ -246,7 +245,7 @@ li > a:only-child:after { content: ''; }
 		text-decoration: none;
 		border: none;
 		float: right;
-		background-color: #F3C64A;
+		background-color: rgb(2, 163, 163);
 		color: #fff;
 		margin-bottom: 0;
 		margin-top: 0em;
@@ -369,7 +368,7 @@ li > a:only-child:after { content: ''; }
 
 /*-- banner --*/
 .banner {
-    background: url(../images/banner.jpg)no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif)no-repeat 0px 0px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -377,7 +376,7 @@ li > a:only-child:after { content: ''; }
     background-size: cover;
 }
 .layer {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.8);
 }
 .w3ls_banner_txt p {
     font-size: 15px;
@@ -404,7 +403,7 @@ h2.b-w3ltxt,h3.b-w3ltxt {
     font-weight: 600;
 }
 h2.b-w3ltxt span,h3.b-w3ltxt span {
-    color: #F3C64A;
+    color: rgb(2, 163, 163);
 }
 h4.b-w3ltxt {
     font-size: 3em;
@@ -599,7 +598,7 @@ h2.heading strong,h3.heading strong {
 
 /* stats */
 .middlesection-w3pvt {
-    background: url(../images/banner.jpg) no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif) no-repeat 0px 0px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -655,7 +654,7 @@ p.para-text-w3ls{
 /*-- inner banner --*/
 
 .inner-banner {
-    background: url(../images/innerbanner.jpg)no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif)no-repeat 0px 0px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -665,11 +664,12 @@ p.para-text-w3ls{
 }
 
 .inner-layer {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7333);
 	min-height: 250px;
 }
 .breadcrumb-w3pvt{
-	background: #f8f9fa;
+	background: rgb(2, 163, 163);
+    color: white;
 }
 .breadcrumb {
     display: -webkit-box;
@@ -678,7 +678,7 @@ p.para-text-w3ls{
     margin-bottom: 0rem;
 }
 li.breadcrumb-item a {
-    color: #999;
+    color: white;
     padding: 0;
 }
 /*-- //inner banner --*/

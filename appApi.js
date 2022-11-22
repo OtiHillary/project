@@ -22,6 +22,7 @@ app.use((req, res, next)=>{
 
 
 app.use( bodyParser.json() );
+
 app.use((req, res, next)=>{
     console.log(`origin is : ${req.headers.origin}`);
     

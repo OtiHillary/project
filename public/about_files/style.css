@@ -143,8 +143,8 @@ nav a {
 }
 nav li.last-grid a {
     background: none;
-    border: 2px solid #F3C64A;
-    color: #F3C64A;
+    border: 2px solid var(--my-teal);
+    color: var(--my-teal);
     font-size: 15px;
     letter-spacing: 1px;
     padding: 7px 25px;
@@ -153,7 +153,7 @@ nav li.last-grid a {
     margin-top: -10px;
     border-radius: 5px;
 }
-nav ul li ul li:hover { background: #f8f9fa; }
+nav ul li ul li:hover { background: var(--my-teal); }
 
 /* Background color change on Hover */
 nav a:hover { 
@@ -246,7 +246,7 @@ li > a:only-child:after { content: ''; }
 		text-decoration: none;
 		border: none;
 		float: right;
-		background-color: #F3C64A;
+		background-color: var(--my-teal);
 		color: #fff;
 		margin-bottom: 0;
 		margin-top: 0em;
@@ -404,7 +404,7 @@ h2.b-w3ltxt,h3.b-w3ltxt {
     font-weight: 600;
 }
 h2.b-w3ltxt span,h3.b-w3ltxt span {
-    color: #F3C64A;
+    color: var(--my-teal);
 }
 h4.b-w3ltxt {
     font-size: 3em;
@@ -599,7 +599,7 @@ h2.heading strong,h3.heading strong {
 
 /* stats */
 .middlesection-w3pvt {
-    background: url(../images/banner.jpg) no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif) no-repeat 0px 0px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -655,7 +655,7 @@ p.para-text-w3ls{
 /*-- inner banner --*/
 
 .inner-banner {
-    background: url(../images/innerbanner.jpg)no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif)no-repeat 0px 0px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -665,11 +665,11 @@ p.para-text-w3ls{
 }
 
 .inner-layer {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.733333);
 	min-height: 250px;
 }
 .breadcrumb-w3pvt{
-	background: #f8f9fa;
+	background: var(--my-teal);
 }
 .breadcrumb {
     display: -webkit-box;
@@ -774,7 +774,7 @@ button.btn1 {
     background: rgba(51, 51, 51, 0);
     font-size: 14px;
     padding: 12px 30px;
-    border: 2px solid #f8f9fa;
+    border: 2px solid var(--my-teal);
     color: #fff;
     width: 20%;
     text-transform: capitalize;
@@ -833,7 +833,7 @@ button.btn1 {
     color: #343a40;
 }
 .other_services{
-	background: #f8f9fa;
+	background: var(--my-teal);
 }
 .other_services .grid {
     box-shadow: 3px 3px 5px 0 rgba(76, 110, 245, .1);

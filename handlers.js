@@ -4,24 +4,32 @@ const { ADMIN_KEY } = require('./config');
 
 module.exports.loginHandler = async (req, res)=>{
     //
-    const { email, password } = req.body;
-    if ( email === db.query.email && password === db.query.password ){ // should change to actual db query!!!!!!!!!
+    console.log('i was called', req.body);
+
+    if ( req.body ){ // should change to actual db query!!!!!!!!!
         //generate sessionid, update in sessions db, and send it in 201 resp
         try {
-            //
-            let session_id = await req.sessionController.setSession();
-
-            res.status(201).json({status : 201, content : "login successful", sid: session_id } );
+            req.knex_object('users')
+            .insert({ account_no : req.body.account_no, password : req.body.password })
+            .returning('*')
+            .toString()
+            // then( user => {
+            //     console.log( user + ' ' + 'is valid' );
+            //     let session_id = req.sessionController.setSession();
+            //     // get all the information from the database HERE!!!!!!
+            //     res.status(201).json({status : 201, content : "login successful", sid: session_id } ); // respond with info as JSON!!!!!
+            // })
 
         } catch (error) {
-            //
             console.log(error);
             res.status(401).json({status : 401, content : "login failed : inernal error" } );
         }
     }else{
         //
-        res.status(401).json({status : 401, content : "login failed" } );
-    }
+        res.status(200).json({status : 401, content : "login failed" } );
+    }   
+
+
 }
 
 // ADMIN LOGIN //
@@ -71,7 +79,7 @@ module.exports.logoutHandler = async (req, res)=>{
 
 module.exports.postHandler = async (req, res)=>{
     // make room for if the funds are insufficient
-    const {amount, IBAN, swift, date} = req.body ;
+    const {amount, IBAN, swift, time_stamp} = req.body ;
     let knex = req.knex_object;
 
     try {
@@ -81,8 +89,8 @@ module.exports.postHandler = async (req, res)=>{
             res.status(401).json({status : 401, content: 'insufficient funds'});
 
         }
-        let result = await knex.insert({amount, IBAN, swift, date})
-                                .into('feeds');
+        let result = await knex.insert({amount, IBAN, swift, time_stamp})
+                                .into('transactions');
         console.log(result);
 
         res.status(201).json({status : 201, content : "payment successful" } );
@@ -106,7 +114,7 @@ module.exports.deleteHandler = async (req, res)=>{
     try {
         // 
         let result = await knex.delete()
-                            .from('feeds')
+                            .from('transactions')
                             .where({ index : index_value} ) ;
 
         console.log(result);
@@ -140,6 +148,31 @@ module.exports.signup = async (req, res)=>{
     } catch (error) {
         console.log('Error insertng user : ' + error);
         res.status(401).json({status : 401, error});
+    }
+
+}
+
+// getTransaction //
+
+module.exports.getTransactions = async (req, res)=>{
+    console.log("Getting transactions...");
+    console.log(req.body);
+
+    let {email, firstname, lastname } = req.body;
+    let knex = req.knex_object;
+
+    try {
+        // add to 'subscribers' db 
+        // let status = await knex.insert( {email, firstname, lastname })
+        //                     .into('users');
+        // console.log(status);
+        
+        console.log("transactions received");
+        res.status(201).json({status : 201, content : "User created successfully." } );
+
+    } catch (error) {
+        // console.log('Error insertng user : ' + error);
+        // res.status(401).json({status : 401, error});
     }
 
 }
