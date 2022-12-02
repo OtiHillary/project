@@ -1,0 +1,122 @@
+<div class="mainboard r-8 flex col" style="margin-top: .8rem;">
+   <%- include('./profile')%>
+   <%- include('./balances')%>
+
+   <div class="stats flex row justify-between" style=" flex-wrap: wrap">
+      <div class="stat-graph flex col justify-center r-6">
+         <h3 class="chart-alt"><i class="fa-solid fa-chart-simple" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions Statistics</h3>
+         <% if (true) {%>
+            <canvas id="myChart" style="width:80%; max-width:80%; margin: auto; padding: 1rem 0;"></canvas>
+            <script>
+               let amounts = [ 2, 10, 5, 15, 12, 18, 2 ]
+               let months = [ 0, 1, 2, 3, 4, 5, 6 ]
+               let ctx = document.getElementById("myChart").getContext("2d")
+               let gradient = ctx.createLinearGradient(0, 0, 0, 400)
+               gradient.addColorStop(0, '#80b6f412')
+               gradient.addColorStop(1, '#80b6f400')
+
+               new Chart( ctx ,{
+                  type:"line",
+                  data: {
+                     labels: months,
+                     datasets: [{
+                        label: 'transaction stats',
+                        data: amounts,
+                        backgroundColor: gradient,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                     }]
+                  },
+                  options:{
+                     legend: {display:false},
+                     scales:{
+                        yAxes: [{
+                           ticks: { min: 0, max: 20, stepSize: 10, autoSkip: false },
+                           gridLines: { display:false }
+                        }],
+                        xAxes: [{
+                           gridLines: { display: false }
+                        }]
+                     }
+                  }
+               })
+            </script>         
+         <% }%>
+
+         <div class="chart flex row justify-between">
+            <h4 class="first"><i class="fa-solid fa-chart-bar" style="color: teal; margin: 0 .5rem 0 0;"></i>Productivity</h4>
+            <h4><i class="fa-solid fa-chart-area" style="color: teal; margin: 0 .5rem 0 0;"></i>Stats</h4>
+            <h4><i class="fa-solid fa-chart-pie"  style="color: teal; margin: 0 .5rem 0 0;"></i>Charts</h4>
+         </div>
+      </div>
+      <div class="stat-pie flex col r-3_5">
+         <h3 class="chart-alt"><i class="fa-solid fa-chart-bar" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Usage Statistics</h3>
+
+         <div class="progress">
+            <div class="device android">
+               <h4>Android</h4>
+               <div class="bar">
+                  <div class="fill f-70"></div>
+               </div>
+            </div>
+            <div class="device iphone">
+               <h4>Iphone</h4>
+               <div class="bar">
+                  <div class="fill f-20"></div>
+               </div>
+            </div>
+            <div class="device pc">
+               <h4>pc/mac</h4>
+               <div class="bar">
+                  <div class="fill f-10"></div>
+               </div>
+            </div>
+         </div>
+      </div>            
+   </div>
+
+   <div class="transactions flex row justify-start" style=" flex-wrap: wrap">
+      <div class="transaction-table flex col r-5 m-1">
+         <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions</h3>
+         <table>
+            <div class="border">
+               <tr>
+                  <th><p class="sp" style="color: var(--my-teal);">Amount</p></th> 
+                  <th><p class="sp" style="color: var(--my-teal);">IBAN</p></th>
+                  <th><p class="sp" style="color: var(--my-teal);">Swift Code</p></th> 
+                  <th><p class="sp" style="color: var(--my-teal);">Date</p></th>
+                  <th><p class="sp" style="color: var(--my-teal);">A/C Name</p></th>
+               </tr>
+               <% for ( let i = 0; i < 4 ; i++ ) { %>
+                  <% let render_list = JSON.parse(transactions[i]) %>
+                  <tr>
+                     <th><p class= <%= render_list.cr_dr %> ><%= render_list.amount %></p></th> 
+                     <th><p class="sp"><%= render_list.iban %></p></th>
+                     <th><p class="sp"><%= render_list.swift %></p></th> 
+                     <th><p class="sp"><%= render_list.time_stamp %></p></th>                        
+                     <th><p class="sp"><%= render_list.person %></p></th>                        
+                  </tr>
+
+               <% } %>
+            </div>
+         </table>
+      </div>
+
+      <div class="countries r-4 m-1">
+         <h3 class="chart-alt"><i class="fa-solid fa-location-dot" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Most active Locations</h3>
+
+         <div id="m" style="width: 90%; height: 75%; background: green; margin: auto; border-radius: 1.5rem;"></div>
+         <script>
+            function sample() {
+               var m1 = {
+                  center: new google.maps.LatLng(52.3, -0.14),
+                  zoom: 13,
+                  mapss: google.maps.MapTypeId.HYBRID
+               }
+               var m2 = new google.maps.Map(document.getElementById("m"), m1);
+            }
+         </script>
+         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=sample"></script>
+      </div>
+   </div>
+</div>

@@ -8,11 +8,16 @@
     "dev": "nodemon appApi.js"
   },
   "keywords": [],
-  "author": "eddy",
+  "author": "Oti edwin",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.1",
+    "connect-session-knex": "^3.0.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-cookie": "^4.17.1",
+    "express-session": "^1.17.3",
     "knex": "^2.3.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",

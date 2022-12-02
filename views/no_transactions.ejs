@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Transactions</title>
+   <%- include('./invariables/styles') %>
+</head>
+<body>
+   <div class=" r-8 flex col" style="margin: auto;">
+      <div class="transactions flex row justify-start">
+         <div class="transaction-table flex col r-5 m-1">
+            <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i> Transactions For account - <%= user%></h3>
+            <p style="text-align: center;"><%= result%></p>
+         </div>
+      </div>
+   </div>   
+</body>
+</html>

@@ -1,0 +1,114 @@
+<div class="mainboard flex col r-8" style="margin-top: .8rem;overflow-y: scroll; overflow-x: hidden;">
+   <%- include('./profile')%>
+   <div class="flex row justify-start">
+       <div class="main-balance flex col justify-between">
+          <p class="sp">Account Balance</p>
+          <h1>
+             <span class="currency h1"><%= currency %></span>
+             <span class="amount h1"><%= balance %></span>
+          </h1>                  
+          <p class="sp">
+             <div class="footer-copyright text-center py-3">
+                   <script type="text/javascript">
+                   var d = new Date()
+                   document.write("Today's date : "+d.getFullYear()+"/"+ d.getMonth()+"/"+ d.getDay())
+                   </script>
+             </div>    	
+          </p>
+       </div>
+       <div class="last flex col justify-between">
+          <p class="sp">Last Transaction <span class="positive">Received +</span></p>
+          <h1>
+             <span class="currency h1 "><%=currency %></span>
+             <span class="amount h1"><%= received %></span>
+          </h1> 
+          <p class="sp">Date of transaction</p>
+       </div>
+       <div class="total-transfers flex col justify-between">
+          <p class="sp">Last Transaction <span class="negative">Sent -</span></p>
+          <h1>
+             <span class="currency h1"><%=currency %></span>
+             <span class="amount h1"><%= sent %></span>
+          </h1> 
+          <p class="sp">Date of transaction</p>
+       </div>
+    </div>
+   <div class="card card-bordered">
+      <div style="
+         background-color: rgba(3, 165, 165, 0.219);
+         padding: 3rem;
+         margin: auto 1rem;
+         height: fit-content;
+         border: 1px solid rgba(3, 165, 165);
+         border-radius: .5rem;
+      ">
+         <h3 style="
+            color: rgba(3, 165, 165); 
+            font-weight: 600;
+            font-size: 1.5rem;
+         ">
+            Payment Successful
+         </h3>
+      </div>
+       <div class="card-inner card-inner-lg flex col">
+           <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Make a Payment</h4>
+           <form class="signup" method="post" action="http://localhost:8080/ajax/payment" style="margin: 0 auto;">
+            <div class="response" style="display:none"></div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="amount h1" style = "color: var(--my-teal-dark);">Amount <span>*</span></label>
+                </div>
+                <input class="first_name" type="number" autofocus="" class="form-control form-control-lg" name="amount h1" placeholder="amount h1" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="iban" style = "color: var(--my-teal-dark);">IBAN <span>*</span></label>
+                </div>
+                <input class="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="iban" placeholder="IBAN" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="swift" style = "color: var(--my-teal-dark);">Swift Code <span>*</span></label>
+                </div>
+                <input class="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="swift" placeholder="Swift Code" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="person" style = "color: var(--my-teal-dark);">Account Name <span>*</span></label>
+                </div>
+                <input class="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="person" placeholder="Account Name" required>
+            </div>
+            
+            <button 
+                style="
+                    background-color: var(--my-teal);
+                    color: white;
+                    display: block;
+                    width: 100%;display: inline-block;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border-width: 1px;" 
+                type="submit">Make Transfer</button>
+            </form>       
+       </div>
+   </div>
+</div>

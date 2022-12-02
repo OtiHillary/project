@@ -1,0 +1,36 @@
+
+<div class="mainboard r-8 flex col" style="margin-top: .8rem;overflow-y: scroll; overflow-x: hidden;">
+   <%- include('./profile')%>
+   <div class="transactions flex row justify-start">
+      <div class="transaction-table flex col r-5 m-1">
+         <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions</h3>
+         <table style=" ">
+            <div class="border">
+               <tr>
+                  <th><p class="sp" style="color: var(--my-teal); font-weight:600">Amount</p></th> 
+                  <th><p class="sp" style="color: var(--my-teal); font-weight:600">IBAN</p></th>
+                  <th><p class="sp" style="color: var(--my-teal); font-weight:600">Swift Code</p></th> 
+                  <th><p class="sp" style="color: var(--my-teal); font-weight:600">Date</p></th>
+                  <th><p class="sp" style="color: var(--my-teal); font-weight:600">A/C Name</p></th>
+               </tr>
+               <% for ( let i = 0; i < transactions.length ; i++ ) { %>
+                  <% let length = transactions.length - 1 %>
+                  <% let render_list = JSON.parse(transactions[length]) %>
+                  <tr>
+                     <th><p class= <%= render_list.cr_dr %> ><%= render_list.amount %></p></th> 
+                     <th><p class="sp"><%= render_list.iban %></p></th>
+                     <th><p class="sp"><%= render_list.swift %></p></th> 
+                     <th><p class="sp"><%= render_list.time_stamp %></p></th>                        
+                     <th><p class="sp"><%= render_list.person %></p></th>                        
+                  </tr>
+               <% } %>
+            </div>
+
+         </table>
+      </div>
+
+      <div class="countries r-4 m-1">
+         <h3 class="chart-alt"><i class="fa-solid fa-location-dot" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Most active Locations</h3>
+      </div>
+   </div>
+</div>

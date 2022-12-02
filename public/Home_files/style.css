@@ -151,6 +151,7 @@ nav {
 }
 .crypto:hover{
     outline-offset: 8px;
+    z-index: 3;
 }
 .c1{}
 .c2{
@@ -978,7 +979,7 @@ button.btn1 {
 .clients {
     background: linear-gradient(to left, #333333 60%, #999999 60%);
     background: #333;
-    background: url(../images/banner.jpg) no-repeat 0px 0px;
+    background: url(../assets/hero-img.jfif) no-repeat 0px 0px;
     background-size: cover;
 }
 .clients h2.heading, .middlesection-w3pvt h3.heading{
@@ -1910,7 +1911,7 @@ a.move-top span{
 		font-size: 15px;
 	}
 	.banner {
-		background: url(../images/banner.jpg)no-repeat center;
+		background: url(../assets/hero-img.jfif)no-repeat center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -1996,7 +1997,7 @@ a.move-top span{
 		width: 70px;
 	}
 	.middlesection-w3pvt {
-		background: url(../images/banner.jpg) no-repeat center;
+		background: url(../assets/hero-img.jfif) no-repeat center;
 		background-size: cover;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;

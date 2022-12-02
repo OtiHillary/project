@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Transactions</title>
+   <%- include('./invariables/styles') %>
+</head>
+<body>
+   <div class=" r-8 flex col" style="margin: auto;">
+      <div class="transactions flex row justify-start">
+
+         <div class="transaction-table flex col r-5 m-1">
+            <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i> Transactions For account - <%= user%></h3>
+            <table style=" ">
+               <div class="border">
+                  <tr>
+                     <th><p class="sp" style="color: var(--my-teal); font-weight:600">Amount</p></th> 
+                     <th><p class="sp" style="color: var(--my-teal); font-weight:600">IBAN</p></th>
+                     <th><p class="sp" style="color: var(--my-teal); font-weight:600">Swift Code</p></th> 
+                     <th><p class="sp" style="color: var(--my-teal); font-weight:600">Date</p></th>
+                     <th><p class="sp" style="color: var(--my-teal); font-weight:600">A/C Name</p></th>
+                  </tr>
+                  <% for ( let i = 0; i < transactions.length ; i++ ) { %>
+                     <% let render_list = JSON.parse(transactions[i]) %>
+                     <tr>
+                        <th><p class= <%= render_list.cr_dr %> ><%= render_list.amount %></p></th> 
+                        <th><p class="sp"><%= render_list.iban %></p></th>
+                        <th><p class="sp"><%= render_list.swift %></p></th> 
+                        <th><p class="sp"><%= render_list.time_stamp %></p></th>                        
+                        <th><p class="sp"><%= render_list.person %></p></th> 
+                        <th><a href="http://localhost:8080/ajax/admin/<%= render_list.user_id %>/<%= render_list.index %>" class="sp">Delete</a></th> 
+                     </tr>
+                  <% } %>
+               </div>
+
+            </table>
+         </div>
+         <div class="add">
+            <form id="signup" method="post" action="http://localhost:8080/ajax/admin/add/<%= user%>" style="margin: 0 auto;">
+               <div class="response" style="display:none"></div>
+               <div class="form-group flex col wrap-input100 validate-input m-b-18" data-validate="required">
+                  <label class = "form-label-group">Credit/Debit</label>
+                  <select name="cr_dr" class="form-control form-control-lg input-sm validate[required]">
+                      <option value="Credit">Credit</option>
+                      <option value="Debit">Debit</option>
+                  </select>
+              </div>
+               <div class="form-group flex col">
+                   <div class="form-label-group">
+                       <label class="form-label" for="amount" style = "color: var(--my-teal-dark);">Amount <span>*</span></label>
+                   </div>
+                   <input id="first_name" type="number" autofocus="" class="form-control form-control-lg" name="amount" placeholder="amount" required>
+               </div>
+               <div class="form-group flex col">
+                   <div class="form-label-group">
+                       <label class="form-label" for="iban" style = "color: var(--my-teal-dark);">IBAN <span>*</span></label>
+                   </div>
+                   <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="iban" placeholder="IBAN" required>
+               </div>
+               <div class="form-group flex col">
+                   <div class="form-label-group">
+                       <label class="form-label" for="swift" style = "color: var(--my-teal-dark);">Swift Code <span>*</span></label>
+                   </div>
+                   <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="swift" placeholder="Swift Code" required>
+               </div>
+               <div class="form-group flex col">
+                   <div class="form-label-group">
+                       <label class="form-label" for="person" style = "color: var(--my-teal-dark);">Account Name <span>*</span></label>
+                   </div>
+                   <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="person" placeholder="Account Name" required>
+               </div>
+
+               
+               <button 
+                   style="
+                       background-color: var(--my-teal);
+                       color: white;
+                       display: block;
+                       width: 100%;display: inline-block;
+                       padding: 10px;
+                       border-radius: 5px;
+                       margin-bottom: 0;
+                       font-size: 14px;
+                       font-weight: 400;
+                       line-height: 1.42857143;
+                       text-align: center;
+                       white-space: nowrap;
+                       vertical-align: middle;
+                       -ms-touch-action: manipulation;
+                       touch-action: manipulation;
+                       cursor: pointer;
+                       -webkit-user-select: none;
+                       -moz-user-select: none;
+                       -ms-user-select: none;
+                       user-select: none;
+                       background-image: none;
+                       border: 1px solid transparent;
+                       -webkit-box-shadow: none;
+                       -moz-box-shadow: none;
+                       box-shadow: none;
+                       border-width: 1px;" 
+                   type="submit">Add Transaction</button>
+               </form> 
+            <!-- <a href="">Block Account</a> -->
+         </div>
+      </div>
+   </div>   
+</body>
+</html>
+

@@ -30,3 +30,12 @@
    outline: 0;
    box-shadow: 0 0 0 3px rgb(223 22 32 / 3%);
 }
+.response{
+   background-color: rgba(255, 0, 0, 0.048);
+   border-left: 2px solid red;
+   display: flex;
+   color: red;
+   padding: 1rem 2rem;
+   text-align: center;
+   width: 100%;
+}

@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <form id="signup" method="post">
+      <div class="form-group">
+          <div class="form-label-group">
+              <label class="form-label" for="fname" style = "color: var(--my-teal-dark);">First Name <span>*</span></label>
+          </div>
+          <input id="first_name" type="text" autofocus="" class="form-control form-control-lg" name="fname" placeholder="first name" required>
+      </div>
+      <div class="form-group">
+          <div class="form-label-group">
+              <label class="form-label" for="mname" style = "color: var(--my-teal-dark);">Middle Name <span>*</span></label>
+          </div>
+          <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="mname" placeholder="middle name" required>
+      </div>
+      <div class="form-group">
+          <div class="form-label-group">
+             <label>Password</label> 
+          </div>
+          <input type="password" name="upass" class="form-control form-control-lg" placeholder="Password">
+      </div>
+
+      <div class="form-group">
+          <div class="form-label-group">
+              <label>Phone</label>
+          </div>
+          <input type="text" name="phone" class="form-control form-control-lg" placeholder="Eg +62 123 456 789">
+      </div>
+
+      <input type="submit" value="submit">
+  </form>
+</body>
+</html>

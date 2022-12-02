@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://westalliantfin.com/dashboard/applicationform.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Application Form</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./Login_files/dashlite.css">
+    <script src="https://kit.fontawesome.com/16810e6ebd.js" crossorigin="anonymous"></script>
+<!--===============================================================================================-->
+<style>
+    :root{
+   --my-teal:rgb(2, 163, 163);
+   --my-teal-dark:rgb(1, 172, 172);
+   
+    }
+    p {
+        font-family: Poppins-Regular;
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--my-teal);
+        margin: 0px;
+    }
+
+    body {
+        background-color:#d2d6de;
+        font-family: unset;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--my-teal);
+    }
+</style>
+</head>
+<body style="background-color:#f7f7f7; display: flex; flex-direction: column; justify-content: center;">
+    <div class="brand-logo pb-4 text-center" style="margin: 2rem auto 0 ;" >
+        <a class="logo-link">
+            <div id="logo">
+                <img class="mb-logo" src="./assets/CSB.png" alt="the logo" style="width: 6rem; height: 3rem; border-radius: 10px;">
+            </div>
+        </a>
+    </div>
+    <div class="card card-bordered" style="width: 50%; border:0.1px solid rgb(224, 224, 224); border-radius: 10px; margin: 1rem auto; display: flex;">
+        <div class="card-inner card-inner-lg">
+            <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                    <h4 class="nk-block-title" style = "color: var(--my-teal-dark);">Create an Account</h4>
+                    <div class="nk-block-des">
+                        <p style="color: black;">Create a bank account with us today.</p>
+                    </div>
+                </div>
+            </div>
+            <form id="signup" method="post" action="http://localhost:8080/ajax/signup">
+                <div class="response" style="display:none"></div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="first_name" style = "color: var(--my-teal-dark);">First Name <span>*</span></label>
+                    </div>
+                    <input id="first_name" type="text" autofocus="" class="form-control form-control-lg" name="first_name" required placeholder="first name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="middle_name" style = "color: var(--my-teal-dark);">Middle Name <span>*</span></label>
+                    </div>
+                    <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="middle_name" required placeholder="middle name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="last_name" style = "color: var(--my-teal-dark);">Last Name <span>*</span></label>
+                    </div>
+                    <input id="last_name" type="text" autofocus="" class="form-control form-control-lg" name="last_name" required placeholder="last name" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <label class="form-label" for="user_name" style = "color: var(--my-teal-dark);">Username <span>*</span></label>
+                    </div>
+                    <input id="user_name" type="text" autofocus="" class="form-control form-control-lg" name="user_name" required placeholder="username" required>
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                       <label>Password</label> 
+                    </div>
+                    <input id="password" type="password" name="password" class="form-control form-control-lg" required placeholder="Password">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Occupation</label>
+                    </div>
+                    <input type="text" name="work" class="form-control form-control-lg" required placeholder="Occupation">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Phone</label>
+                    </div>
+                    <input id="phone" type="text" name="phone" class="form-control form-control-lg" required placeholder="Eg +62 123 456 789">
+                </div>
+                <div class="form-group" data-validate="required">
+                    <div class="form-label-group">
+                        <label>Email</label>
+                    </div>
+                    <input id="email" type="email" name="email" class="form-control form-control-lg" required placeholder="Email">
+                </div>
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Date of Birth</label>
+                    <div class="input-icon datetime-pick date-only">
+                        <input data-format="dd/MM/yyyy" name="dob" type="text" required placeholder="Date of Birth dd/MM/yyyy" class="form-control input-sm">
+                        <span class="add-on">
+                            <i class="sa-plus"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Marital Status</label>
+                    <select name="marry" class="form-control input-sm validate[required]">
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Widowed">Widowed</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Gender</label>
+                    <select name="sex" class="form-control input-sm validate[required]">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Address</label>
+                    <textarea name="addr" class="form-control form-control-lg" required placeholder="House or Office Address"></textarea>
+                </div>
+                
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Account Type</label>
+                    <select name="type" class="form-control input-sm validate[required]">
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                         <option value="Checking">Checking</option>
+                        <option value="Fixed Deposit">Fixed Deposit</option>
+                         <option value="NON-Resident">NON-Resident</option>
+                        <option value="Online Banking">Online Banking</option>
+                         <option value="Joint Account">Joint Account</option>
+                        <option value="DOMICILIARY ACCOUNT">DOMICILIARY ACCOUNT</option>
+                    </select>
+                </div>
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <div class="input-icon datetime-pick date-only">
+                        <input data-format="dd/MM/yyyy" name="reg_date" type="text" value=" 10/11/2022" class="form-control input-sm" hidden="">
+                    </div>
+                </div>
+                                     
+                <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                    <label>Account Currency</label>
+                    <select id="currency" class="form-control input-sm validate[required]" name="currency">
+                         <option value="$">Dollar</option>
+                        <option value="£">Pound</option>
+                        <option value="€">Euro</option>
+                    </select>
+                    <hr>     
+                </div>
+                <button 
+                    style="
+                        background-color: var(--my-teal);
+                        color: white;
+                        display: block;
+                        width: 100%;display: inline-block;
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-bottom: 0;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 1.42857143;
+                        text-align: center;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                        -ms-touch-action: manipulation;
+                        touch-action: manipulation;
+                        cursor: pointer;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        background-image: none;
+                        border: 1px solid transparent;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        border-width: 1px;" 
+                    type="submit">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+
+	<div class="limiter" style="background-color:var(--my-teal-dark);">
+		<div class="container-login100" style="background-color:#f5f5f5;">
+			<div class="wrap-login100">
+				<form role="form" class="login100-form validate-form" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                            <input type="number" name="t_bal" class="input100" value="0" hidden="">
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                            <input type="number" name="a_bal" class="input100" value="0" hidden="">
+                        </div>
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="required">
+                            <input type="text" name="acc_no" class="input100" value="0000" hidden="">
+                        </div>
+                    </div>
+
+                    <div class="" data-validate="required">
+                        <input type="text" name="verify" class="input100" value="N" hidden="">
+                        <input type="text" name="status" class="input100" value="Dormant/Inactive" hidden="">
+                    </div>          
+            </form>
+        </div>
+
+
+          
+           
+
+			
+				
+
+				
+					
+				
+		</div>
+	</div>
+	
+    <center>
+        <div class="footer-copyright text-center py-3">
+            © 
+            <script type="text/javascript">
+                var d = new Date()
+                document.write(d.getFullYear())
+            </script>
+            Copyright:
+            <a href="./applicationform.html"> Cathay Standard Bank, Member FDIC.</a>
+        </div> 	
+    </center>
+	<!-- <script src="./endpoint.js"></script> -->
+
+</body></html>

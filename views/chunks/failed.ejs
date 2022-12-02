@@ -1,0 +1,90 @@
+<div class="mainboard flex col r-8" style="margin-top: .8rem;overflow-y: scroll; overflow-x: hidden;">
+   <%- include('./profile')%>
+   <%- include('./balances')%>
+
+
+   <div class="card card-bordered">
+      <div style="
+         background-color: rgba(165, 3, 3, 0.219);
+         padding: 3rem;
+         margin: auto 1rem;
+         height: fit-content;
+         border: 1px solid rgb(165, 3, 3);
+         border-radius: .5rem;
+      ">
+         <h3 style="
+            color: rgb(165, 3, 3); 
+            font-weight: 600;
+            font-size: 1.5rem;
+         ">
+            Transaction failed
+         </h3>
+         <p style="
+         color: rgb(165, 27, 3); 
+         font-weight: 400;
+         align-self: center;
+         font-size: 1rem;
+      "> Insufficient funds</p>
+      </div>
+       <div class="card-inner card-inner-lg flex col">
+           <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Make a Payment</h4>
+           <form id="signup" method="post" action="http://localhost:8080/ajax/payment" style="margin: 0 auto;">
+            <div class="response" style="display:none"></div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="amount" style = "color: var(--my-teal-dark);">Amount <span>*</span></label>
+                </div>
+                <input id="first_name" type="number" autofocus="" class="form-control form-control-lg" name="amount" placeholder="amount" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="iban" style = "color: var(--my-teal-dark);">IBAN <span>*</span></label>
+                </div>
+                <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="iban" placeholder="IBAN" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="swift" style = "color: var(--my-teal-dark);">Swift Code <span>*</span></label>
+                </div>
+                <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="swift" placeholder="Swift Code" required>
+            </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="person" style = "color: var(--my-teal-dark);">Account Name <span>*</span></label>
+                </div>
+                <input id="middle_name" type="text" autofocus="" class="form-control form-control-lg" name="person" placeholder="Account Name" required>
+            </div>
+            
+            <button 
+                style="
+                    background-color: var(--my-teal);
+                    color: white;
+                    display: block;
+                    width: 100%;display: inline-block;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border-width: 1px;" 
+                type="submit">Make Transfer</button>
+            </form>          
+       </div>
+   </div>
+</div>

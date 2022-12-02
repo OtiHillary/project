@@ -1,0 +1,43 @@
+<div class="dashboard alt r-full h-full row flex justify-end">
+   <div id="toggler" style="    display: flex;
+   flex-direction: column;
+   justify-content: center; margin : 0 3rem 0 auto" >
+      <a class="toggler">
+         toggle
+      </a>
+      <script>
+         let toggler = document.getElementById('toggler')
+
+         toggler.addEventListener('click', () => {
+            let toggled = document.getElementById('toggled')
+            if (toggled.style.display === "" ) {
+               toggled.style.display = "flex"
+            } 
+            else{toggled.style.display = ""}
+         })
+      </script>
+   </div>
+
+      <div id="toggled" class="toggled flex col">
+         <a href="http://localhost:8080/ajax/dashboard" >
+            <i class="fa-solid fa-house-user" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
+            Dashboard
+         </a>
+         <a href="http://localhost:8080/ajax/transactions" >
+            <i class="fa-solid fa-credit-card" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
+            Transactions
+         </a>
+         <a href="http://localhost:8080/ajax/transfers">
+            <i class="fa-solid fa-money-bill-transfer" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
+            Transfers
+         </a>
+         <a href="http://localhost:8080/ajax/notifications" >
+            <i class="fa-solid fa-bell" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
+            Notifications
+         </a>
+         <a href="http://localhost:8080/login.html">
+            <i class="fa-solid fa-arrow-right-from-bracket" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
+            Logout
+         </a>
+      </div>
+</div>
