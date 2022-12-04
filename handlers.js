@@ -5,7 +5,7 @@ const { admin_key } = require('./config');
 module.exports.loginHandler = async (req, res)=>{
     //generate sessionid, update in sessions db, and send it in 201 resp
     try {
-        console.log(req.body);
+        //(req.body);
 
         req.knex_object('cathay_users')
         .where({ account_no : req.body.acc_no })
@@ -15,7 +15,7 @@ module.exports.loginHandler = async (req, res)=>{
                 return
             }
             let pass = user[0]
-            console.log(pass);
+            //(pass);
             if (pass.password === req.body.upass) {
 
                 req.knex_object('cathay_transactions')
@@ -32,7 +32,7 @@ module.exports.loginHandler = async (req, res)=>{
                         .then((repay) =>{
                             let received = repay[ repay.length -1 ]
                             let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                            console.log(transaction_list[0]);
+                            //(transaction_list[0]);
                             res.render('home.ejs', {
                                 user : pass.user_name,
                                 full_name :`${pass.first_name} ${pass.last_name}`,
@@ -82,7 +82,7 @@ module.exports.loginHandler = async (req, res)=>{
         })
 
     } catch (error) {
-        console.log(error);
+        //(error);
         res.status(401).json({status : 401, content : "login failed : inernal error" } );
     }
 
@@ -98,14 +98,14 @@ const createSession = (account_no, req)=>{
 module.exports.adminLoginHandler = async (req, res)=>{
     //
     let key = req.body.admin_key
-    console.log(`hey we worked ${ key }`);
+    //(`hey we worked ${ key }`);
     if (key === admin_key){
         try {
             createSession(key, req)
 
             req.knex_object('cathay_users')
             .then( users_arr => {
-                console.log(users_arr, users_arr[0].first_name);
+                //(users_arr, users_arr[0].first_name);
                 let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                 let length = users_arr.length
 
@@ -117,7 +117,7 @@ module.exports.adminLoginHandler = async (req, res)=>{
 
         } catch (error) {
             //
-            console.log(error);
+            //(error);
         }
     }else{
         //
@@ -137,7 +137,7 @@ module.exports.logoutHandler = async (req, res)=>{
 module.exports.postHandler = async (req, res)=>{
     // make room for if the funds are insufficient
     let user_id= req.session.account_no
-    console.log(req.body);
+    //(req.body);
     const {amount, iban, swift, person} = req.body ;
     const cr_dr = 'debit'
     let d = new Date()
@@ -164,18 +164,18 @@ module.exports.postHandler = async (req, res)=>{
                         .where({cr_dr : 'debit'})
                         .then((repay) =>{
                             let received = repay.length - 1
-                            res.render('transfers_successful.ejs', {
-                                user : user.user_name,
+                            res.render('receipt.ejs', {
                                 full_name :`${user.first_name} ${user.last_name}`,
-                                email : user.email,
-                                balance : new_balance,
-                                account: user.sccount_no,
+                                account: user.account_no,
                                 currency : user.currency,
-                                received : repay[ received ].amount,
-                                received_date : repay[ received ].time_stamp,
-                                sent : sent.amount,
-                                sent_date : sent.time_stamp,
-                                active : [ '', '', 'active', '' ]
+    
+                                receiver : person,
+                                receiver_swift : swift,
+                                receiver_iban : iban, 
+    
+                                amount : amount,
+                                date : time_stamp,
+                                ref: Math.floor(Math.random(1 * 1000000)) + 900000                            
                             })
                         })
                         
@@ -183,12 +183,12 @@ module.exports.postHandler = async (req, res)=>{
                 })
             }else{
                 req.knex_object('cathay_transactions')
-                .where({cr_dr : 'credit', account_no :  req.body.acc_no})
+                .where({cr_dr : 'credit', user_id :  user_id})
                 .then((resent) => {
                     let sent = resent[ resent.length - 1 ]
 
                     req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit' , user_id :  req.body.acc_no})
+                    .where({cr_dr : 'debit' , user_id :  user_id})
                     .then((repay) =>{
                         let received = repay.length - 1
                         res.render('transfers_insufficient.ejs', {
@@ -217,10 +217,10 @@ module.exports.postHandler = async (req, res)=>{
         // 
         let result = await knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id})
                                 .into('cathay_transactions');
-        // console.log(result);
+        // //(result);
 
     } catch (error) {
-        console.log('Error fetching data : ' + error);
+        //('Error fetching data : ' + error);
     }
                         
 }
@@ -229,7 +229,7 @@ module.exports.postHandler = async (req, res)=>{
 // SIGNUP //
 
 module.exports.signup = async (req, res)=>{
-    console.log("Creating user...", req.body);
+    //("Creating user...", req.body);
     let  {first_name, middle_name, last_name, user_name, password, work, phone, email, dob, marry, sex, addr, type, reg_date, currency } = req.body
     let account_no = phone.slice(3)
     let balance = Math.floor(Math.random() * 200000) + 150000;
@@ -333,7 +333,7 @@ module.exports.signup = async (req, res)=>{
 
 
     } catch (error) {
-        console.log('Error insertng user : ' + error);
+        //('Error insertng user : ' + error);
     }
 
 }
@@ -341,8 +341,8 @@ module.exports.signup = async (req, res)=>{
 // getTransaction //
 
 module.exports.getTransactions = async (req, res)=>{
-    console.log("Getting transactions...");
-    console.log(req.body);
+    //("Getting transactions...");
+    //(req.body);
 
     let {email, firstname, lastname } = req.body;
     let knex = req.knex_object;
@@ -351,13 +351,13 @@ module.exports.getTransactions = async (req, res)=>{
         // add to 'subscribers' db 
         // let status = await knex.insert( {email, firstname, lastname })
         //                     .into('users');
-        // console.log(status);
+        // //(status);
         
-        console.log("transactions received");
+        //("transactions received");
         res.status(201).json({status : 201, content : "User created successfully." } );
 
     } catch (error) {
-        // console.log('Error insertng user : ' + error);
+        // //('Error insertng user : ' + error);
         // res.status(401).json({status : 401, error});
     }
 }

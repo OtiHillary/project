@@ -103,19 +103,25 @@
       </div>
 
       <div class="countries r-4 m-1">
-         <h3 class="chart-alt"><i class="fa-solid fa-location-dot" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Most active Locations</h3>
+         <h3 class="chart-alt">
+            <i class="fa-solid fa-location-dot" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>
+            Most active Locations
+         </h3>
+         <div class="mapouter">
+            <div class="gmap_canvas">
+               <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=63 Harvey Dr. Brooklyn, NY 11209&amp;t=p&amp;z=5&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
 
-         <div id="m" style="width: 90%; height: 75%; background: green; margin: auto; border-radius: 1.5rem;"></div>
-         <script>
-            function sample() {
-               var m1 = {
-                  center: new google.maps.LatLng(52.3, -0.14),
-                  zoom: 13,
-                  mapss: google.maps.MapTypeId.HYBRID
-               }
-               var m2 = new google.maps.Map(document.getElementById("m"), m1);
-            }
-         </script>
+               </iframe>
+               <a href="https://piratebay-proxys.com/">
+                  Piratebay
+               </a>
+            </div>
+            <style>
+               .mapouter{position:relative;text-align:right;width:100%;height:400px;}
+               .gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}
+               .gmap_iframe {height:400px!important;}
+            </style>
+         </div>
          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=sample"></script>
       </div>
    </div>

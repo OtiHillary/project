@@ -53,19 +53,22 @@
    border-radius: 5px;
    min-height: 70vh;
    display: flex;
+   flex-wrap: wrap;
    margin: 2rem 1rem;
    overflow: hidden;
    flex-direction: row;
    justify-content: space-between;
 }
 .section-image{
-   background-color: var(--my-teal);
-   width: 40%;
-   display: flex;
-   justify-content: center;
+    background-color: var(--my-teal);
+    width: 40%;
+    min-width: 35em;
+    display: flex;
+    justify-content: center;
 }
 .section-description{
    width: 60%;
+   margin: 0 auto;
    display: flex;
    justify-content: center;
 }

@@ -52,7 +52,7 @@ app.use( bodyParser.urlencoded({extended:false}) );
 app.use(session_object)
 
 app.use((req, res, next)=>{
-    console.log(`origin is : ${req.headers.origin}`);
+    //(`origin is : ${req.headers.origin}`);
     
     if (req.headers.origin){
         res.setHeader('Access-Control-Allow-Origin', req.headers.origin );

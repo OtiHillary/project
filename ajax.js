@@ -9,13 +9,13 @@ const { adminLoginHandler, loginHandler, logoutHandler, postHandler, deleteHandl
 
 function auth(req, res, next) {
     if ( req.session){
-        console.log(req.session);
-        console.log('current user is', req.session.account_no)
+        //(req.session);
+        //('current user is', req.session.account_no)
         next();
     }else{
         //invalid session
         //GOTO login
-        console.log({content: 'Invalid session'});
+        //({content: 'Invalid session'});
         res.status('401').json({status: 401, content: 'Invalid session'});
     }
 }
@@ -23,25 +23,9 @@ const createSession = (account_no, req)=>{
     req.session.account_no = account_no;
 }
 
-
-router.get('/home', (req, res) => {
-    res.render('home.ejs',
-    {
-        user : 'otied',
-        full_name : 'Otonye Hillary Edwin',
-        email : 'otiedwin40@gmail.com',
-        balance : '15,000.23',
-        account : 2345678901,
-        received : '1,540',
-        sent : resent[0].amount,
-        active : ['active', '', '', '']       
-    }                         
-)
-})
-
 router.get('/dashboard', auth, (req, res) => {
     let account_no = req.session.account_no
-    console.log('acct is:', account_no)
+    //('acct is:', account_no)
 
     req.knex_object('cathay_users')
         .where({ account_no : account_no })
@@ -52,7 +36,7 @@ router.get('/dashboard', auth, (req, res) => {
                 return
             }
             let pass = user[0]
-            console.log(pass);
+            //(pass);
             
             req.knex_object('cathay_transactions')
             .where({ user_id : pass.account_no }) //DONT FORGET!!!!
@@ -68,7 +52,7 @@ router.get('/dashboard', auth, (req, res) => {
                     .then((repay) =>{
                         let received = repay[ repay.length -1 ]
                         let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        console.log(transaction_list);
+                        //(transaction_list);
                         res.render('home.ejs', {
                             user : pass.user_name,
                             full_name :`${pass.first_name} ${pass.last_name}`,
@@ -93,7 +77,7 @@ router.get('/dashboard', auth, (req, res) => {
 
 router.get('/transactions', (req, res) => {
     let account_no = req.session.account_no
-    console.log('acct is:', account_no)
+    //('acct is:', account_no)
 
     req.knex_object('cathay_users')
         .where({ account_no : account_no })
@@ -103,7 +87,7 @@ router.get('/transactions', (req, res) => {
                 return
             }
             let pass = user[0]
-            console.log(pass);
+            //(pass);
             
             req.knex_object('cathay_transactions')
             .where({ user_id : pass.account_no }) //DONT FORGET!!!!
@@ -119,7 +103,7 @@ router.get('/transactions', (req, res) => {
                     .then((repay) =>{
                         let received = repay[ repay.length -1 ]
                         let transaction_list = transactions.map( transactions => { return JSON.stringify(transactions) })
-                        console.log(transaction_list);
+                        //(transaction_list);
                         res.render('transactions.ejs', {
                             user : pass.user_name,
                             full_name :`${pass.first_name} ${pass.last_name}`,
@@ -145,7 +129,7 @@ router.get('/transactions', (req, res) => {
 router.get('/transfers', (req, res) => {
 
     let account_no = req.session.account_no
-    console.log('acct is:', account_no)
+    //('acct is:', account_no)
 
     req.knex_object('cathay_users')
         .where({ account_no : account_no })
@@ -156,7 +140,7 @@ router.get('/transfers', (req, res) => {
                 return
             }
             let pass = user[0]
-            console.log(pass);
+            //(pass);
             
             req.knex_object('cathay_transactions')
             .where({ user_id : pass.account_no }) //DONT FORGET!!!!
@@ -173,7 +157,7 @@ router.get('/transfers', (req, res) => {
                     .then((repay) =>{
                         let received = repay[ repay.length -1 ]
                         let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        console.log(transaction_list[0]);
+                        //(transaction_list[0]);
                         res.render('transfers.ejs', {
                             user : pass.user_name,
                             full_name :`${pass.first_name} ${pass.last_name}`,
@@ -225,20 +209,24 @@ router.get('/admin', (req, res) =>{
 
 router.post('/admin', adminLoginHandler );
 
+router.get('/receipt', (req, res) => {
+    res.render('receipt.ejs')
+} );
+
 router.get('/admin/:id', (req, res) => {
-    console.log(req.params);
+    //(req.params);
     req.knex_object('cathay_transactions')
     .where({ user_id : req.params.id })
     .then(( transactions ) => {
         if(!transactions[0]){
-            console.log('no transactions here');
+            //('no transactions here');
             res.render('no_transactions.ejs', {
                 user : req.params.id,
                 result : 'No transactions here'
             })
         }
         else{
-            console.log(transactions);
+            //(transactions);
             let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
 
             res.render('admin_users_page.ejs', {
@@ -250,7 +238,7 @@ router.get('/admin/:id', (req, res) => {
     })
 })
 router.get('/admin/:id/delete', (req, res) => {
-    console.log(req.params);
+    //(req.params);
 
     req.knex_object('cathay_transactions')
     .where({user_id : req.params.id})
@@ -262,7 +250,7 @@ router.get('/admin/:id/delete', (req, res) => {
         .then(( users_arr ) => {
             req.knex_object('cathay_users')
             .then( users_arr => {
-                console.log(users_arr, users_arr[0].first_name);
+                //(users_arr, users_arr[0].first_name);
                 let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                 let length = users_arr.length
 
@@ -278,27 +266,48 @@ router.get('/admin/:id/delete', (req, res) => {
 }
 )
 router.post('/admin/add/:id/', (req, res) => {
-    console.log(req.params);
+    //(req.params);
     let user_id = req.params.id
     let d = new Date()
+
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     const {cr_dr, amount, iban, swift, person} = req.body ;
+    console.log(cr_dr);
+
+    if (cr_dr == "Credit"){
+        console.log('the user id is this ---->',user_id);
+
+        req.knex_object('cathay_users')
+        .where( {account_no : user_id} )
+        .then((user) => {
+            console.log(user);
+            let new_balance = Number(user[0].balance) + Number(amount)
+            console.log(Number(new_balance));
+
+            req.knex_object('cathay_users')
+            .where( {account_no : user_id} )
+            .update({ balance : new_balance })
+            .then((result)=>{
+                //(result);
+            })
+        })
+
+    }
 
     let result = req.knex_object.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id})
-
     .into('cathay_transactions')
-
     .then(( transactions ) => {
         res.redirect(`http://localhost:8080/ajax/admin/${ req.params.id }`)
     })
+
 })
 router.get('/admin/:id/:transaction_id', (req, res) => {
-    console.log(req.params);
+    //(req.params);
     req.knex_object('cathay_transactions')
     .where({ user_id : req.params.id, index : req.params.transaction_id })
     .delete()
     .then(( transactions ) => {
-        res.redirect(`http://localhost:8080/ajax/admin/${ req.params.id }`)
+        res.redirect(`/ajax/admin/${ req.params.id }`)
     })
 })
 

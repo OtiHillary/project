@@ -41,7 +41,7 @@
 //       }))
 //    let data = await login_details
 //    if (data){
-//       console.log(data)
+//       //(data)
 //    }
 // }
 // // button to sign up

@@ -23,11 +23,11 @@ const login = async (event) => {
       let data = await login_details
 
       if (data.failed){
-         console.log(data, data.failed)
+         //(data, data.failed)
          response.style = 'display: initial'
          response.innerHTML = data.failed
       }else{
-         console.log(data)
+         //(data)
       }    
    }
    response.style = 'display: initial'

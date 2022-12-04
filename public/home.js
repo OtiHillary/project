@@ -1,4 +1,4 @@
-console.log(data)
+//(data)
 
 let login_title = document.getElementById('title')
 let login_user = document.getElementById('user')
