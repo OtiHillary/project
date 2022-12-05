@@ -128,7 +128,7 @@ module.exports.adminLoginHandler = async (req, res)=>{
 
 module.exports.logoutHandler = async (req, res)=>{
     req.session.destroy((err) => {
-        res.redirect('/login.html')
+        res.redirect('/Login,html')
     })
 }
 
