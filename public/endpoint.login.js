@@ -10,7 +10,7 @@ const login = async (event) => {
    // fetch the details from the database //
    if (account_no_value || password_value !== '') {
       let login_details = (await fetch(
-         'http://localhost:8080/ajax/login',
+         '/ajax/login',
          {
             method: 'POST',  
             headers: { 'Content-Type': 'application/json' },

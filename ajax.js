@@ -297,7 +297,7 @@ router.post('/admin/add/:id/', (req, res) => {
     let result = req.knex_object.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id})
     .into('cathay_transactions')
     .then(( transactions ) => {
-        res.redirect(`http://localhost:8080/ajax/admin/${ req.params.id }`)
+        res.redirect(`/ajax/admin/${ req.params.id }`)
     })
 
 })

@@ -23,7 +23,7 @@
 //    // fetch the details from the database //
 
 //    let login_details = (await fetch(
-//       'http://localhost:8080/ajax/signup',
+//       '/ajax/signup',
 //       {
 //          method: 'POST',
 //          headers: { 'Content-Type': 'application/json' },
