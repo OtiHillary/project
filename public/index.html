@@ -80,11 +80,18 @@
 					<input type="radio" name="slides" id="slides_3">
 
 					<script>
-						let sl_1 = document.getElementById('slides_1')
-						let sl_2 = document.getElementById('slides_2')
-						let sl_3 = document.getElementById('slides_3')
-
+						let slides = ['slides_1', 'slides_2', 'slides_3'], current_index = 0;
+						slides = slides.map(i=>document.getElementById(i));
 						
+						function changeSlide(){
+							slides[current_index].checked = true;
+							current_index = (current_index+1)%(slides.length);
+
+							setTimeout(changeSlide, 3000);
+							
+						}
+
+						changeSlide();
 					</script>
 
 					<ul class="banner_slide_bg">
