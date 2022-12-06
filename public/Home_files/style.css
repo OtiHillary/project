@@ -167,13 +167,13 @@ nav {
     width: 70%;
 }
 .bg-1{
-    background-color: #00cccc1f;
-    left: -7%;
+    background-color: #00cccc0f;
+    left: 0;
     bottom: -10%;
 }
 .bg-2{
-    background-color: #00cccc1f;
-    left: 7%;
+    background-color: #00cccc0d;
+    right: 0;
     bottom: 10%;
 }
 
@@ -377,7 +377,7 @@ li > a:only-child:after { content: ''; }
 
     .card{
         min-height: 10rem;
-        background-color: rgb(204, 204, 204);
+        background-color: rgba(204, 204, 204, 0.065);
     }
 
     .mini-head{
