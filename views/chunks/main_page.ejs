@@ -34,7 +34,33 @@
       </div>
    <!-- TradingView Widget END -->
 
-   <%- include('./balances')%>
+   <%- include('./balances')%>`
+   <div class="quick-links flex row justify-center" style="margin: auto;">
+      <div class="click flex col">
+         <a style="text-align: center;" href="/ajax/transfers" class="flex col" ><i class="fa fa-exchange" aria-hidden="true" style="margin: auto; font-size: 1.7rem; color: rgb(0, 140, 255); padding: .5rem 0;"></i> Quick Transfer</a>
+      </div>
+      <div class="click flex col">
+         <a style="text-align: center;" href="/ajax/transactions" class="flex col"><i class="fa fa-history" aria-hidden="true" style="margin: auto; font-size: 1.7rem; color: rgb(0, 192, 64); padding: .5rem 0;"></i>Transaction history</a>
+      </div>
+      <div class="click  flex col">
+         <a style="text-align: center;" href="/ajax/dashboard" class="flex col"><i class="fa fa-tachometer" aria-hidden="true" style="margin: auto; font-size: 1.7rem; color: rgb(202, 1, 152); padding: .5rem 0;"></i>View profile</a>
+      </div>
+   </div>
+   <style>
+      .quick-links{
+         width:95%;
+      }
+      .click a{
+         border: 1px solid teal;
+         height: 5rem;
+         width: 5rem;
+         padding: 1rem;
+         margin: .5rem;
+         justify-content: center;
+         border-radius: .2rem;
+         color: teal;
+      }
+   </style>
 
    <div class="stats flex row justify-between" style=" flex-wrap: wrap">
       <div class="stat-graph flex col justify-center r-6">
