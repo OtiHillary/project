@@ -387,7 +387,7 @@ form{
    display: flex;
    background-color: transparent;
    color: white;
-   margin: 0 0 0 auto !important;
+   margin: auto 0 !important;
 }
 .toggled{
    display:none;
@@ -471,6 +471,10 @@ form{
       }
       @media (max-width:500px) {
          .card-bordered, .mainboard, .main-balance, .last, .total-transfers, .greeting, .stats, .transactions, .stat-graph, .stat-pie, .transaction-table, .countries{
+            width: 95%;
+            margin: .5rem auto;
+         }
+         .greeting, .stat-pie{
             width: 100%;
          }
       }
