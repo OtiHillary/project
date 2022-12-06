@@ -1,5 +1,39 @@
 <div class="mainboard r-8 flex col" style="margin-top: .8rem;">
    <%- include('./profile')%>
+
+   <!-- TradingView Widget BEGIN -->
+      <div class="tradingview-widget-container">
+         <div class="tradingview-widget-container__widget"></div>
+         <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Quotes</span></a> by TradingView</div>
+         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+            [{
+            "symbols": [
+            {
+               "proName": "FOREXCOM:NSXUSD",
+               "title": "US 100"
+            },
+            {
+               "proName": "FX_IDC:EURUSD",
+               "title": "EUR/USD"
+            },
+            {
+               "proName": "BITSTAMP:BTCUSD",
+               "title": "Bitcoin"
+            },
+            {
+               "proName": "BITSTAMP:ETHUSD",
+               "title": "Ethereum"
+            }
+            ],
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "showSymbolLogo": true,
+            "locale": "en"
+         }]
+      </script>
+      </div>
+   <!-- TradingView Widget END -->
+
    <%- include('./balances')%>
 
    <div class="stats flex row justify-between" style=" flex-wrap: wrap">
@@ -74,7 +108,7 @@
          </div>
       </div>            
    </div>
-
+   
    <div class="transactions flex row justify-start" style=" flex-wrap: wrap">
       <div class="transaction-table flex col r-5 m-1">
          <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions</h3>
