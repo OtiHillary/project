@@ -1,5 +1,6 @@
 <div class="mainboard r-8 flex col" style="margin-top: .8rem;">
-   <%- include('./profile')%>
+   <h1 class="teal" style="margin: .5rem auto; width: 95%;"><i class="fa-sharp fa-solid fa-user" style=" color: rgba(0, 128, 128, 0.37);"></i>Hi, <%= full_name%>. Welcome back</h1>
+
 
    <!-- TradingView Widget BEGIN -->
       <div class="tradingview-widget-container">
@@ -34,7 +35,9 @@
       </div>
    <!-- TradingView Widget END -->
 
-   <%- include('./balances')%>`
+   <%- include('./main_page_info')%>
+
+
    <div class="quick-links flex row justify-center" style="margin: auto;">
       <div class="click flex col">
          <a style="text-align: center;" href="/ajax/transfers" class="flex col" ><i class="fa fa-exchange" aria-hidden="true" style="margin: auto; font-size: 1.7rem; color: rgb(0, 140, 255); padding: .5rem 0;"></i> Quick Transfer</a>
@@ -62,7 +65,7 @@
       }
    </style>
 
-   <div class="stats flex row justify-between" style=" flex-wrap: wrap">
+   <div class="stats flex row justify-between" style=" flex-wrap: wrap;">
       <div class="stat-graph flex col justify-center r-6">
          <h3 class="chart-alt"><i class="fa-solid fa-chart-simple" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions Statistics</h3>
          <% if (true) {%>

@@ -1,0 +1,75 @@
+
+<div class="main-info flex row justify-start" style="flex-wrap: wrap; width: 95%; margin: 1rem auto;">
+   <style>
+      .main-info{
+         width: 100%;
+         background-color: #f7f7f7;
+         border: 1px solid #01d9d9;
+         margin: .5em auto;
+         border-radius: .5rem;
+         padding: 1rem 0
+      }
+      .sub-info{
+         margin: 1rem 2rem ;
+         color: #01d9d9;
+      }
+      .main-info p, .main-info h1, .sub-info p, h1{
+         color: #01d9d9;
+      }
+   </style>
+   <div class="" style="margin: auto; width: 85%;">
+      <h3>Tip</h3>
+      <p style="color: black;">Change your acoount password frequently to better secure your account from malicious</p>
+   </div>
+   <div class="sub-info flex col justify-between">
+      <p class="sp">Account Balance</p>
+      <h1>
+         <span class= "h1 currency"><%=currency %></span>
+         <span class=" h1 amount"><%= balance %></span>
+      </h1>                  
+      <p class="sp">
+         <div class="footer-copyright text-center py-3">
+               <script type="text/javascript">
+               var d = new Date()
+               document.write("Today's date : "+d.getFullYear()+"-"+ d.getMonth()+"-"+ d.getDay())
+               </script>
+         </div>    	
+      </p>
+   </div>
+   <div class="sub-info flex col justify-between">
+      <p class="sp">Ledger Balance</p>
+      <h1>
+         <span class= "h1 currency"><%=currency %></span>
+         <span class=" h1 amount"><%= balance %></span>
+      </h1>                  
+      <p class="sp">
+         <div class="footer-copyright text-center py-3">
+               <script type="text/javascript">
+               var d = new Date()
+               document.write("Today's date : "+d.getFullYear()+"-"+ d.getMonth()+"-"+ d.getDay())
+               </script>
+         </div>    	
+      </p>
+   </div>   
+   <div class="sub-info flex col justify-between">
+      <p class="sp">Account Holder</p>
+      <h1>
+         <span class= "h1 currency"><%=full_name%></span>
+      </h1>                  
+   </div>    
+   <div class="sub-info flex col justify-between">
+      <p class="sp">Account Number</p>
+      <h1>
+         <span class= "h1 currency"><%=account%></span>
+      </h1>                  
+   </div>
+   <div class="sub-info flex col justify-between">
+      <p class="sp">Account Type</p>
+      <h1>
+         <span class= "h1 currency">Savings</span>
+      </h1>                  
+   </div> 
+   <marquee behavior="wrap" direction="left"  style="font-weight: 700; display: flex; background-color: blue; padding: .2rem 0; width: 85%; margin: auto;">
+      <p style="color: white;">Do not share your passwords or sensitive information about your <span style="color: yellow;"> ACCOUNT</span> to Anyone, if you notice anything <span style="color: red;">suspicious</span> , Immediately report any such activity </p>
+   </marquee>   
+</div>
