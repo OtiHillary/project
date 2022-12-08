@@ -4,27 +4,28 @@
       .main-info{
          width: 100%;
          background-color: #f7f7f7;
-         border: 1px solid #01d9d9;
          margin: .5em auto;
-         border-radius: .5rem;
-         padding: 1rem 0
+         border-radius: .2rem;
+         box-shadow: 1px 1px 5px #80808066;
+         padding: 1.5rem 0;
       }
       .sub-info{
          margin: 1rem 2rem ;
-         color: #01d9d9;
+         color: teal;
+         border-radius: .2rem;
       }
       .main-info p, .main-info h1, .sub-info p, h1{
-         color: #01d9d9;
+         color: teal;
       }
    </style>
    <div class="" style="margin: auto; width: 85%;">
       <h3>Tip</h3>
-      <p style="color: black;">Change your account password frequently to better secure your account from malicious activities</p>
+      <p style="color: rgb(102, 102, 102);">Change your account password frequently to better secure your account from malicious activities</p>
    </div>
    <div class="sub-info flex col justify-between">
       <p class="sp">Account Balance</p>
       <h1>
-         <span class= "h1 currency"><%=currency %></span>
+         <span class= "h1 currency" style="color: teal;"><%=currency %></span>
          <span class=" h1 amount"><%= balance %></span>
       </h1>                  
       <p class="sp">
@@ -39,7 +40,7 @@
    <div class="sub-info flex col justify-between">
       <p class="sp">Ledger Balance</p>
       <h1>
-         <span class= "h1 currency"><%=currency %></span>
+         <span class= "h1 currency" style="color: teal;"><%=currency %></span>
          <span class=" h1 amount"><%= balance %></span>
       </h1>                  
       <p class="sp">
@@ -54,19 +55,19 @@
    <div class="sub-info flex col justify-between">
       <p class="sp">Account Holder</p>
       <h1>
-         <span class= "h1 currency"><%=full_name%></span>
+         <span class= "h1 currency" style="color: teal;"><%=full_name%></span>
       </h1>                  
    </div>    
    <div class="sub-info flex col justify-between">
       <p class="sp">Account Number</p>
       <h1>
-         <span class= "h1 currency"><%=account%></span>
+         <span class= "h1 currency" style="color: teal;"><%=account%></span>
       </h1>                  
    </div>
    <div class="sub-info flex col justify-between">
       <p class="sp">Account Type</p>
       <h1>
-         <span class= "h1 currency">Savings</span>
+         <span class= "h1 currency" style="color: teal;">Savings</span>
       </h1>                  
    </div> 
    <marquee behavior="wrap" direction="left"  style="font-weight: 700; display: flex; background-color: blue; padding: .2rem 0; width: 85%; margin: auto;">

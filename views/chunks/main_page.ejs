@@ -1,7 +1,4 @@
 <div class="mainboard r-8 flex col" style="margin-top: .8rem;">
-   <h1 class="teal" style="margin: .5rem auto; width: 95%;"><i class="fa-sharp fa-solid fa-user" style=" color: rgba(0, 128, 128, 0.37);"></i>Hi, <%= full_name%>. Welcome back</h1>
-
-
    <!-- TradingView Widget BEGIN -->
       <div class="tradingview-widget-container">
          <div class="tradingview-widget-container__widget"></div>
@@ -33,10 +30,9 @@
          }]
       </script>
       </div>
-   <!-- TradingView Widget END -->
-
+   <!-- TradingView Widget END -->   
+   <h1 class="teal" style="margin: .5rem auto; width: 95%;"><i class="fa-sharp fa-solid fa-user" style=" color: rgba(0, 128, 128, 0.37);"></i>Hi, <%= full_name%>. Welcome back</h1>
    <%- include('./main_page_info')%>
-
 
    <div class="quick-links flex row justify-center" style="margin: auto;">
       <div class="click flex col">
@@ -49,6 +45,7 @@
          <a style="text-align: center;" href="/ajax/dashboard" class="flex col"><i class="fa fa-tachometer" aria-hidden="true" style="margin: auto; font-size: 1.7rem; color: rgb(202, 1, 152); padding: .5rem 0;"></i>View profile</a>
       </div>
    </div>
+
    <style>
       .quick-links{
          width:95%;
@@ -165,5 +162,6 @@
          </table>
       </div>
    </div>
+   
    <%- include('../invariables/footer')%>
 </div>
