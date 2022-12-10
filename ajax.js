@@ -4,7 +4,7 @@ const res = require('express-cookie/lib/response');
 const router = express.Router();
 const admin_key = 'admin123'
 
-const { adminLoginHandler, loginHandler, logoutHandler, postHandler, deleteHandler, signup, getTransactions } = require('./handlers');
+const { adminLoginHandler, loginHandler, logoutHandler, postHandler, deleteHandler, signup, getTransactions, authPin } = require('./handlers');
 
 
 function auth(req, res, next) {
@@ -201,7 +201,11 @@ router.post('/signup', signup );
 
 router.post('/login', loginHandler );
 
+router.post('/auth_pin', authPin );
+
 router.get('/login', loginHandler );
+
+router.get('/auth_pin', authPin );
 
 router.get('/admin', (req, res) =>{
     res.render('admin.ejs', { user: 'administrator'  })
@@ -238,7 +242,6 @@ router.get('/admin/:id', (req, res) => {
     })
 })
 router.get('/admin/:id/delete', (req, res) => {
-    //(req.params);
 
     req.knex_object('cathay_transactions')
     .where({user_id : req.params.id})
@@ -266,7 +269,6 @@ router.get('/admin/:id/delete', (req, res) => {
 }
 )
 router.post('/admin/add/:id/', (req, res) => {
-    //(req.params);
     let user_id = req.params.id
     let d = new Date()
 

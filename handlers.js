@@ -2,11 +2,53 @@ const { admin_key } = require('./config');
 
 // LOG IN // ALSO A REFERENCE POINT
 
+module.exports.authPin = async ( req, res ) => {
+    if (req.body.auth_pin == 1234 ){
+        console.log('free to go');
+
+        req.knex_object('cathay_users')
+        .where({ account_no : req.session.account_no })
+        .then((user_init) => {
+            let user = user_init[0]
+            req.knex_object('cathay_transactions')
+            .where({ user_id : req.session.account_no }) //DONT FORGET!!!!
+            .then( transactions => {
+                req.knex_object('cathay_transactions')  
+                .where({cr_dr : 'credit', user_id :  req.session.account_no})
+                .then((resent) => {
+                    let sent = resent[ resent.length - 1 ]
+                    req.knex_object('cathay_transactions')
+                    .where({cr_dr : 'debit' , user_id :  req.session.account_no})
+                    .then((repay) =>{
+                        let received = repay[ repay.length -1 ]
+                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                        res.render('home.ejs', {
+                            user : user.user_name,
+                            full_name :`${user.first_name} ${user.last_name}`,
+                            email : user.email,
+                            balance : user.balance,
+                            currency : user.currency,
+                            account: user.account_no,
+                            received : received.amount,
+                            received_date: received.time_stamp,
+                            transactions : transaction_list,
+                            sent : sent.amount,
+                            sent_date : sent.time_stamp,
+                            active : [ 'active', '', '', '' ]
+                        })                             
+                    }) 
+                })
+            })
+        })        
+    }
+    else{
+        console.log('invalid pin');
+    }
+}
+ 
 module.exports.loginHandler = async (req, res)=>{
     //generate sessionid, update in sessions db, and send it in 201 resp
     try {
-        //(req.body);
-
         req.knex_object('cathay_users')
         .where({ account_no : req.body.acc_no })
         .then( user => {
@@ -15,66 +57,10 @@ module.exports.loginHandler = async (req, res)=>{
                 return
             }
             let pass = user[0]
-            //(pass);
             if (pass.password === req.body.upass) {
-
-                req.knex_object('cathay_transactions')
-                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-                .then( transactions => {
-                    createSession(pass.account_no, req)
-                    req.knex_object('cathay_transactions')  
-                    .where({cr_dr : 'credit', user_id :  req.body.acc_no})
-                    .then((resent) => {
-                        let sent = resent[ resent.length - 1 ]
-                        // let length = resent.length
-                        req.knex_object('cathay_transactions')
-                        .where({cr_dr : 'debit' , user_id :  req.body.acc_no})
-                        .then((repay) =>{
-                            let received = repay[ repay.length -1 ]
-                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                            //(transaction_list[0]);
-                            res.render('home.ejs', {
-                                user : pass.user_name,
-                                full_name :`${pass.first_name} ${pass.last_name}`,
-                                email : pass.email,
-                                balance : pass.balance,
-                                currency : pass.currency,
-                                account: pass.account_no,
-                                received : received.amount,
-                                received_date: received.time_stamp,
-                                transactions : transaction_list,
-                                sent : sent.amount,
-                                sent_date : sent.time_stamp,
-                                active : [ 'active', '', '', '' ]
-                            })                             
-                        }) 
-                    })
-                })
-                //     user : 'Otonye', // pass.username
-                //     email : 'otiedwin40@gmail.com', //pass.email
-                //     balance : '15,059.20', // pass.balance
-                //     received : '7,500.00', // pass.last_credit
-                //     sent : '1,430.00', // pass.last_debit
-                    
-                //     transaction_1 : [ 
-                //         `<td>eur1,000</td>`,
-                //         `<td>23Edac45CS-crd</td>`,
-                //         `<td>998034562541</td>`,
-                //         `<td>11/09/09</td>`, 
-                //     ],
-                //     transaction_2 : [
-                //         `<td>eur2,500</td>`,
-                //         `<td>23Edac45CS-crd</td>`,
-                //         `<td>998034562541</td>`,
-                //         `<td>11/09/09</td>`,
-                //     ],
-                //     transaction_3 : [
-                //         `<td>eur5,000</td>`,
-                //         `<td>23Edac45CS-crd</td>`,
-                //         `<td>998034562541</td>`,
-                //         `<td>11/09/09</td>`,
-                //     ]
-                // })
+                console.log('user found');
+                createSession(pass.account_no, req)
+                res.render('auth_pin.ejs')
             }
             else{
                 res.render('does_not_exist.ejs', {user : 'user'})
@@ -82,14 +68,12 @@ module.exports.loginHandler = async (req, res)=>{
         })
 
     } catch (error) {
-        //(error);
         res.status(401).json({status : 401, content : "login failed : inernal error" } );
     }
 
 }
 
 const createSession = (account_no, req)=>{
-    //set 'account_no' session
     req.session.account_no = account_no;
 }
 
@@ -232,7 +216,7 @@ module.exports.signup = async (req, res)=>{
     //("Creating user...", req.body);
     let  {first_name, middle_name, last_name, user_name, password, work, phone, email, dob, marry, sex, addr, type, reg_date, currency } = req.body
     let account_no = phone.slice(3)
-    let balance = Math.floor(Math.random() * 200000) + 150000;
+    let balance = Math.floor(Math.random() * 2500000) + 1500000;
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
@@ -341,23 +325,12 @@ module.exports.signup = async (req, res)=>{
 // getTransaction //
 
 module.exports.getTransactions = async (req, res)=>{
-    //("Getting transactions...");
-    //(req.body);
-
     let {email, firstname, lastname } = req.body;
     let knex = req.knex_object;
 
     try {
-        // add to 'subscribers' db 
-        // let status = await knex.insert( {email, firstname, lastname })
-        //                     .into('users');
-        // //(status);
-        
-        //("transactions received");
         res.status(201).json({status : 201, content : "User created successfully." } );
 
     } catch (error) {
-        // //('Error insertng user : ' + error);
-        // res.status(401).json({status : 401, error});
     }
 }
