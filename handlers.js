@@ -60,7 +60,7 @@ module.exports.loginHandler = async (req, res)=>{
             if (pass.password === req.body.upass) {
                 console.log('user found');
                 createSession(pass.account_no, req)
-                res.render('auth_pin.ejs')
+                res.redirect('/auth_pin.html')
             }
             else{
                 res.render('does_not_exist.ejs', {user : 'user'})

