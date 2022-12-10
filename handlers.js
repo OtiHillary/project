@@ -3,6 +3,7 @@ const { admin_key } = require('./config');
 // LOG IN // ALSO A REFERENCE POINT
 
 module.exports.authPin = async ( req, res ) => {
+    console.log(req.body.auth_pin, req.body);
     if (req.body.auth_pin == 1234 ){
         console.log('free to go');
 
