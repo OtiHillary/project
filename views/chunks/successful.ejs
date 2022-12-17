@@ -1,38 +1,5 @@
 <div class="mainboard flex col r-8" style="margin-top: .8rem;overflow-x: hidden;">
    <%- include('./profile')%>
-   <div class="flex row justify-start">
-       <div class="main-balance flex col justify-between">
-          <p class="sp">Account Balance</p>
-          <h1>
-             <span class="currency h1"><%= currency %></span>
-             <span class="amount h1"><%= balance %></span>
-          </h1>                  
-          <p class="sp">
-             <div class="footer-copyright text-center py-3">
-                   <script type="text/javascript">
-                   var d = new Date()
-                   document.write("Today's date : "+d.getFullYear()+"/"+ d.getMonth()+"/"+ d.getDay())
-                   </script>
-             </div>    	
-          </p>
-       </div>
-       <div class="last flex col justify-between">
-          <p class="sp">Last Transaction <span class="positive">Received +</span></p>
-          <h1>
-             <span class="currency h1 "><%=currency %></span>
-             <span class="amount h1"><%= received %></span>
-          </h1> 
-          <p class="sp">Date of transaction</p>
-       </div>
-       <div class="total-transfers flex col justify-between">
-          <p class="sp">Last Transaction <span class="negative">Sent -</span></p>
-          <h1>
-             <span class="currency h1"><%=currency %></span>
-             <span class="amount h1"><%= sent %></span>
-          </h1> 
-          <p class="sp">Date of transaction</p>
-       </div>
-    </div>
    <div class="card card-bordered">
       <div style="
          background-color: rgba(3, 165, 165, 0.219);

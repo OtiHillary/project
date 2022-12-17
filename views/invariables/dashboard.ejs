@@ -1,3 +1,8 @@
+<style>
+   ol a{
+      
+   }
+</style>
 <div class="dashboard r-2 h-full col flex justify-between">
    <div>
       <div class="bank-name row flex justify-center r-8">
@@ -14,10 +19,17 @@
                <i class="fa-solid fa-credit-card" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
                Transactions
             </a>
-            <a href="/ajax/transfers" class=<%=active[2] %>>
+             <!-- -->
+            <a id="transfer-toggle" class=<%=active[2] %>>
                <i class="fa-solid fa-money-bill-transfer" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
-               Transfers
+               Transfers 
             </a>
+
+               <ol id="transfer-options" style="margin-left: 20%; margin-right: 1rem; height: 5rem; display: none;" class="col justify-start">
+                  <li style="list-style: circle; margin: .5rem 0;"><a href=" /ajax/transfers">Local Transfers</a></li>
+                  <li style="list-style: circle; margin: .5rem 0;"><a href="/ajax/imf">Wire Transfer</a></li>
+               </ol> 
+
             <a href="/ajax/notifications" class=<%=active[3] %>>
                <i class="fa-solid fa-bell" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
                Notifications
@@ -33,3 +45,16 @@
       <p id="email"><%= email %></p>
    </div>
 </div>
+<script>
+   let transfer_toggle = document.getElementById('transfer-toggle'), 
+      transfer_options = document.getElementById('transfer-options')
+
+      function toggle() {
+         if( !transfer_options.style.display == 'none' ){
+            transfer_options.style.display = 'none'
+         }
+         transfer_options.style.display = 'flex'
+      }
+      transfer_toggle.addEventListener("click", toggle)
+
+</script>

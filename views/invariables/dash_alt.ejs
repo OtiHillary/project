@@ -36,10 +36,16 @@
             <i class="fa-solid fa-credit-card" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
             Transactions
          </a>
-         <a href="/ajax/transfers">
+         <a id="transfer-toggle_mobile" class=<%=active[2] %>>
             <i class="fa-solid fa-money-bill-transfer" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
-            Transfers
+            Transfers 
          </a>
+
+            <ol id="transfer-options_mobile" style="margin-left: 20%; margin-right: 1rem; height: 5rem; display: none;" class="col justify-start">
+               <li style="list-style: circle; margin: .5rem 0;"><a href=" /ajax/transfers">Local Transfers</a></li>
+               <li style="list-style: circle; margin: .5rem 0;"><a href="/ajax/imf">Wire Transfer</a></li>
+            </ol> 
+
          <a href="/ajax/notifications" >
             <i class="fa-solid fa-bell" style="color: var(--my-teal-dark) ; margin: 0 .6rem;"></i>
             Notifications
@@ -50,3 +56,16 @@
          </a>
       </div>
 </div>
+<script>
+   let transfer_toggle_mobile = document.getElementById('transfer-toggle_mobile'), 
+      transfer_options_mobile = document.getElementById('transfer-options_mobile')
+
+      function toggle() {
+         if( !transfer_options_mobile.style.display == 'none' ){
+            transfer_options_mobile.style.display = 'none'
+         }
+         transfer_options_mobile.style.display = 'flex'
+      }
+      transfer_toggle_mobile.addEventListener("click", toggle)
+
+</script>

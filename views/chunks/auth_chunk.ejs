@@ -1,0 +1,48 @@
+<div class="mainboard flex col r-8" style="margin-top: .8rem; overflow-x: hidden;">
+    <div class="card card-bordered">
+        <div class="card-inner card-inner-lg flex col">
+             <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Verify Your Account</h4>
+             <form id="signup" method="post" action="/ajax/auth_payment" style="margin: 0 auto;">
+             <div class="response" style="display:none">
+             </div>
+            <div class="form-group flex col">
+                <div class="form-label-group">
+                    <label class="form-label" for="auth_pin" style = "color: var(--my-teal-dark);">Authentication Pin<span>*</span></label>
+                </div>
+                <input id="otp" type="text" autofocus="" class="form-control form-control-lg" name="auth_pin" placeholder="e.g 15243" required>
+            </div>
+            
+            <button 
+                style="
+                    background-color: var(--my-teal);
+                    color: white;
+                    display: block;
+                    width: 100%;display: inline-block;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border-width: 1px;" 
+                type="submit">Authenticate Account</button>
+            </form>        
+        </div>
+    </div>
+    <%- include('../invariables/footer')%>
+ </div>
