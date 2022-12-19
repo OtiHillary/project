@@ -286,6 +286,78 @@ router.post('/imf_verify', (req, res) => {
     })
 })
 
+router.get('/cotp', (req, res) => {
+    req.knex_object('cathay_users')
+    .where({account_no : req.session.account_no})
+    .then((user_init) => {
+        let user = user_init[0]
+        res.render('cotp.ejs', {
+            user : user.user_name,
+            full_name : user.first_name,
+            email : user.email,
+            active : ['', '', 'active', '']       
+        })
+    })
+})
+
+router.post('/cotp_verify', (req, res) => {
+req.knex_object('cathay_users')
+.where({account_no : req.session.account_no})
+.then((user_init) => {
+    let user = user_init[0]
+    if (req.body.cotp == '159357'){
+        let account_no = req.session.account_no
+    
+        req.knex_object('cathay_users')
+            .where({ account_no : account_no })
+            .select('*')
+            .then( user => {
+                if ( !user || !user[0] ) {
+                    res.status(200).json( {status : 401, failed : "invalid username or password" } );
+                    return
+                }
+                let pass = user[0]
+                //(pass);
+                
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
+    
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                            //(transaction_list[0]);
+                            res.render('imf.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                currency : pass.currency,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ '', '', 'active', '' ]
+                            })                             
+                        }) 
+                    })
+                })
+                
+            })
+    }
+})
+
+})
 
 router.get('/otp', (req, res) => {
     
@@ -416,8 +488,7 @@ router.post('/admin', adminLoginHandler );
 
 router.get('/receipt', (req, res) => {
     res.render('receipt.ejs')
-} );
-
+});
 
 router.get('/admin/:id', (req, res) => {
     //(req.params);
@@ -443,6 +514,7 @@ router.get('/admin/:id', (req, res) => {
         }
     })
 })
+
 router.get('/admin/:id/delete', (req, res) => {
 
     req.knex_object('cathay_transactions')
@@ -470,6 +542,7 @@ router.get('/admin/:id/delete', (req, res) => {
 
 }
 )
+
 router.post('/admin/add/:id/', (req, res) => {
     let user_id = req.params.id
     let d = new Date()
@@ -505,6 +578,7 @@ router.post('/admin/add/:id/', (req, res) => {
     })
 
 })
+
 router.get('/admin/:id/:transaction_id', (req, res) => {
     //(req.params);
     req.knex_object('cathay_transactions')
@@ -519,9 +593,7 @@ router.post('/logout', logoutHandler );
 
 router.get('/logout', logoutHandler );
 
-
 router.get('/contact', getTransactions );
-
 
 router.post('/payment', (req, res)=>{ //let us see how this goes
     // make room for if the funds are insufficient
@@ -575,6 +647,13 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                             
                         })
                     })
+                    // go through with the transaction
+                    try {
+                        let result =  knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id}).into('cathay_transactions');
+            
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }else{
                     req.knex_object('cathay_transactions')
                     .where({ user_id : req.session.account_no }) //DONT FORGET!!!!
@@ -616,15 +695,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
 
         )
 
-        try {
-            // 
-            let result =  knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id})
-                                    .into('cathay_transactions');
-            // //(result);
 
-        } catch (error) {
-            //('Error fetching data : ' + error);
-        }
     }
 
                         
