@@ -6,7 +6,7 @@ const router = express.Router();
 const admin_key = 'admin123'
 
 const { adminLoginHandler, loginHandler, logoutHandler, deleteHandler, signup, getTransactions, authPin, authPay, review } = require('./handlers');
-const sendMail = require('./mail/send_otp');
+const { sendOtp, sendSupportMail } = require('./mail/send_otp');
 
 const storage = new HandyStorage('./store.json');
 
@@ -385,7 +385,8 @@ router.get('/otp', (req, res) => {
                     })
 
 
-                    sendMail(`otiedwin40@gmail.com`, `${otp_init}`)
+                    sendOtp(`${user.email}`, `${otp_init}`)
+
                     res.render('otp.ejs', {
                         user : user.user_name,
                         full_name :`${user.first_name} ${user.last_name}`,
@@ -629,7 +630,6 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                             .where({cr_dr : 'debit'})
                             .then((repay) =>{
                                 let received = repay.length - 1
-                                // createSession({})
                                 res.render('receipt.ejs', {
                                     full_name :`${user.first_name} ${user.last_name}`,
                                     account: user.account_no,
@@ -641,7 +641,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
         
                                     amount : storage.state.amount,
                                     date : time_stamp,
-                                    ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
+                                    ref: Math.floor(Math.random(1 * 164736540)) + 3486984758                            
                                 })
                             })
                             
@@ -706,9 +706,18 @@ router.get('*', () =>{
     res.render('not_found.ejs')
 })
 
+router.post('/support', (req, res) => {
+    let message = `Sender Email: ${req.body.email}\n Sender Name: ${req.body.name}\n Message body: ${req.body.issues}`
+    console.log(message);
+    sendSupportMail('globalxcreditbank@gmail.com', message)
+    res.redirect('/')
+})
+
 router.post('*', () =>{
     res.render('not_found.ejs')
 })
+
+
 
 // router.delete('/delete/:index', auth, deleteHandler ); 
 

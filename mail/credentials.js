@@ -1,4 +1,4 @@
 module.exports = {
-   user: 'dezwhy97@gmail.com',
-   password: 'fouygsfdpsedhjpn',
+   user: 'globalxcreditbank@gmail.com',
+   password: 'dpgjufhpllsseegi',
 };

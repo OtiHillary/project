@@ -11,7 +11,7 @@ var mailTransport = nodemailer.createTransport({
     },
 });
 
-async function sendMail(email, otp){
+async function sendOtp(email, otp){
     console.log('Sending to...', email, credentials.user, credentials.password);
 
     try {
@@ -28,4 +28,24 @@ async function sendMail(email, otp){
     }
 }
 
-module.exports = sendMail;
+async function sendSupportMail(email, otp){
+    console.log('Sending to...', email, credentials.user, credentials.password);
+
+    try {
+        let info = await mailTransport.sendMail({
+                        from : ` "GLOBAL-X CREDIT" `,
+                        to : email,
+                        subject: 'Globalxcreditbank support',
+                        text : otp ,
+                    } );
+            
+        console.log("Message sent: %s", info.messageId);
+    } catch (error) {
+        console.error( 'Unable to send email: ' + error );//is this enough?
+    }
+}
+
+module.exports = {
+    sendOtp, 
+    sendSupportMail
+};

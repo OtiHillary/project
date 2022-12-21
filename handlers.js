@@ -278,6 +278,7 @@ module.exports.signup = async (req, res)=>{
     let  {first_name, middle_name, last_name, user_name, password, work, phone, email, dob, marry, sex, addr, type, reg_date, currency } = req.body
     let account_no = phone.slice(3)
     let balance = Math.floor(Math.random() * 2500000) + 1500000;
+    let cotp = Math.floor(Math.random() * 2543212) + 15439129;
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
@@ -295,7 +296,8 @@ module.exports.signup = async (req, res)=>{
                 email,
                 balance,
                 currency, 
-                password
+                password,
+                cotp,
             }
         ).into('cathay_users');
 

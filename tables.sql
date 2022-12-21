@@ -6,7 +6,8 @@ CREATE TABLE cathay_users (
    email VARCHAR(255) NOT NULL,
    balance BIGINT NOT NULL,
    currency VARCHAR(255) NOT NULL,
-   password VARCHAR(25) NOT NULL                                
+   password VARCHAR(25) NOT NULL ,
+   cotp VARCHAR(25) NOT NULL
 );
 
 -- first_name
