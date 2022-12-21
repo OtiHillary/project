@@ -305,7 +305,7 @@ req.knex_object('cathay_users')
 .where({account_no : req.session.account_no})
 .then((user_init) => {
     let user = user_init[0]
-    if (req.body.cotp == '159357'){
+    if (req.body.cotp == user.cotp){
         let account_no = req.session.account_no
     
         req.knex_object('cathay_users')
