@@ -279,6 +279,8 @@ module.exports.signup = async (req, res)=>{
     let account_no = phone.slice(3)
     let balance = Math.floor(Math.random() * 2500000) + 1500000;
     let cotp = Math.floor(Math.random() * 2543212) + 15439129;
+    let iban = `${Math.floor(Math.random() * 25) + 11}-${Math.floor(Math.random() * 15) + 199}-${Math.floor(Math.random() * 22) + 98999}-${Math.floor(Math.random() * 2225436) + 989913249}`;
+    let swift = `${Math.floor(Math.random() * 25) + 154}-${Math.floor(Math.random() * 15) + 19}-${Math.floor(Math.random() * 22) + 99}`;
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
@@ -298,6 +300,8 @@ module.exports.signup = async (req, res)=>{
                 currency, 
                 password,
                 cotp,
+                swift,
+                iban
             }
         ).into('cathay_users');
 
