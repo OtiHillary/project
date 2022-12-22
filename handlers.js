@@ -284,6 +284,7 @@ module.exports.signup = async (req, res)=>{
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
+    ``
     try {
         // if (/*already exists*/)  {
             
