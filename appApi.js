@@ -65,6 +65,39 @@ app.use((req, res, next)=>{
 app.use('/',  express.static( 'public') );
 app.use('/ajax',  ajax_router );
 
+app.get('/reset_cotp/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_cotp = Math.floor(Math.random() * 2543413) + 25456189;
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ cotp : random_cotp })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                //('no transactions here');
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                //(transactions);
+                let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+    
+                res.render('admin_users_page.ejs', {
+                    transactions : transaction_list,
+                    user : req.params.id
+                })
+    
+            }
+        })
+     } )
+})
+
 app.get('*', (req, res) => {
     res.render('not_found.ejs', {user : 'not found'})
 })

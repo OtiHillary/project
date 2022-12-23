@@ -434,6 +434,7 @@ router.post('/payment_review', (req, res) => {
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
 
+
     req.knex_object('cathay_users')
     .where({ account_no : user_id})
     .select('*')
@@ -453,28 +454,34 @@ router.post('/payment_review', (req, res) => {
                         req.knex_object('cathay_transactions')
                         .where({cr_dr : 'debit'})
                         .then((repay) =>{
-                            storage.setState({
-                                amount : req.body.amount ,
-                                iban : req.body.iban ,
-                                swift : req.body.iban ,
-                                person : req.body.person
-                            })
-
                             let received = repay.length - 1
-                            // createSession({})
-                            res.render('review.ejs', {
-                                full_name :`${user.first_name} ${user.last_name}`,
-                                account: user.account_no,
-                                currency : user.currency,
-    
-                                receiver : person,
-                                receiver_swift : swift,
-                                receiver_iban : iban, 
-    
-                                amount : amount,
-                                date : time_stamp,
-                                ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
-                            })
+                            console.log(req.body.iban, user.iban,' : ',req.body.swift, user.swift);
+
+                            if (req.body.iban === user.iban && req.body.swift == user.swift) {
+                                storage.setState({
+                                    amount : req.body.amount ,
+                                    iban : req.body.iban ,
+                                    swift : req.body.iban ,
+                                    person : req.body.person
+                                })
+                                let result =  knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id}).into('cathay_transactions');
+                                res.render('review.ejs', {
+                                    full_name :`${user.first_name} ${user.last_name}`,
+                                    account: user.account_no,
+                                    currency : user.currency,
+        
+                                    receiver : person,
+                                    receiver_swift : swift,
+                                    receiver_iban : iban, 
+        
+                                    amount : amount,
+                                    date : time_stamp,
+                                    ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
+                                })
+                            } else {
+                                
+                            }
+
                         })
                         
                     })
@@ -694,23 +701,22 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
             }
 
         )
-
-
     }
 
                         
 }
  );
 
-router.get('*', () =>{
-    res.render('not_found.ejs')
-})
 
 router.post('/support', (req, res) => {
     let message = `Sender Email: ${req.body.email}\n Sender Name: ${req.body.name}\n Message body: ${req.body.issues}`
     console.log(message);
     sendSupportMail('globalxcreditbank@gmail.com', message)
     res.redirect('/')
+})
+
+router.get('*', () =>{
+    res.render('not_found.ejs')
 })
 
 router.post('*', () =>{
