@@ -455,7 +455,7 @@ router.post('/payment_review', (req, res) => {
                             let received = repay.length - 1
                             console.log(req.body.iban, user.iban,' : ',req.body.swift, user.swift);
 
-                            if (req.body.iban && req.body.swift) {
+                            if (true) {
                                 storage.setState({
                                     amount : req.body.amount ,
                                     iban : req.body.iban ,
