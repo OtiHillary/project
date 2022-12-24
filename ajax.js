@@ -661,7 +661,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                     })
                     // go through with the transaction
                     try {
-                        let result =  knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id}).into('cathay_transactions');
+                        let result =  knex.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
             
                     } catch (error) {
                         console.log(error);
