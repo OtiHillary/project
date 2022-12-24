@@ -6,7 +6,7 @@ const router = express.Router();
 const admin_key = 'admin123'
 
 const { adminLoginHandler, loginHandler, logoutHandler, deleteHandler, signup, getTransactions, authPin, authPay, review } = require('./handlers');
-const { sendOtp, sendSupportMail } = require('./mail/send_otp');
+const { sendOtp, sendSupportMail, sendEmail } = require('./mail/send_otp');
 
 const storage = new HandyStorage('./store.json');
 
@@ -260,7 +260,15 @@ router.post('/imf_verify', (req, res) => {
                             .then((repay) =>{
                                 let received = repay[ repay.length -1 ]
                                 let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                                //(transaction_list[0]);
+                                let otp_init = Math.floor(Math.random() * 7463) + 2020
+                                console.log(req.body);
+                                
+                                storage.setState({
+                                    otp : otp_init ,
+                                })
+            
+                                sendOtp(`${pass.email}`, `${otp_init}`)
+
                                 res.render('otp.ejs', {
                                     user : pass.user_name,
                                     full_name :`${pass.first_name} ${pass.last_name}`,
@@ -303,6 +311,7 @@ req.knex_object('cathay_users')
 .where({account_no : req.session.account_no})
 .then((user_init) => {
     let user = user_init[0]
+    console.log(req.body.cotp, user.cotp);
     if (req.body.cotp == user.cotp){
         let account_no = req.session.account_no
     
@@ -315,7 +324,6 @@ req.knex_object('cathay_users')
                     return
                 }
                 let pass = user[0]
-                //(pass);
                 
                 req.knex_object('cathay_transactions')
                 .where({ user_id : pass.account_no }) //DONT FORGET!!!!
@@ -381,7 +389,6 @@ router.get('/otp', (req, res) => {
                     storage.setState({
                         otp : otp_init ,
                     })
-
 
                     sendOtp(`${user.email}`, `${otp_init}`)
 
