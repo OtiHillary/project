@@ -141,7 +141,6 @@ router.get('/transactions', (req, res) => {
 router.get('/transfers', (req, res) => {
 
     let account_no = req.session.account_no
-    //('acct is:', account_no)
 
     req.knex_object('cathay_users')
         .where({ account_no : account_no })
@@ -245,8 +244,7 @@ router.post('/imf_verify', (req, res) => {
                         return
                     }
                     let pass = user[0]
-                    //(pass);
-                    
+
                     req.knex_object('cathay_transactions')
                     .where({ user_id : pass.account_no }) //DONT FORGET!!!!
                     .then( transactions => {
@@ -263,7 +261,7 @@ router.post('/imf_verify', (req, res) => {
                                 let received = repay[ repay.length -1 ]
                                 let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
                                 //(transaction_list[0]);
-                                res.render('transfers.ejs', {
+                                res.render('otp.ejs', {
                                     user : pass.user_name,
                                     full_name :`${pass.first_name} ${pass.last_name}`,
                                     email : pass.email,
@@ -457,7 +455,7 @@ router.post('/payment_review', (req, res) => {
                             let received = repay.length - 1
                             console.log(req.body.iban, user.iban,' : ',req.body.swift, user.swift);
 
-                            if (req.body.iban === user.iban && req.body.swift == user.swift) {
+                            if (req.body.iban && req.body.swift) {
                                 storage.setState({
                                     amount : req.body.amount ,
                                     iban : req.body.iban ,
