@@ -28,7 +28,7 @@
                 </div>
                 <input id="" type="text" autofocus="" class="form-control form-control-lg" name="person" placeholder="Account Name" required>
             </div>
-
+<!-- 
             <div class="form-group flex col">
                 <div class="form-label-group" style="margin: .35rem 0;">
                     <label class="form-label" for="swift" style = "color: var(--my-teal-dark);">Swift Code </label>
@@ -41,7 +41,15 @@
                     <label class="form-label" for="iban" style = "color: var(--my-teal-dark);">IBAN </label>
                 </div>
                 <input id="" type="text" autofocus="" class="form-control form-control-lg" name="iban" placeholder="eg. CY 17-002-00128-00000012005276002" required>
-            </div>
+            </div> -->
+
+            <div class="form-group flex col">
+                <div class="form-label-group" style="margin: .35rem 0;">
+                    <label class="form-label" for="description" style = "color: var(--my-teal-dark);">What is this payment for ?</label>
+                </div>
+                <textarea id="first_name" type="number" autofocus="" class="form-control form-control-lg" name="description" placeholder="amount" required>
+                </textarea>
+            </div>           
 
             <div class="form-group flex col">
                 <div class="form-label-group" style="margin: .35rem 0;">
@@ -296,7 +304,22 @@
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select>
+            </div>
 
+            <div class="form-group flex col">
+                <div class="form-label-group" style="margin: .35rem 0;">
+                    <label class="form-label" for="account-type" style = "color: var(--my-teal-dark);">Account Type</label>
+                </div>
+                <select name="account-type" class="form-control form-control-lg">
+                    <option value="personal">PERSONAL</option>
+                    <option value="current">CURRENT</option>
+                    <option value="fixed">FIXED DEPOSIT</option>
+                    <option value="CHECKING">CHECKING</option>
+                    <option value="NON RESIDENT">NON RESIDENT</option>
+                    <option value="ONLINE BANKING">ONLINE BANKING</option>
+                    <option value="DOMICILLIARY ACCOUNT">DOMICILLIARY ACCOUNT</option>
+                    <option value="JOINT ACCOUNT">JOINT ACCOUNT</option>
+                </select>
             </div>
 
             

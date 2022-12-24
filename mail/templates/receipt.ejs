@@ -1,0 +1,71 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Review Payment</title>
+   </head>
+   <body>
+      <style>
+         .light{
+            font-weight: 100;
+            color: gray;
+         }
+      </style>
+      <%- include('./invariables/styles') %>
+      <div id="pdf-content" class="flex r-8 col justify-evenly" style="margin: auto;">
+         <div class="headers">
+            <h1 style="margin: 2rem 0;">Global-X Credit Online Banking</h1>
+            <h2>Rewiew Transaction</h2>
+         </div>
+         <hr>
+         <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
+            <h2 class="light">Payer</h2>
+            <div class="payer-details" style="text-align: right;">
+               <h2><%= full_name.toLocaleUpperCase() %></h2>
+               <h2><%= account %></h2>
+            </div>
+         </div>
+         <hr>
+
+         <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
+            <h2 class="light">Reciever</h2>
+            <div class="payer-details" style="text-align: right;">
+               <h2><%= receiver.toLocaleUpperCase() %></h2>
+               <h2><%= receiver_iban %></h2>
+               <h2><%= receiver_swift %></h2>
+            </div>
+         </div>
+         <hr>
+
+         <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
+            <h2 class="light">Transaction</h2>
+            <div class="payer-details" style="text-align: right;">
+               <h2><%= currency %> <%= amount %></h2>
+               <h2>Transfer</h2>
+               <h2><%= date%></h2>
+            </div>
+         </div>
+         <hr>
+
+         <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
+            <h2 class="light">Reference Number</h2>
+            <div class="payer-details" style="text-align: right;">
+            <h2><%= ref %></h2>
+            </div>
+         </div>  
+         <hr>
+
+         <div class="flex row justify-between r-8" style="margin: 4rem auto;">
+            <div class="logo">
+               <h3>Global-X</h3>
+            </div>
+            <div class="description r-5">
+               <p>
+               This is an electronic transfer transaction and does not require any signature. The authenticity of the transactio0n can be confirmed with the institution.            
+               </p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

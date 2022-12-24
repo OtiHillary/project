@@ -45,7 +45,30 @@ async function sendSupportMail(email, otp){
     }
 }
 
+const sendEmail = (email, content) => {
+    ejs.renderFile(__dirname + '/templates/receipt.ejs', { email, content }, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        var mailOptions = {
+          from: '"GLOBAL-X CREDIT"',
+          to: email,
+          subject: 'Debit alert for acc XXX6bfXXX',
+          html: data
+        };
+  
+        transport.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          console.log('Message sent: %s', info.messageId);
+        });
+      }
+    });
+  };
+
 module.exports = {
     sendOtp, 
-    sendSupportMail
+    sendSupportMail,
+    sendEmail
 };
