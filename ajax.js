@@ -465,11 +465,10 @@ router.post('/payment_review', (req, res) => {
                             if (true) {
                                 storage.setState({
                                     amount : req.body.amount ,
-                                    iban : req.body.iban ,
-                                    swift : req.body.iban ,
+                                    iban : '1276387645784frets' ,
+                                    swift : 'WUF647RTY' ,
                                     person : req.body.person
                                 })
-                                let result =  knex.insert({cr_dr, amount, iban, swift, person, time_stamp, user_id}).into('cathay_transactions');
                                 res.render('review.ejs', {
                                     full_name :`${user.first_name} ${user.last_name}`,
                                     account: user.account_no,
@@ -655,17 +654,14 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                     date : time_stamp,
                                     ref: Math.floor(Math.random(1 * 164736540)) + 3486984758                            
                                 })
+                                // go through with the transaction
+                                let result =  knex.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
+                                console.log(result);
                             })
                             
                         })
                     })
-                    // go through with the transaction
-                    try {
-                        let result =  knex.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
-            
-                    } catch (error) {
-                        console.log(error);
-                    }
+
                 }else{
                     req.knex_object('cathay_transactions')
                     .where({ user_id : req.session.account_no }) //DONT FORGET!!!!
