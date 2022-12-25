@@ -286,10 +286,6 @@ module.exports.signup = async (req, res)=>{
     let knex = req.knex_object;
     ``
     try {
-        // if (/*already exists*/)  {
-            
-        // }
-
         let status = await knex.insert( 
                 { 
                 account_no,    

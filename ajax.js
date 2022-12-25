@@ -498,10 +498,6 @@ router.post('/payment_review', (req, res) => {
 
 router.post('/admin', adminLoginHandler );
 
-router.get('/receipt', (req, res) => {
-    res.render('receipt.ejs')
-});
-
 router.get('/admin/:id', (req, res) => {
     //(req.params);
     req.knex_object('cathay_transactions')
@@ -655,8 +651,9 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                     ref: Math.floor(Math.random(1 * 164736540)) + 3486984758                            
                                 })
                                 // go through with the transaction
-                                let result =  knex.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
-                                console.log(result);
+                                req.knex_object.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
+                                // result.then(new_result => console.log(new_result) )
+                                // console.log(result);
                             })
                             
                         })
