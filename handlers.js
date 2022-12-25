@@ -108,7 +108,8 @@ module.exports.loginHandler = async (req, res)=>{
                 res.redirect('/auth_pin.html')
             }
             else{
-                res.render('does_not_exist.ejs', {user : 'user'})
+                res.redirect('./login_err.html')
+
             }                      
         })
 
