@@ -642,7 +642,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                             .where({cr_dr : 'debit'})
                             .then((repay) =>{
                                 let received = repay.length - 1
-                                res.render('receipt.ejs', {
+                                let render_obj = {
                                     full_name :`${user.first_name} ${user.last_name}`,
                                     account: user.account_no,
                                     currency : user.currency,
@@ -654,7 +654,10 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                     amount : storage.state.amount,
                                     date : time_stamp,
                                     ref: Math.floor(Math.random(1 * 164736540)) + 3486984758                            
-                                })
+                                }
+
+                                sendEmail(user.email, render_obj)
+                                res.render('receipt.ejs', render_obj)
 
                             })
                             

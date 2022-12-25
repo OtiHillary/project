@@ -1,0 +1,486 @@
+<style>
+   .flex{display: flex;}
+   .row{flex-direction: row;}
+   .col{flex-direction: column;}
+   .r-2{width: 20%;}
+   .r-3{width: 30%;}
+   .r-3_5{width: 35%;}
+   .r-4{width: 40%;}
+   .r-4_5{width: 45%;}
+   .r-5{width: 50%;}
+   .r-6{width: 60%;}
+   .r-7{width: 70%;}
+   .r-8{width: 80%;}
+   .r-full{width: 100%;}
+   .h-full{height: 100%;}
+   .justify-between{justify-content: space-between;}
+   .justify-center{justify-content: center;}
+   .justify-start{justify-content: start;}
+   .justify-end{justify-content: end;}
+   .justify-evenly{justify-content: space-evenly;}
+   body{
+      font-size: 13px;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* font-family: 'Comfortaa', cursive; */
+      font-family: 'Lexend Deca', sans-serif;
+      /* font-family: 'PT Mono', monospace; */
+   }
+   *{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+      text-decoration: none;
+      color: black;
+   }
+   :root{
+      --my-teal:rgb(2, 163, 163);
+      --my-teal-dark:rgb(1, 172, 172);
+   }
+   .teal{
+      color: var(--my-teal-dark);
+   }
+   .dashboard{
+      background: rgba(247, 247, 247, 0.705);
+   }
+   .bank-name{
+      margin: .5rem;
+   }
+   h1, .h1{
+      font-size: 2rem !important;
+   }
+   h2, .h2{
+      font-size: 1.5rem !important;
+      color: var(--my-teal-dark);
+   }
+   h3, .h3{
+      font-size: 1.2rem;
+      color: var(--my-teal-dark);
+   }
+   .dashboard{
+      overflow: hidden;
+   }
+   .nav{
+      width: 100%;
+      text-align: left;
+      overflow: hidden;
+      margin: 1rem .3rem;
+   }
+   .sp{font-size: .75rem;}
+   .nav li{
+      width: fit-content;
+      height: fit-content;
+   }
+   .nav a{
+      width: 100%;
+      padding: 1rem 0;
+      border-left: 5px solid transparent;
+      transition: all .2s;
+   }
+   .nav a:hover{
+      font-weight: 800;
+      background: #0000ff05;
+      border-radius: 5px;
+   }
+   .nav a:hover a{
+      color: var(--my-teal-dark);
+   }
+   a.active{
+      font-weight: 800;
+      border-left: 5px solid var(--my-teal-dark);
+      background: #0000ff05;
+      border-radius: 5px;
+   }
+   .active a{
+      color: var(--my-teal-dark);
+   }
+   .user p{
+      padding: 1rem;
+      text-align: center;
+      color: var(--my-teal-dark);
+      font-weight: 500;
+   }
+   .user-img{
+      height: 2rem;
+      margin: auto 0;
+      width: 2rem;
+      background: teal;
+      border-radius: 100%;
+   }
+   .mainboard{
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+   }
+   .greeting{
+      margin: 0 0 1rem 0;padding: 1rem 0; border-radius: .5rem; margin: 0 auto 1rem auto; background-color: rgb(243 243 243 / 63%); width: 95%;
+   }
+   .settings{
+      display: flex;
+      justify-content: center;
+      /* height: 2rem;
+      margin: auto 4rem; */
+   }
+   .settings a{
+      height: fit-content;
+      text-align: center;
+      align-content: center;
+      margin: auto 4rem;
+      padding: .5rem 1rem;
+      border-radius: 100px;
+      color: gray;
+      background-color: rgba(180, 180, 180, 0.11);
+      transition: all .3s;
+   }
+   .icn{
+      color: gray;
+      transition: all .3s;
+   }
+   .settings a:hover{
+      color: black;
+   }
+   .settings a:hover .icn{
+      color: var(--my-teal-dark);
+   }
+   .main-balance, .last, .total-transfers{
+      padding: 2rem;
+      margin: auto;
+      width: 15rem;
+   }
+   .main-balance{
+      background-color:var(--my-teal-dark);
+      color: white;
+   }
+   .main-balance, .last, .total-transfers{
+      border-radius: .5rem;
+   }
+   .last{
+      background-color: rgb(0 255 255 / 25%);
+   }
+   .total-transfers{
+      background-color: rgba(235, 211, 0, 0.459);
+   }
+   .main-balance p, .main-balance span, .main-balance div{
+      color: white;
+   }
+
+   .m-1{
+      margin: 0 0 0 2rem;
+   }
+   .negative{
+      border-radius: 100px;
+      background-color: rgba(180, 0, 0, 0.068);
+      color: red;
+      padding: .15rem .5rem;
+      font-weight: 600;
+   }
+   .positive{
+      border-radius: 100px;
+      background-color: rgba(33, 0, 180, 0.062);
+      color: rgb(33, 3, 165);
+      padding: .15rem .5rem;
+      font-weight: 600;
+   }
+   .stats{
+      margin: 2rem 0;
+   }
+   .stat-graph, .stat-pie, .transaction-table, .countries{
+      /* border: 1px solid rgba(128, 128, 128, 0.233); */
+      border: 1px solid rgba(3, 153, 158, 0.363);
+      border-radius: 1.5rem;
+      /* min-width: 600px; */
+   }
+   /* .stat-graph{width: 40rem;}
+   .stat-pie{width: 30rem;}
+   .transaction-table{width: 42rem;}
+   .countries{width: 32rem;} */
+
+   .transaction-table, .stat-graph{
+      min-width: 350px;
+      margin: auto;
+   }
+   .stat-pie, .countries{
+      min-width: 200px;
+   }
+   .chart{
+      width: 95%;
+      margin: .5rem auto;
+      padding: .2rem;
+      border: 1px solid rgba(3, 153, 158, 0.205);
+      /* border-radius: 1000px; */
+   }
+   .chart-alt{
+      width: 95%;
+      margin: .5rem auto;
+      padding: .2rem;
+      background-color: rgba(2, 120, 124, 0.035);
+      border: 1px solid rgba(3, 153, 158, 0.363);
+      border-radius: 1000px;
+   }
+   .chart h4{
+      padding: .4rem .8rem;
+      color: teal;
+      font-size: .8rem;
+   }
+   .first{
+      background-color: rgba(3, 153, 158, 0.075);
+      color: black;
+      border-radius: 1000px;
+   }
+   table{
+      border-collapse: collapse;
+      margin: 0;
+      margin-bottom: 1rem;
+   }
+   tr{
+      height: 3rem;
+   }
+   tr:nth-child(even){
+      background-color: rgba(3, 153, 158, 0.075);
+   }
+   th{
+      font-weight: 400;
+      text-align: left;
+   }
+   td{
+      font-weight: 700;
+      text-align: left;
+   }
+   th, td{
+      border-bottom: 1px solid rgba(216, 216, 216, 0.315);
+      padding: 0 .5rem;
+   }
+   .device{
+      width: 95%;
+      margin: .2rem auto;
+      display:flex;
+      flex-direction: column;
+   }
+   .device h4{color: var(--my-teal);}
+   .bar{
+      border-radius: 100px;
+      height: 1rem;
+      margin: .2rem 0;
+      width: 100%;
+      display:flex;
+      animation: fill_progress .7s;
+      animation-iteration-count: 1;
+   }
+   .f-70{
+      width: 70%; 
+      background-color: #a70404;
+
+   }
+   .f-20{
+      width: 20%; 
+      background-color: blue;
+
+   }
+   .f-10{
+      width: 50%; 
+      background-color: green;
+
+   }
+   .fill{
+      height: .5rem;
+      margin: auto 0;
+      border-radius: 100px;
+      margin-left: .2rem;
+
+   }
+
+   .form-group{
+display: flex;
+margin: 1rem 0;
+}
+.btn, .btn:active{
+/* width: 85%; */
+color: white;
+margin: auto;
+background-color: var(--my-teal);
+border:  1px solid var(--my-teal);
+}
+.btn:hover {
+border:  1px solid rgb(1, 117, 117);
+background-color: rgb(1, 117, 117);
+text-decoration: none;
+}
+
+.link-primary, a{
+color: var(--my-teal) !important;
+}
+.form-control:focus {
+color: #3c4d62;
+background-color: #f7f7f7;
+border-color: var(--my-teal-dark);
+border-width: 2px;
+outline: 0;
+box-shadow: 0 0 0 3px rgb(223 22 32 / 3%);
+}
+.response{
+background-color: rgba(255, 0, 0, 0.048);
+border-left: 2px solid red;
+display: flex;
+color: red;
+padding: 1rem 2rem;
+text-align: center;
+width: 100%;
+}
+.card-bordered{
+height: 100%;
+padding : 2rem;
+margin: auto;
+display: flex;
+justify-content: center;
+background-color: rgba(241, 241, 241, 0.171);
+flex-wrap: wrap;
+}
+.card-inner{
+border: 1px solid rgba(233, 233, 233, 0.608);
+ background-color: rgba(233, 233, 233, 0.171);
+ border-radius: 1.5rem;
+ display: flex;
+ margin: auto 0;
+ padding: 1rem 0;
+ justify-content: center;
+ width: 40rem;
+ height: fit-content;
+}
+.form-group{
+margin: 0 0 1rem 0;
+}
+form input, select, textarea{
+resize: none;
+border: 1px solid rgba(181, 178, 178, 0.305);
+height: 2.5rem;
+padding: 0 1rem;
+background-color: transparent;
+border-radius: 5px;
+}
+.nk-block-title{
+color: var(--my-teal-dark);
+ width: 70%;
+ margin: auto;
+ font-size: 1.4rem;
+}
+form{
+width: 70%;
+}
+.credit{
+background-color: rgba(0, 255, 89, 0.216);
+color: rgb(2, 95, 10);
+padding: .5rem;
+border-radius: .5rem;
+}
+.debit{
+background-color: rgba(255, 0, 0, 0.216);
+color: rgb(228, 2, 2);
+padding: .5rem;
+border-radius: .5rem;
+}
+.alt{
+width: 100vw;
+background-color: teal;
+height: 8%;
+display: none;
+}
+.toggler{
+display: flex;
+background-color: transparent;
+color: white;
+margin: auto 0 !important;
+}
+.toggled{
+display:none;
+position: absolute;
+height: fit-content;
+padding: 4rem 0rem;
+text-align: left;
+height: 100vh;
+width: 50vw;
+background-color: white;
+border-radius: 5px;
+flex-direction: column;
+justify-content: start;
+top: 8%;
+right: 0;
+box-shadow: 0px 1px 4px gray;
+}
+.toggled a {
+font-size: 1.35rem;
+padding: .4rem 0;
+}
+.toggled a:hover, .toggled a:active{
+font-size: 1.35rem;
+background-color: rgba(128, 128, 128, 0.068);
+}
+
+   @keyframes fill_progress {
+   from{
+         width: 0%;
+      }
+      to{
+         width: 100%;
+      }
+   }
+
+   /* QUERIES */
+
+   @media (max-width:1250px) {
+      *{
+         font-size: 13px;
+      }
+   }
+   @media (max-width:900px) {
+      body{
+         font-size: 12.5px;
+         margin: 0rem !important;
+      }
+      .stat-graph, .stat-pie, .transaction-table, .countries{
+         margin: 3rem auto;
+      }
+      .stats, .transactions{
+         width: 90%;
+         justify-content: center;
+         flex-wrap: wrap
+      }
+      .settings a {
+         margin: auto .5rem;
+      }
+
+   }
+   @media (max-width : 800px) {
+      .dashboard{
+         display: none;
+      }
+      .alt{
+         display:flex
+      }
+      .mainboard{
+         overflow-y: initial;
+         overflow-x: initial;
+         width: 100%;
+      }
+      .card-bordered{
+         padding: 0;
+      }
+   }
+   @media (max-width:700px) {
+      body{
+         font-size: 12.5px;
+      }
+   }
+   @media (max-width:500px) {
+      .card-bordered, .mainboard, .main-balance, .last, .total-transfers, .greeting, .stats, .transactions, .stat-graph, .stat-pie, .transaction-table, .countries{
+         width: 95%;
+         margin: .5rem auto;
+      }
+      .greeting, .stat-pie{
+         width: 100%;
+      }
+   }
+</style>

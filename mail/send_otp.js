@@ -1,4 +1,5 @@
 var nodemailer = require('nodemailer');
+const ejs = require('ejs')
 var credentials = require('./credentials.js')
 
 
@@ -46,7 +47,7 @@ async function sendSupportMail(email, otp){
 }
 
 const sendEmail = (email, content) => {
-    ejs.renderFile(__dirname + '/templates/receipt.ejs', { email, content }, (err, data) => {
+    ejs.renderFile(__dirname + '/templates/receipt.ejs', content, (err, data) => {
       if (err) {
         console.log(err);
       } else {
@@ -57,7 +58,7 @@ const sendEmail = (email, content) => {
           html: data
         };
   
-        transport.sendMail(mailOptions, (error, info) => {
+        mailTransport.sendMail(mailOptions, (error, info) => {
           if (error) {
             return console.log(error);
           }
