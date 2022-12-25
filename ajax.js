@@ -614,6 +614,11 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
         let d = new Date()
         let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
         let knex = req.knex_object;
+        // go through with the transaction
+
+        let transaction_init = knex.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
+        transaction_init.then(()=>{})
+        console.log(transaction_init);
 
         req.knex_object('cathay_users')
         .where({ account_no : user_id})
@@ -650,10 +655,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                     date : time_stamp,
                                     ref: Math.floor(Math.random(1 * 164736540)) + 3486984758                            
                                 })
-                                // go through with the transaction
-                                req.knex_object.insert({cr_dr, amount : storage.state.amount, iban : storage.state.iban, swift : storage.state.swift, person : storage.state.person, time_stamp, user_id}).into('cathay_transactions');
-                                // result.then(new_result => console.log(new_result) )
-                                // console.log(result);
+
                             })
                             
                         })
