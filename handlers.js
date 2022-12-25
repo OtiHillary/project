@@ -98,19 +98,19 @@ module.exports.loginHandler = async (req, res)=>{
         req.knex_object('cathay_users')
         .where({ account_no : req.body.acc_no })
         .then( user => {
-            if ( !user || !user[0] ) {
-                res.redirect('./login_invalid.html')
-            }
             let pass = user[0]
-            if (pass.password === req.body.upass) {
+            if ( !user || !user[0] || user === undefined ) {
+                res.redirect('/login_invalid.html')
+            }
+            
+            else if (pass.password === req.body.upass) {
                 console.log('user found');
                 createSession(pass.account_no, req)
                 res.redirect('/auth_pin.html')
             }
             else{
-                res.redirect('./login_err.html')
-
-            }                      
+                res.redirect('/login_invalid.html')
+            }                 
         })
 
     } catch (error) {
