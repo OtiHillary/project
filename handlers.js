@@ -99,8 +99,7 @@ module.exports.loginHandler = async (req, res)=>{
         .where({ account_no : req.body.acc_no })
         .then( user => {
             if ( !user || !user[0] ) {
-                res.status(200).json( {status : 401, failed : "invalid username or password" } );
-                return
+                res.redirect('./login_invalid.html')
             }
             let pass = user[0]
             if (pass.password === req.body.upass) {
