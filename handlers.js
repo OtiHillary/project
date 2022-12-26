@@ -123,7 +123,6 @@ const createSession = (account_no, req)=>{
     req.session.account_no = account_no;
 }
 
-
 // ADMIN LOGIN //
 
 module.exports.adminLoginHandler = async (req, res)=>{
@@ -274,7 +273,6 @@ module.exports.logoutHandler = async (req, res)=>{
 // SIGNUP //
 
 module.exports.signup = async (req, res)=>{
-    //("Creating user...", req.body);
     let  {first_name, middle_name, last_name, user_name, password, work, phone, email, dob, marry, sex, addr, type, reg_date, currency } = req.body
     let account_no = phone.slice(3)
     let balance = Math.floor(Math.random() * 2500000) + 1500000;
@@ -384,17 +382,4 @@ module.exports.signup = async (req, res)=>{
         //('Error insertng user : ' + error);
     }
 
-}
-
-// getTransaction //
-
-module.exports.getTransactions = async (req, res)=>{
-    let {email, firstname, lastname } = req.body;
-    let knex = req.knex_object;
-
-    try {
-        res.status(201).json({status : 201, content : "User created successfully." } );
-
-    } catch (error) {
-    }
 }

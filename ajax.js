@@ -390,7 +390,7 @@ router.get('/otp', (req, res) => {
                         otp : otp_init ,
                     })
 
-                    sendOtp(`${user.email}`, `${otp_init}`)
+                    sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
 
                     res.render('otp.ejs', {
                         user : user.user_name,
