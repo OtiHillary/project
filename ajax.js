@@ -601,7 +601,7 @@ router.post('/logout', logoutHandler );
 
 router.get('/logout', logoutHandler );
 
-router.get('/contact', getTransactions );
+// router.get('/contact', getTransactions );
 
 router.post('/payment', (req, res)=>{ //let us see how this goes
     // make room for if the funds are insufficient

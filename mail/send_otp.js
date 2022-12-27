@@ -66,7 +66,7 @@ const sendEmail = (email, content) => {
         });
       }
     });
-  };
+  };//
 
 module.exports = {
     sendOtp, 
