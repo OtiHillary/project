@@ -607,7 +607,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
     // make room for if the funds are insufficient
     let numify = Number(req.body.otp)
 
-    if (numify == '1234'){
+    if ( numify == storage.state.otp ) {
         console.log('otp ti wa okay');
         let user_id= req.session.account_no
         const cr_dr = 'debit'
