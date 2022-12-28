@@ -72,6 +72,7 @@ router.get('/dashboard', auth, (req, res) => {
                             full_name :`${pass.first_name} ${pass.last_name}`,
                             email : pass.email,
                             balance : pass.balance,
+                            profile :pass.profile,
                             currency : pass.currency,
                             account: pass.account_no,
                             received : received.amount,
@@ -123,6 +124,7 @@ router.get('/transactions', (req, res) => {
                             full_name :`${pass.first_name} ${pass.last_name}`,
                             email : pass.email,
                             balance : pass.balance,
+                            profile: pass.profile,
                             currency : pass.currency,
                             account: pass.account_no,
                             received : received.amount,
@@ -176,6 +178,7 @@ router.get('/transfers', (req, res) => {
                             full_name :`${pass.first_name} ${pass.last_name}`,
                             email : pass.email,
                             balance : pass.balance,
+                            profile: pass.profile,
                             currency : pass.currency,
                             account: pass.account_no,
                             received : received.amount,
@@ -230,6 +233,7 @@ router.get('/transfers.local', (req, res) => {
                             email : pass.email,
                             balance : pass.balance,
                             currency : pass.currency,
+                            profile : pass.profile,
                             account: pass.account_no,
                             received : received.amount,
                             received_date : received.time_stamp,
@@ -271,7 +275,7 @@ router.get('/settings', (req, res) => {
         let user = user_init[0]
         res.render('settings.ejs', {
             user : user.user_name,
-            full_name : user.first_name,
+            full_name : `${user.first_name} ${user.last_name}`,
             profile : user.profile,
             email : user.email,
             active : ['', '', '', '', 'active']       
@@ -799,7 +803,7 @@ router.post('/change-password', (req, res) => {
             let user = user_init[0]
             res.render('settings_page_success.ejs', {
                 user : user.user_name,
-                full_name : user.first_name,
+                full_name : `${user.first_name} ${user.last_name}`,
                 profile : user.profile,
                 email : user.email,
                 active : ['', '', '', '', 'active']       

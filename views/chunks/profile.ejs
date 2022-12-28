@@ -1,9 +1,15 @@
 <div class="greeting flex row justify-between" style = "">
    <div class="greet-user flex col" style="margin: 0 1rem;">
-      <h1 class="teal">
-         <i class="fa-sharp fa-solid fa-user" style=" color: rgba(0, 128, 128, 0.37);"></i>
-         <%= full_name%> 
-      </h1>
+      <div class="flex row ">
+         <img src="/profile/<%= profile %>" style="margin : auto .5rem ; height:2rem; width: 2rem; border-radius: 50%; color: rgba(0, 128, 128, 0.37);">
+         <div class="flex justify-center">
+            <h1 class="teal flex ">
+               <%= full_name%> 
+            </h1>
+         </div>
+ 
+      </div>
+
       <p class="sp teal">@<%= user%></p>
       <h3 class="teal"><%= account%></h3>
    </div>
