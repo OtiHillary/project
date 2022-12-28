@@ -66,6 +66,14 @@
       <hr>
 
       <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
+         <h2 class="light">Description</h2>
+         <div class="payer-details" style="text-align: right;">
+            <h2><%= description %></h2>
+         </div>
+      </div>
+      <hr>
+
+      <div class="payer flex row justify-between" style="margin: 1rem 1.5rem;">
          <h2 class="light">Reference Number</h2>
          <div class="payer-details" style="text-align: right;">
            <h2><%= ref %></h2>
@@ -85,7 +93,7 @@
       </div>
    </div>
    <div class="link" style="margin: auto; color: white;">
-      <a href="/ajax/dashboard"
+      <a href="/ajax/transactions"
       style="
          padding: 1rem 3rem ;
          margin: 1rem 0;
@@ -93,7 +101,7 @@
          background-color: teal;
          border-radius: 5px; 
       "
-      >Go to home</a>
+      >View Transaction History</a>
    </div>
 
 </body>

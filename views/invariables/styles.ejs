@@ -36,6 +36,9 @@
          /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
          text-decoration: none;
          color: black;
+         user-select: none;
+         -webkit-user-select: none; /*Safari*/
+         -moz-user-select: none; /*Firefox*/
       }
       :root{
          --my-teal:rgb(2, 163, 163);
@@ -353,7 +356,7 @@
 .form-group{
    margin: 0 0 1rem 0;
 }
-form input, select, textarea{
+form input, input, select, textarea{
    resize: none;
    border: 1px solid rgba(181, 178, 178, 0.305);
    height: 2.5rem;

@@ -17,8 +17,10 @@
                style="
                    background-color: var(--my-teal);
                    color: white;
+                   margin: 1rem 0 0 0;
                    display: block;
-                   width: 100%;display: inline-block;
+                   width: 100%;
+                   display: inline-block;
                    padding: 10px;
                    border-radius: 5px;
                    margin-bottom: 0;
@@ -41,9 +43,73 @@
                    -moz-box-shadow: none;
                    box-shadow: none;
                    border-width: 1px;" 
-               type="submit">Proceed to Transfer</button>
-           </form>        
+               type="submit" id="processor">
+               Proceed to Transfer
+            </button>
+            
+            <a  href="/ajax/otp"
+                style="
+                    background-color: rgb(4, 4, 148);
+                    color: white;
+                    margin: 1rem 0;
+                    display: block;
+                    width: 95%;
+                    text-decoration: none;
+                    display: inline-block;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    border-width: 1px;" 
+                >
+                Resend OTP
+            </a>
+           </form>   
+
+           <div style="margin: 2rem;">
+            <div style="width: 70%; margin: auto; background-color: rgba(128, 128, 128, 0.185); border-radius: 1000px;">
+                <div style="
+                width: 80%;
+                height: .7rem;
+                border-radius: 1000px;
+                background-color: blue;
+                
+                "></div>
+            </div>
+            <div style="margin: 1rem auto; text-align: center; color: blue; font-sizec: 1rem;">80% Completed, Almost there</div>
+           </div>      
        </div>
+       <div id="processed" class="processing flex col justify-center" style="display: none; height: 50%; width: 50%; background: rgb(245, 245, 245);box-shadow: .1px .2px 10px rgba(128, 128, 128, 0.418); border-radius: 1rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div><h1  style="margin: 2rem auto 0; text-align: center; color: teal; font-sizec: 1rem; font-weight: 200;">Transaction Processing</h1></div>
+        <div><p  style="text-align: center; color: teal; font-sizec: .5rem; font-weight: 200;">please wait while we process your transaction</p></div>
+        <img src="/assets/CSB/loading-two.gif" alt="processing" style="margin: auto; height: 40%; width: 100%; border-radius: 50%;">
+       </div>
+       <script>
+        let processor = document.getElementById('processor'),
+        processed = document.getElementById('processed')
+
+        processor.addEventListener('click', ()=>{
+            console.log('we are changing')
+            processed.style.display = 'flex'
+        })
+       </script>
    </div>
    <%- include('../invariables/footer')%>
 </div>

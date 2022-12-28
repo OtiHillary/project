@@ -4,6 +4,7 @@ CREATE TABLE cathay_users (
    last_name VARCHAR(255) NOT NULL,
    user_name VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
+   profile VARCHAR(255) NOT NULL,
    balance BIGINT NOT NULL,
    currency VARCHAR(255) NOT NULL,
    password VARCHAR(25) NOT NULL ,
@@ -34,10 +35,15 @@ CREATE TABLE cathay_transactions (
       REFERENCES cathay_users(account_no)
 );
 
--- CREATE TABLE sessions (
---    id VARCHAR(36) PRIMARY KEY,
---    epoch_time BIGINT NOT NULL
--- );
+CREATE TABLE profile_images (
+   index SERIAL PRIMARY KEY,
+   name TEXT NOT NULL,
+   user_id BIGINT NOT NULL,
+   CONSTRAINT fk_users
+      FOREIGN KEY(user_id)
+      REFERENCES cathay_users(account_no)
+);
+
 
 INSERT INTO cathay_transactions (amount, cr_dr, iban, swift, person, time_stamp, user_id) VALUES 
 ('123,000', 'credit', 123454321, 234565432, 'john woo', '01/02/18', 8105966585),

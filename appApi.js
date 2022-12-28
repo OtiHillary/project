@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-// const cookie = require('express-cookie')
+const fileUpload = require('express-fileupload');
 const {KNEX_CONFIG } = require('./config');
 
 // config stuff
@@ -12,10 +12,6 @@ const app = express();
 
 const ajax_router = require('./ajax');
 
-// const { SessionController } = require('./session-controller');
-
-
-// const sessionController = new SessionController(knex);
 
 const sessions = require('express-session') ;
 const res = require('express-cookie/lib/response');
@@ -47,6 +43,7 @@ app.use((req, res, next)=>{
 });  
 
 
+
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({extended:false}) );
 app.use(session_object)
@@ -62,7 +59,15 @@ app.use((req, res, next)=>{
     next();                                 
 });
 
+app.use(fileUpload( {
+    defCharset: 'utf8',
+    defParamCharset: 'utf8'
+} ));
+
+
+
 app.use('/',  express.static( 'public') );
+app.use('/profile',  express.static( './profile') );
 app.use('/ajax',  ajax_router );
 
 app.get('/reset_cotp/:id', (req, res) => {
@@ -97,6 +102,42 @@ app.get('/reset_cotp/:id', (req, res) => {
         })
      } )
 })
+
+app.post('/upload', function(req, res) { 
+    console.log(req.files);
+    console.log(req.session);
+    const { name, data } = req.files.profile_image
+    if (!name && !data) {
+      return res.status(400).send('No files were uploaded.');
+    }
+    req.files.profile_image.mv('./profile/' + name, function (err) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log('er are good');
+        }
+    })
+    req.knex_object('cathay_users')
+    .where({account_no : req.session.account_no})
+    .update({ profile : name }).then(()=>{})
+
+    req.knex_object('cathay_users')
+    .where({account_no : req.session.account_no})
+    .then((user_init) => {
+        let user = user_init[0]
+        console.log(user);
+        res.render('settings_page_success.ejs', {
+            user : user.user_name,
+            full_name : user.first_name,
+            profile : user.profile,
+            email : user.email,
+            active : ['', '', '', '', 'active']       
+        })
+    }) 
+    res.status(200)
+
+  });
 
 app.get('*', (req, res) => {
     res.render('not_found.ejs', {user : 'not found'})

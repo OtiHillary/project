@@ -6,6 +6,7 @@ const router = express.Router();
 const admin_key = 'admin123'
 
 const { adminLoginHandler, loginHandler, logoutHandler, deleteHandler, signup, getTransactions, authPin, authPay, review } = require('./handlers');
+const { password } = require('./mail/credentials');
 const { sendOtp, sendSupportMail, sendEmail } = require('./mail/send_otp');
 
 const storage = new HandyStorage('./store.json');
@@ -15,7 +16,8 @@ storage.setState({
     amount : null ,
     iban : null ,
     swift : null ,
-    person : null
+    person : null,
+    desc: null
 })
 
 
@@ -77,7 +79,7 @@ router.get('/dashboard', auth, (req, res) => {
                             transactions : transaction_list,
                             sent : sent.amount,
                             sent_date : sent.time_stamp,
-                            active : [ 'active', '', '', '' ]
+                            active : [ 'active', '', '', '', '' ]
                         })                             
                     }) 
                 })
@@ -128,7 +130,7 @@ router.get('/transactions', (req, res) => {
                             transactions : transaction_list,
                             sent : sent.amount,
                             sent_date : sent.time_stamp,
-                            active : [ '', 'active', '', '' ]
+                            active : [ '', 'active', '', '', '' ]
                         })                             
                     }) 
                 })
@@ -181,7 +183,60 @@ router.get('/transfers', (req, res) => {
                             transactions : transaction_list,
                             sent : sent.amount,
                             sent_date : sent.time_stamp,
-                            active : [ '', '', 'active', '' ]
+                            active : [ '', '', 'active', '', '' ]
+                        })                             
+                    }) 
+                })
+            })
+            
+        })
+
+})
+
+router.get('/transfers.local', (req, res) => {
+
+    let account_no = req.session.account_no
+
+    req.knex_object('cathay_users')
+        .where({ account_no : account_no })
+        .select('*')
+        .then( user => {
+            if ( !user || !user[0] ) {
+                res.status(200).json( {status : 401, failed : "invalid username or password" } );
+                return
+            }
+            let pass = user[0]
+            //(pass);
+            
+            req.knex_object('cathay_transactions')
+            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+            .then( transactions => {
+                createSession(pass.account_no, req)
+
+                req.knex_object('cathay_transactions')  
+                .where({cr_dr : 'credit', user_id : account_no})
+                .then((resent) => {
+                    let sent = resent[ resent.length - 1 ]
+                    
+                    req.knex_object('cathay_transactions')
+                    .where({cr_dr : 'debit', user_id : account_no})
+                    .then((repay) =>{
+                        let received = repay[ repay.length -1 ]
+                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                        //(transaction_list[0]);
+                        res.render('transfers.local.ejs', {
+                            user : pass.user_name,
+                            full_name :`${pass.first_name} ${pass.last_name}`,
+                            email : pass.email,
+                            balance : pass.balance,
+                            currency : pass.currency,
+                            account: pass.account_no,
+                            received : received.amount,
+                            received_date : received.time_stamp,
+                            transactions : transaction_list,
+                            sent : sent.amount,
+                            sent_date : sent.time_stamp,
+                            active : [ '', '', 'active', '', '' ]
                         })                             
                     }) 
                 })
@@ -201,7 +256,25 @@ router.get('/notifications', (req, res) => {
             user : user.user_name,
             full_name : user.first_name,
             email : user.email,
-            active : ['', '', '', 'active']       
+            active : ['', '', '', 'active', '']       
+        })
+    })
+
+
+})
+
+router.get('/settings', (req, res) => {
+
+    req.knex_object('cathay_users')
+    .where({account_no : req.session.account_no})
+    .then((user_init) => {
+        let user = user_init[0]
+        res.render('settings.ejs', {
+            user : user.user_name,
+            full_name : user.first_name,
+            profile : user.profile,
+            email : user.email,
+            active : ['', '', '', '', 'active']       
         })
     })
 
@@ -267,7 +340,7 @@ router.post('/imf_verify', (req, res) => {
                                     otp : otp_init ,
                                 })
             
-                                sendOtp(`${pass.email}`, `${otp_init}`)
+                                sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
 
                                 res.render('otp.ejs', {
                                     user : pass.user_name,
@@ -281,7 +354,7 @@ router.post('/imf_verify', (req, res) => {
                                     transactions : transaction_list,
                                     sent : sent.amount,
                                     sent_date : sent.time_stamp,
-                                    active : [ '', '', 'active', '' ]
+                                    active : [ '', '', 'active', '', '' ]
                                 })                             
                             }) 
                         })
@@ -353,7 +426,7 @@ req.knex_object('cathay_users')
                                 transactions : transaction_list,
                                 sent : sent.amount,
                                 sent_date : sent.time_stamp,
-                                active : [ '', '', 'active', '' ]
+                                active : [ '', '', 'active', '', '' ]
                             })                             
                         }) 
                     })
@@ -404,13 +477,13 @@ router.get('/otp', (req, res) => {
                         transactions : transaction_list,
                         sent : sent.amount,
                         sent_date : sent.time_stamp,
-                        active : [ 'active', '', '', '' ]
+                        active : [ '', '', 'active', '', '' ]
                     })                             
                 }) 
             })
         })
     })   
-})
+}) //test subject, route not actually used
 
 router.post('/signup', signup );
 
@@ -433,7 +506,7 @@ router.get('/admin', (req, res) =>{
 router.post('/payment_review', (req, res) => {
     let user_id= req.session.account_no
 
-    const {amount, iban, swift, person} = req.body ;
+    const {amount, iban, swift, person, description} = req.body ;
     const cr_dr = 'debit'
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
@@ -467,7 +540,8 @@ router.post('/payment_review', (req, res) => {
                                     amount : req.body.amount ,
                                     iban : '1276387645784frets' ,
                                     swift : 'WUF647RTY' ,
-                                    person : req.body.person
+                                    person : req.body.person,
+                                    desc : req.body.description
                                 })
                                 res.render('review.ejs', {
                                     full_name :`${user.first_name} ${user.last_name}`,
@@ -477,6 +551,7 @@ router.post('/payment_review', (req, res) => {
                                     receiver : person,
                                     receiver_swift : swift,
                                     receiver_iban : iban, 
+                                    description : description,
         
                                     amount : amount,
                                     date : time_stamp,
@@ -607,7 +682,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
     // make room for if the funds are insufficient
     let numify = Number(req.body.otp)
 
-    if ( numify == '1234' ) {
+    if ( numify == storage.state.otp ) {
         console.log('otp ti wa okay');
         let user_id= req.session.account_no
         const cr_dr = 'debit'
@@ -650,6 +725,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                     receiver : storage.state.person,
                                     receiver_swift : storage.state.swift,
                                     receiver_iban : storage.state.iban, 
+                                    description : storage.state.desc,
         
                                     amount : storage.state.amount,
                                     date : time_stamp,
@@ -657,7 +733,10 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                 }
 
                                 sendEmail(user.email, render_obj)
-                                res.render('receipt.ejs', render_obj)
+                                
+                                setTimeout(() => {
+                                    res.render('receipt.ejs', render_obj)
+                                }, 7000);
 
                             })
                             
@@ -691,7 +770,7 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
                                         transactions : transaction_list,
                                         sent : sent.amount,
                                         sent_date : sent.time_stamp,
-                                        active : [ '', '', 'active', '' ]
+                                        active : [ '', '', 'active', '', '' ]
                                     }
                                 res.render('transfers_insufficient.ejs', sesh_obj)
                             })
@@ -710,6 +789,27 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
 }
  );
 
+router.post('/change-password', (req, res) => {
+    let { password, new_password, confirm_password } = req.body
+    if (new_password == confirm_password) {
+        req.knex_object('cathay_users').where({ password : password, account_no : req.session.account_no }).update({ password : new_password }).then(()=>{})  
+        req.knex_object('cathay_users')
+        .where({account_no : req.session.account_no})
+        .then((user_init) => {
+            let user = user_init[0]
+            res.render('settings_page_success.ejs', {
+                user : user.user_name,
+                full_name : user.first_name,
+                profile : user.profile,
+                email : user.email,
+                active : ['', '', '', '', 'active']       
+            })
+        })    
+    }
+    else{
+        res.send('failed')
+    }
+})
 
 router.post('/support', (req, res) => {
     let message = `Sender Email: ${req.body.email}\n Sender Name: ${req.body.name}\n Message body: ${req.body.issues}`
