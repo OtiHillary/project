@@ -389,6 +389,9 @@ req.knex_object('cathay_users')
 .then((user_init) => {
     let user = user_init[0]
     console.log(req.body.cotp, user.cotp);
+
+    //TODO : Do not forget to add an "invalid cotp page"
+    
     if (req.body.cotp == user.cotp){
         let account_no = req.session.account_no
     
@@ -438,6 +441,7 @@ req.knex_object('cathay_users')
                 
             })
     }
+    //TODO : <---- invalid cot should be added as an else statement over here <----
 })
 
 })
