@@ -54,6 +54,33 @@
                         padding: 1rem 3rem;
                         border-radius: 5000px;
                     }
+                    .aref{
+                        color: white !important;
+                       display: block;
+                       width: 100%;display: inline-block;
+                       padding: 10px;
+                       border-radius: 5px;
+                       margin-bottom: 1rem;
+                       font-size: 14px;
+                       font-weight: 400;
+                       line-height: 1.42857143;
+                       text-align: center;
+                       white-space: nowrap;
+                       vertical-align: middle;
+                       -ms-touch-action: manipulation;
+                       touch-action: manipulation;
+                       cursor: pointer;
+                       -webkit-user-select: none;
+                       -moz-user-select: none;
+                       -ms-user-select: none;
+                       user-select: none;
+                       background-image: none;
+                       border: 1px solid transparent;
+                       -webkit-box-shadow: none;
+                       -moz-box-shadow: none;
+                       box-shadow: none;
+                       border-width: 1px;
+                    }
                 </style>
             </div>
          </div>
@@ -98,97 +125,37 @@
 
                
                <button 
-                   style="
-                       background-color: var(--my-teal);
-                       color: white;
-                       display: block;
-                       width: 100%;display: inline-block;
-                       padding: 10px;
-                       border-radius: 5px;
-                       margin-bottom: 0;
-                       font-size: 14px;
-                       font-weight: 400;
-                       line-height: 1.42857143;
-                       text-align: center;
-                       white-space: nowrap;
-                       vertical-align: middle;
-                       -ms-touch-action: manipulation;
-                       touch-action: manipulation;
-                       cursor: pointer;
-                       -webkit-user-select: none;
-                       -moz-user-select: none;
-                       -ms-user-select: none;
-                       user-select: none;
-                       background-image: none;
-                       border: 1px solid transparent;
-                       -webkit-box-shadow: none;
-                       -moz-box-shadow: none;
-                       box-shadow: none;
-                       border-width: 1px;" 
-                   type="submit">Add Transaction</button>
+                   style="background-color: var(--my-teal);" 
+                   class="aref"
+                   type="submit">
+                   Add Transaction
+                </button>
 
-                   <a href="/block/<%= user%>"
-                    style="
-                        background-color: rgb(146, 24, 24);
-                        color: white !important;
-                        display: block;
-                        width: 100%;display: inline-block;
-                        padding: 10px;
-                        border-radius: 5px;
-                        margin-bottom: 0;
-                        font-size: 14px;
-                        font-weight: 400;
-                        line-height: 1.42857143;
-                        text-align: center;
-                        white-space: nowrap;
-                        vertical-align: middle;
-                        -ms-touch-action: manipulation;
-                        touch-action: manipulation;
-                        cursor: pointer;
-                        -webkit-user-select: none;
-                        -moz-user-select: none;
-                        -ms-user-select: none;
-                        user-select: none;
-                        background-image: none;
-                        border: 1px solid transparent;
-                        -webkit-box-shadow: none;
-                        -moz-box-shadow: none;
-                        box-shadow: none;
-                        border-width: 1px;
-                        margin: 1rem 0;" 
-                    >Block Account</a>
-                
+                <div style="margin: 2rem auto;">
+                    <h3 style="text-align: center;">Access Contols</span></h3>
+                </div>
+
+                <a 
+                    href="/block/<%= user%>"
+                    style="background-color: rgb(146, 24, 24);" 
+                    class="aref" >
+                    Block Account
+                </a>
  
-                <a href="/active/<%= user%>"
-                 style="
-                     background-color: blue;
-                     color: white !important;
-                     display: block;
-                     width: 100%;display: inline-block;
-                     padding: 10px;
-                     border-radius: 5px;
-                     margin-bottom: 0;
-                     font-size: 14px;
-                     font-weight: 400;
-                     line-height: 1.42857143;
-                     text-align: center;
-                     white-space: nowrap;
-                     vertical-align: middle;
-                     -ms-touch-action: manipulation;
-                     touch-action: manipulation;
-                     cursor: pointer;
-                     -webkit-user-select: none;
-                     -moz-user-select: none;
-                     -ms-user-select: none;
-                     user-select: none;
-                     background-image: none;
-                     border: 1px solid transparent;
-                     -webkit-box-shadow: none;
-                     -moz-box-shadow: none;
-                     box-shadow: none;
-                     border-width: 1px;
-                     margin: 0;" 
-                 >Activate Account</a>
+                <a 
+                    href="/active/<%= user%>"
+                    style="
+                        background-color: blue;
+                        margin-bottom: 1rem;"
+                    class="aref" >
+                    Activate Account
+                </a>
+
+                <a 
+                    href="/reset_password/<%= user%>"
+                    style="background-color: blue;" 
+                    class="aref" 
+                    >Password Reset</a>
                </form> 
 
              

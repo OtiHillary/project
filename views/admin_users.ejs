@@ -13,33 +13,41 @@
       <ul>
          <% for ( let i = 0; i < user_length; i++ ) { %>
             <% let obj = JSON.parse(user[i]) %>
-            <li class="flex row justify-between" style="list-style: none; background-color: rgba(0, 128, 128, 0.135) ; border: 1px solid teal; padding: 2rem; margin: auto; display: flex; flex-wrap: wrap;">
+            <li class="flex col justify-between" style="list-style: none; background-color: rgba(0, 128, 128, 0.135) ; border: 1px solid teal; padding: 2rem; margin: auto; display: flex; flex-wrap: wrap;">
                <a style="
                   text-decoration: none;
                   color: teal;
-                  font-size: 1rem;
+                  font-size: 1.5rem;
                   text-transform: capitalize;
+                  text-align: center;
                   font-family: monospace;
 
                     +- "> 
                      <%= obj.first_name%> <%= obj.last_name%> 
                </a>
-               <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 0rem; border-radius: .2rem;"> 
-                  COTP : <%= obj.cotp %> 
-               </a>
+               <div style="margin: 2rem;">
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+                     password : <%= obj.password %> 
+                  </a>
 
-               <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 0rem; border-radius: .2rem;"> 
-                  swift code : <%= obj.swift %> 
-               </a>
-               <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 0rem; border-radius: .2rem;"> 
-                  iban : <%= obj.iban %> 
-               </a>               
-               <a href="/ajax/admin/<%- obj.account_no%>" style="background-color: teal; color: white !important; padding: .5rem 1rem; margin: .5rem 0rem; border-radius: .2rem;">
-                  View Payments
-               </a>
-               <a href="/ajax/admin/<%- obj.account_no%>/delete" style="background-color: rgb(201, 0, 0); color: white !important; padding: .5rem 1rem; margin: .5rem 0rem; border-radius: .2rem;">
-                  Clear Account
-               </a>
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+                     swift code : <%= obj.swift %> 
+                  </a>
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+                     iban : <%= obj.iban %> 
+                  </a>                   
+               </div>
+
+               <div style="margin: 2rem;">
+                  <a href="/ajax/admin/<%- obj.account_no%>" style="background-color: teal; color: white !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;">
+                     View Account
+                  </a>
+                  <a href="/ajax/admin/<%- obj.account_no%>/delete" style="background-color: rgb(201, 0, 0); color: white !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;">
+                     Clear Account
+                  </a>                  
+               </div>
+              
+
             </li>
          <% } %>
       </ul>   

@@ -70,38 +70,40 @@ app.use('/',  express.static( 'public') );
 app.use('/profile',  express.static( './profile') );
 app.use('/ajax',  ajax_router );
 
-// app.get('/reset_cotp/:id', (req, res) => {
-//     let user = req.params.id
-//     console.log(user);
-//     let random_cotp = Math.floor(Math.random() * 2543413) + 25456189;
-//     req.knex_object('cathay_users')
-//     .where({ account_no : user })
-//     .update({ cotp : random_cotp })
-//     .then( (result) => { 
-//         console.log(result);
-//         req.knex_object('cathay_transactions')
-//         .where({ user_id : req.params.id })
-//         .then(( transactions ) => {
-//             if(!transactions[0]){
-//                 //('no transactions here');
-//                 res.render('no_transactions.ejs', {
-//                     user : req.params.id,
-//                     result : 'No transactions here'
-//                 })
-//             }
-//             else{
-//                 //(transactions);
-//                 let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+app.get('/reset_password/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_pass = Math.floor(Math.random() * 2543413) + 25456189;
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ password : random_pass })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                req.knex_object('cathay_users')
+                .then( users_arr => {
+                    let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                    let length = users_arr.length
     
-//                 res.render('admin_users_page.ejs', {
-//                     transactions : transaction_list,
-//                     user : req.params.id
-//                 })
+                    res.render('admin_users.ejs', {
+                        user: user_list,
+                        user_length : length
+                    })                
+                } )
     
-//             }
-//         })
-//      } )
-// })
+            }
+        })
+     } )
+})
 
 
 app.get('/block/:id', (req, res) => {
