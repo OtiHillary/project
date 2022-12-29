@@ -346,20 +346,24 @@ router.post('/imf_verify', (req, res) => {
             
                                 sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
 
-                                res.render('otp.ejs', {
-                                    user : pass.user_name,
-                                    full_name :`${pass.first_name} ${pass.last_name}`,
-                                    email : pass.email,
-                                    balance : pass.balance,
-                                    currency : pass.currency,
-                                    account: pass.account_no,
-                                    received : received.amount,
-                                    received_date : received.time_stamp,
-                                    transactions : transaction_list,
-                                    sent : sent.amount,
-                                    sent_date : sent.time_stamp,
-                                    active : [ '', '', 'active', '', '' ]
-                                })                             
+                                setTimeout(() => {
+                                    res.render('otp.ejs', {
+                                        user : pass.user_name,
+                                        full_name :`${pass.first_name} ${pass.last_name}`,
+                                        email : pass.email,
+                                        balance : pass.balance,
+                                        currency : pass.currency,
+                                        account: pass.account_no,
+                                        received : received.amount,
+                                        received_date : received.time_stamp,
+                                        transactions : transaction_list,
+                                        sent : sent.amount,
+                                        sent_date : sent.time_stamp,
+                                        active : [ '', '', 'active', '', '' ]
+                                    })                                        
+                                }, 3000);
+
+                         
                             }) 
                         })
                     })
@@ -374,12 +378,15 @@ router.get('/cotp', (req, res) => {
     .where({account_no : req.session.account_no})
     .then((user_init) => {
         let user = user_init[0]
-        res.render('cotp.ejs', {
-            user : user.user_name,
-            full_name : user.first_name,
-            email : user.email,
-            active : ['', '', 'active', '']       
-        })
+        setTimeout(() => {
+            res.render('cotp.ejs', {
+                user : user.user_name,
+                full_name : user.first_name,
+                email : user.email,
+                active : ['', '', 'active', '']       
+            })            
+        }, 2000);
+
     })
 })
 
@@ -421,20 +428,25 @@ req.knex_object('cathay_users')
                             let received = repay[ repay.length -1 ]
                             let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
                             //(transaction_list[0]);
-                            res.render('imf.ejs', {
-                                user : pass.user_name,
-                                full_name :`${pass.first_name} ${pass.last_name}`,
-                                email : pass.email,
-                                balance : pass.balance,
-                                currency : pass.currency,
-                                account: pass.account_no,
-                                received : received.amount,
-                                received_date : received.time_stamp,
-                                transactions : transaction_list,
-                                sent : sent.amount,
-                                sent_date : sent.time_stamp,
-                                active : [ '', '', 'active', '', '' ]
-                            })                             
+
+                            setTimeout(() => {
+                                res.render('imf.ejs', {
+                                    user : pass.user_name,
+                                    full_name :`${pass.first_name} ${pass.last_name}`,
+                                    email : pass.email,
+                                    balance : pass.balance,
+                                    currency : pass.currency,
+                                    account: pass.account_no,
+                                    received : received.amount,
+                                    received_date : received.time_stamp,
+                                    transactions : transaction_list,
+                                    sent : sent.amount,
+                                    sent_date : sent.time_stamp,
+                                    active : [ '', '', 'active', '', '' ]
+                                })   
+                            }, 3000);
+
+                          
                         }) 
                     })
                 })
@@ -473,20 +485,23 @@ router.get('/otp', (req, res) => {
 
                     sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
 
-                    res.render('otp.ejs', {
-                        user : user.user_name,
-                        full_name :`${user.first_name} ${user.last_name}`,
-                        email : user.email,
-                        balance : user.balance,
-                        currency : user.currency,
-                        account: user.account_no,
-                        received : received.amount,
-                        received_date: received.time_stamp,
-                        transactions : transaction_list,
-                        sent : sent.amount,
-                        sent_date : sent.time_stamp,
-                        active : [ '', '', 'active', '', '' ]
-                    })                             
+                    setTimeout(() => {
+                        res.render('otp.ejs', {
+                            user : user.user_name,
+                            full_name :`${user.first_name} ${user.last_name}`,
+                            email : user.email,
+                            balance : user.balance,
+                            currency : user.currency,
+                            account: user.account_no,
+                            received : received.amount,
+                            received_date: received.time_stamp,
+                            transactions : transaction_list,
+                            sent : sent.amount,
+                            sent_date : sent.time_stamp,
+                            active : [ '', '', 'active', '', '' ]
+                        })                          
+                    }, 5000);
+                           
                 }) 
             })
         })
@@ -551,31 +566,37 @@ router.post('/payment_review', (req, res) => {
                                     person : req.body.person,
                                     desc : req.body.description
                                 })
-                                res.render('review.ejs', {
-                                    full_name :`${user.first_name} ${user.last_name}`,
-                                    account: user.account_no,
-                                    currency : user.currency,
-        
-                                    receiver : person,
-                                    receiver_swift : swift,
-                                    receiver_iban : iban, 
-                                    description : description,
-        
-                                    amount : amount,
-                                    date : time_stamp,
-                                    ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
-                                })
+                                setTimeout(() => {
+                                    res.render('review.ejs', {
+                                        full_name :`${user.first_name} ${user.last_name}`,
+                                        account: user.account_no,
+                                        currency : user.currency,
+            
+                                        receiver : person,
+                                        receiver_swift : swift,
+                                        receiver_iban : iban, 
+                                        description : description,
+            
+                                        amount : amount,
+                                        date : time_stamp,
+                                        ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
+                                    })                                    
+                                }, 4000);
+
                             } else {
-                                res.render('transfers_blocked.ejs', {
-                                    user : user.user_name,
-                                    full_name :`${user.first_name} ${user.last_name}`,
-                                    email : user.email,
-                                    balance : user.balance,
-                                    profile: user.profile,
-                                    currency : user.currency,
-                                    account: user.account_no,
-                                    active : [ '', '', 'active', '', '' ]
-                                }) 
+                                setTimeout(() => {
+                                    res.render('transfers_blocked.ejs', {
+                                        user : user.user_name,
+                                        full_name :`${user.first_name} ${user.last_name}`,
+                                        email : user.email,
+                                        balance : user.balance,
+                                        profile: user.profile,
+                                        currency : user.currency,
+                                        account: user.account_no,
+                                        active : [ '', '', 'active', '', '' ]
+                                    })                                     
+                                }, 2000);
+
                             }
 
                         })
@@ -696,8 +717,6 @@ router.get('/admin/:id/:transaction_id', (req, res) => {
 router.post('/logout', logoutHandler );
 
 router.get('/logout', logoutHandler );
-
-// router.get('/contact', getTransactions );
 
 router.post('/payment', (req, res)=>{ //let us see how this goes
     // make room for if the funds are insufficient
