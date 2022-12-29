@@ -384,6 +384,18 @@ textarea {
   margin-top: 6px;
   margin-bottom: 10px;
 }
+.processing{
+   display: none; 
+   height: 50%; 
+   width: 50%; 
+   background: rgb(245, 245, 245);
+   box-shadow: .1px .2px 10px rgba(128, 128, 128, 0.418); 
+   border-radius: 1rem; 
+   position: absolute; 
+   top: 50%; 
+   left: 50%; 
+   transform: translate(-50%, -50%);
+}
 .credit{
    background-color: rgba(0, 255, 89, 0.216);
    color: rgb(2, 95, 10);
@@ -486,6 +498,9 @@ textarea {
       @media (max-width:700px) {
          body{
             font-size: 12.5px;
+         }
+         .processing{
+            width: 90% !important;
          }
       }
       @media (max-width:500px) {
