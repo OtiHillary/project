@@ -539,7 +539,7 @@ router.post('/payment_review', (req, res) => {
                             let received = repay.length - 1
                             console.log(req.body.iban, user.iban,' : ',req.body.swift, user.swift);
 
-                            if (true) {
+                            if (user.status == "active") {
                                 storage.setState({
                                     amount : req.body.amount ,
                                     iban : '1276387645784frets' ,
@@ -562,7 +562,16 @@ router.post('/payment_review', (req, res) => {
                                     ref: Math.floor(Math.random(1 * 164736540)) + 9869850                            
                                 })
                             } else {
-                                
+                                res.render('transfers_blocked.ejs', {
+                                    user : user.user_name,
+                                    full_name :`${user.first_name} ${user.last_name}`,
+                                    email : user.email,
+                                    balance : user.balance,
+                                    profile: user.profile,
+                                    currency : user.currency,
+                                    account: user.account_no,
+                                    active : [ '', '', 'active', '', '' ]
+                                }) 
                             }
 
                         })
@@ -590,12 +599,16 @@ router.get('/admin/:id', (req, res) => {
             })
         }
         else{
-            //(transactions);
             let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
 
-            res.render('admin_users_page.ejs', {
-                transactions : transaction_list,
-                user : req.params.id
+            req.knex_object('cathay_users').where({ account_no : req.params.id }).then((user_init) => {
+                let account = user_init[0]
+                console.log(account);
+                res.render('admin_users_page.ejs', {
+                    transactions : transaction_list,
+                    user : req.params.id,
+                    status : account.status
+                })                    
             })
 
         }

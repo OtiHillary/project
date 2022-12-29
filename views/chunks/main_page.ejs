@@ -34,7 +34,7 @@
    <div class="flex row justify-start">
       <img src="/profile/<%= profile %>" style="margin : auto 1rem auto 2rem; height:4rem; width: 4rem; border-radius: 50%; color: rgba(0, 128, 128, 0.37);">
       <h1 class="teal" style="margin: .5rem auto; width: 95%;">
-         Hi, <%= full_name%>. Welcome back
+         Hi, <%= full_name%>. Welcome
       </h1>
    </div>  
    <%- include('./main_page_info')%>
@@ -71,7 +71,9 @@
       <div class="stat-graph flex col justify-center r-6">
          <h3 class="chart-alt"><i class="fa-solid fa-chart-simple" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions Statistics</h3>
          <% if (true) {%>
-            <canvas id="myChart" style="width:80%; max-width:80%; margin: auto; padding: 1rem 0;"></canvas>
+            <canvas class="chart" id="myChart" style=" display:initial; width:80%; max-width:80%; margin: auto; padding: 1rem 0;"></canvas>
+            <img class="chart" id="myChart2" style="display none ; width:80%; max-width:80%; margin: auto; padding: 1rem 0;">
+            <img class="chart" id="myChart3" style="display: none; width:80%; max-width:80%; margin: auto; padding: 1rem 0;">
             <script>
                let amounts = [ 2, 10, 5, 15, 12, 18, 2 ]
                let months = [ 0, 1, 2, 3, 4, 5, 6 ]
@@ -109,11 +111,48 @@
          <% }%>
 
          <div class="chart flex row justify-between">
-            <h4 class="first"><i class="fa-solid fa-chart-bar" style="color: teal; margin: 0 .5rem 0 0;"></i>Productivity</h4>
-            <h4><i class="fa-solid fa-chart-area" style="color: teal; margin: 0 .5rem 0 0;"></i>Stats</h4>
-            <h4><i class="fa-solid fa-chart-pie"  style="color: teal; margin: 0 .5rem 0 0;"></i>Charts</h4>
+            <h4 id="one" class="first ct"><i class="fa-solid fa-chart-bar" style="color: teal; margin: 0 .5rem 0 0;"></i>Productivity</h4>
+            <h4 id="two" class="ct"><i class="fa-solid fa-chart-area" style="color: teal; margin: 0 .5rem 0 0;"></i>Stats</h4>
+            <h4 id="three" class="ct"><i class="fa-solid fa-chart-pie"  style="color: teal; margin: 0 .5rem 0 0;"></i>Charts</h4>
          </div>
-      </div>         
+      </div>   
+      <script>
+         let toggler_arr = doccument.getElementsByClassName('ct'),
+         toggler_1 = document.getElementById('one'),
+         toggler_2 = document.getElementById('two'),
+         toggler_3 = document.getElementById('three')
+
+         toggler_1.addEventListener('click', () =>{
+            for (let index = 0; index < toggler_arr.length; index++) {
+               if (index === 0) {
+                  toggler_arr[i].addClassName = 'first'
+               }               
+               else{
+                  toggler_arr[i].removeClassName = 'first'
+               }
+            }
+         })
+         toggler_2.addEventListener('click', () =>{
+            for (let index = 0; index < toggler_arr.length; index++) {
+               if (index === 1) {
+                  toggler_arr[i].addClassName = 'first'
+               }               
+               else{
+                  toggler_arr[i].removeClassName = 'first'
+               }
+            }
+         })
+         toggler_3.addEventListener('click', () =>{
+            for (let index = 0; index < toggler_arr.length; index++) {
+               if (index === 2) {
+                  toggler_arr[i].addClassName = 'first'
+               }               
+               else{
+                  toggler_arr[i].removeClassName = 'first'
+               }
+            }
+         })
+      </script>      
    </div>
    
    <!-- <div class="transactions flex row justify-start" style=" flex-wrap: wrap">

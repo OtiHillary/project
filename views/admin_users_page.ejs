@@ -8,8 +8,13 @@
 </head>
 <body>
    <div class=" r-8 flex col" style="margin: auto;">
-      <div class="transactions flex row justify-start">
-
+      <div class="transactions flex col justify-start">
+        <div style="margin: 2rem auto;">
+            <h1 style="text-align: center;">Account Control Panel</h1>
+         </div>
+         <div style="margin: 2rem auto;">
+            <h3 style="text-align: center;">Account Status <span class="<%=status%>-mode"><%= status%></span></h3>
+         </div>
          <div class="transaction-table flex col r-5 m-1">
             <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i> Transactions For account - <%= user%></h3>
             <table style=" ">
@@ -35,8 +40,28 @@
                </div>
 
             </table>
+            <div class="status">
+                <style>
+                    .active-mode{
+                        color: rgb(18, 97, 18);
+                        background-color: rgba(172, 255, 47, 0.589);
+                        padding: 1rem 3rem;
+                        border-radius: 5000px;
+                    }
+                    .blocked-mode{
+                        color: brown;
+                        background-color: rgba(255, 0, 0, 0.205);
+                        padding: 1rem 3rem;
+                        border-radius: 5000px;
+                    }
+                </style>
+            </div>
          </div>
+
          <div class="add">
+            <div style="margin: 2rem auto;">
+                <h3 style="text-align: center;">Account Balance Control Center</h3>
+             </div>
             <form id="signup" method="post" action="/ajax/admin/add/<%= user%>" style="margin: 0 auto;">
                <div class="response" style="display:none"></div>
                <div class="form-group flex col wrap-input100 validate-input m-b-18" data-validate="required">
@@ -101,37 +126,72 @@
                        box-shadow: none;
                        border-width: 1px;" 
                    type="submit">Add Transaction</button>
+
+                   <a href="/block/<%= user%>"
+                    style="
+                        background-color: rgb(146, 24, 24);
+                        color: white !important;
+                        display: block;
+                        width: 100%;display: inline-block;
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-bottom: 0;
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 1.42857143;
+                        text-align: center;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                        -ms-touch-action: manipulation;
+                        touch-action: manipulation;
+                        cursor: pointer;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        background-image: none;
+                        border: 1px solid transparent;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        border-width: 1px;
+                        margin: 1rem 0;" 
+                    >Block Account</a>
+                
+ 
+                <a href="/active/<%= user%>"
+                 style="
+                     background-color: blue;
+                     color: white !important;
+                     display: block;
+                     width: 100%;display: inline-block;
+                     padding: 10px;
+                     border-radius: 5px;
+                     margin-bottom: 0;
+                     font-size: 14px;
+                     font-weight: 400;
+                     line-height: 1.42857143;
+                     text-align: center;
+                     white-space: nowrap;
+                     vertical-align: middle;
+                     -ms-touch-action: manipulation;
+                     touch-action: manipulation;
+                     cursor: pointer;
+                     -webkit-user-select: none;
+                     -moz-user-select: none;
+                     -ms-user-select: none;
+                     user-select: none;
+                     background-image: none;
+                     border: 1px solid transparent;
+                     -webkit-box-shadow: none;
+                     -moz-box-shadow: none;
+                     box-shadow: none;
+                     border-width: 1px;
+                     margin: 0;" 
+                 >Activate Account</a>
                </form> 
-               <a href="/reset_cotp/<%= user%>"
-                   style="
-                       background-color: var(--my-teal);
-                       color: white !important;
-                       display: block;
-                       width: 100%;display: inline-block;
-                       padding: 10px;
-                       border-radius: 5px;
-                       margin-bottom: 0;
-                       font-size: 14px;
-                       font-weight: 400;
-                       line-height: 1.42857143;
-                       text-align: center;
-                       white-space: nowrap;
-                       vertical-align: middle;
-                       -ms-touch-action: manipulation;
-                       touch-action: manipulation;
-                       cursor: pointer;
-                       -webkit-user-select: none;
-                       -moz-user-select: none;
-                       -ms-user-select: none;
-                       user-select: none;
-                       background-image: none;
-                       border: 1px solid transparent;
-                       -webkit-box-shadow: none;
-                       -moz-box-shadow: none;
-                       box-shadow: none;
-                       border-width: 1px;" 
-                   >Reset COTP</a>
-               </form> 
+
+             
          </div>
       </div>
    </div>   

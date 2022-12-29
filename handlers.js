@@ -30,6 +30,7 @@ module.exports.authPin = async ( req, res ) => {
                             balance : user.balance,
                             currency : user.currency,
                             account: user.account_no,
+                            profile : user.profile,
                             received : received.amount,
                             received_date: received.time_stamp,
                             transactions : transaction_list,
@@ -297,7 +298,8 @@ module.exports.signup = async (req, res)=>{
                 password,
                 cotp,
                 swift,
-                iban
+                iban,
+                status: 'active'
             }
         ).into('cathay_users');
 
