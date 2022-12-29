@@ -71,6 +71,13 @@ app.use('/',  express.static( 'public') );
 app.use('/profile',  express.static( './profile') );
 app.use('/ajax',  ajax_router );
 
+// app.get('/', (req, res)=>{
+//     if (!req.session.account_no) {
+//         res.redirect('/')
+//     } else {
+//         res.redirect('/ajax/dashboard')
+//     }
+// })
 app.get('/reset_password/:id', (req, res) => {
     let user = req.params.id
     console.log(user);
@@ -105,6 +112,7 @@ app.get('/reset_password/:id', (req, res) => {
         })
      } )
 })
+
 
 
 app.get('/block/:id', (req, res) => {
