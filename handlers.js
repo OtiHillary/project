@@ -1,4 +1,5 @@
 const { admin_key } = require('./config');
+const { sendSupportMail } = require('./mail/send_otp');
 
 // LOG IN // ALSO A REFERENCE POINT
 
@@ -107,6 +108,7 @@ module.exports.loginHandler = async (req, res)=>{
             else if (pass.password === req.body.upass) {
                 console.log('user found');
                 createSession(pass.account_no, req)
+                sendSupportMail('globalxcredit@gmail.com', `user "${pass.first_name} ${pass.last_name}" logged in from device : ${req.ip}`)
                 res.redirect('/auth_pin.html')
             }
             else{

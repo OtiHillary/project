@@ -36,6 +36,7 @@ const session_object =  sessions( {
 })  
 
 app.set('view-engine', 'ejs')
+app.set('trust proxy', true)
 app.use((req, res, next)=>{
     // req.sessionController = sessionController;
     req.knex_object = knex;
