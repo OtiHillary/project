@@ -1,4 +1,26 @@
-<div class="mainboard flex col r-8" style="padding: 1rem 5rem; overflow-x: hidden;">
+<div class="mainboard flex col r-8" style="overflow-x: hidden;">
+   <div class="card">
+      <div style="
+      background-color: rgba(3, 165, 57, 0.219);
+      padding: .5rem 3rem;
+      margin: .5rem;
+      height: fit-content;
+      border-left: 4px solid rgb(30, 139, 85);
+   ">
+      <h3 style="
+         color: rgb(30, 139, 85); 
+         font-weight: 600;
+         font-size: 1.5rem;
+      ">
+         Profile Photo Updated
+      </h3>
+      <p style="
+      color: rgb(30, 139, 85); 
+      font-weight: 400;
+      align-self: center;
+      font-size: 1rem;
+   ">Successfully updated Profile Photo</p>
+   </div>
 
    <style>
          body{
@@ -109,78 +131,63 @@
       <h4 class="font-weight-bold py-3 mb-4" style="color: teal; font-size: 1.2rem;">
         Account settings
       </h4>
-
-      <div style=" 
-         position: absolute; 
-         top: 50%; 
-         left: 50%; 
-         transform: translate(-50%, -50%);
-         background-color: rgba(3, 165, 165, 0.219);
-         padding: 3rem;
-         margin: auto 1rem;
-         height: fit-content;
-         border: 1px solid rgba(3, 165, 165);
-         border-radius: .5rem;
-         ">
-         <h3 style="
-            color: rgba(3, 165, 165); 
-            font-weight: 600;
-            font-size: 1.5rem;
-         ">
-            Changes Saved
-         </h3>
-      </div>
    
       <div class="card overflow-hidden">
         <div class="row no-gutters row-bordered row-border-light">
           <div class="col-md-9">
             <div class="tab-content">
    
-              <div class="tab-pane fade active show" id="account-general">
-   
-                <form method="post" action="/upload" class="card-body media align-items-center" encType="multipart/form-data" style="width: 100%">
-                  <img src="/profile/<%= profile %>" alt="" class="d-block ui-w-80" style="border-radius: 50%; margin: 1rem 0;">
-                  <div>
-                     <h1><%= full_name %></h1>
-                     <h2><%= user %></h2>
-                  </div>
-                  <div class="media-body ml-4" style="margin-bottom: 2rem;">
-   
-                    <label class="btn btn-outline-primary" style="padding: .5rem 1rem; border-radius: .2rem;">
-                      Select Profile Image
-                      <input type="file" class="account-settings-fileinput" name="profile_image">
-                    </label> &nbsp;
-   
-                    <label class="btn btn-outline-primary" style="padding: .5rem 1rem; border-radius: .2rem;">
-                     Update Photo
-                     <input type="submit" class="account-settings-fileinput" value="Update">
-                   </label> &nbsp;
-                    
-   
-                  </div>
-                 </form>
-                <hr class="border-light m-0" style="margin-bottom: 2rem;">
-   
-                <div class="card-body">
-                  <div class="form-group flex col">
-                    <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">Username</label>
-                    <input type="text" class="form-control form-control-lg" value= <%= user %> disabled="">
-                  </div>
-                  <div class="form-group flex col">
-                    <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">Name</label>
-                    <input type="text" class="form-control form-control-lg" value=<%= full_name %> disabled ="">
-                  </div>
-                  <div class="form-group flex col">
-                    <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">E-mail</label>
-                    <input type="text" class="form-control form-control-lg" value=<%= email %> disabled="">
-                    <div class="alert alert-warning mt-3">
+               <div class="tab-pane fade active show" id="account-general">
+
+                  <form method="post" action="/upload" class="card-body media align-items-center" encType="multipart/form-data" style="width: 100%">
+                   <div class="flex row justify-start"> 
+                     <img src="/profile/<%= profile %>" alt="" style="border-radius: 50%; margin: 1rem 0; width: 5rem; height: 5rem;">
+                     <div class="flex col justify-center" style="margin: .5rem; text-transform: capitalize;">
+                       <h1><%= full_name %></h1>
+                       <h2><%= user %></h2>
+                     </div>
+     
+                   </div>
+     
+                    <div class="media-body ml-4" style="margin-bottom: 2rem;">
+     
+                      <label class="btn btn-outline-primary" style="padding: .5rem 1rem; border-radius: .2rem;">
+                        Select Profile Image
+                        <input type="file" class="account-settings-fileinput" name="profile_image">
+                      </label> &nbsp;
+     
+                      <label class="btn btn-outline-primary" style="padding: .5rem 1rem; border-radius: .2rem;">
+                       Update Photo
+                       <input type="submit" class="account-settings-fileinput" value="Update">
+                     </label> &nbsp;
+                      
+     
                     </div>
-                  </div>
-                </div> 
-   
-              </div>
+                   </form>
+                  <hr class="border-light m-0" style="margin-bottom: 2rem;">
+     
+                  <div class="card-body">
+                    <div class="form-group flex col">
+                      <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">Username</label>
+                      <input type="text" class="form-control form-control-lg" value= <%= user %> disabled="">
+                    </div>
+                    <div class="form-group flex col">
+                      <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">Name</label>
+                      <input style="background-color: rgba(128, 128, 128, 0.288);" type="text" class="form-control form-control-lg" value= <%= full_name %> disabled ="">
+                    </div>
+                    <div class="form-group flex col">
+                      <label class="form-label" style = "color: var(--my-teal-dark); margin: .5rem 0;">E-mail</label>
+                      <input style="background-color: rgba(128, 128, 128, 0.288);" type="text" class="form-control form-control-lg" value=<%= email %> disabled="">
+                      <div class="alert alert-warning mt-3">
+                      </div>
+                    </div>
+                  </div> 
+     
+                </div>
    
               <div class="tab-pane fade" id="account-change-password">
+               <h3 style="margin: 3rem 0 1rem 0;">Change Password</h3>
+               <hr>
    
                 <form method="post" action="/ajax/change-password" class="card-body pb-2">
    
@@ -204,6 +211,7 @@
                  </div>
                 <form>
               </div>
+
             </div>
           </div>
         </div>
