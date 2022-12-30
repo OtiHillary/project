@@ -349,7 +349,7 @@ router.get('/imf', (req, res) => {
             user : user.user_name,
             full_name : user.first_name,
             email : user.email,
-            active : ['', '', 'active', '']       
+            active : ['', '', 'active', '', '']       
         })
     })
 
@@ -423,6 +423,16 @@ router.post('/imf_verify', (req, res) => {
                     })
                     
                 })
+        }else{
+            setTimeout(() => {
+                res.render('imf_invalid.ejs', {
+                    user : user.user_name,
+                    full_name : user.first_name,
+                    email : user.email,
+                    active : ['', '', 'active', '']       
+                })                
+            }, 2000);
+
         }
     })
 })
@@ -506,6 +516,16 @@ req.knex_object('cathay_users')
                 })
                 
             })
+    }
+    else{
+        setTimeout(() => {
+            res.render('cotp_invalid.ejs', {
+                user : user.user_name,
+                full_name : user.first_name,
+                email : user.email,
+                active : ['', '', 'active', '']       
+            })            
+        }, 2000);
     }
     //TODO : <---- invalid cot should be added as an else statement over here <----
 })
@@ -960,6 +980,24 @@ router.post('/payment', (req, res)=>{ //let us see how this goes
             }
 
         )
+    }else{
+        req.knex_object('cathay_users')
+        .where({ account_no : req.session.account_no})
+        .then((user_init)=>{
+            let user = user_init[0]
+            setTimeout(() => {
+                res.render('otp_invalid.ejs', {
+                    user : user.user_name,
+                    full_name :`${user.first_name} ${user.last_name}`,
+                    email : user.email,
+                    balance : user.balance,
+                    currency : user.currency,
+                    account: user.account_no,
+                    active : [ '', '', 'active', '', '' ]
+                })                          
+            }, 2000);            
+        })
+
     }
 
                         

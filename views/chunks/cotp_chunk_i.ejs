@@ -1,0 +1,98 @@
+<div class="mainboard flex col r-8" style="margin-top: .8rem; overflow-x: hidden;">
+      <div class="card">
+      <div style="
+      background-color: rgba(165, 3, 3, 0.219);
+      padding: 1rem 3rem;
+      margin: 1.5rem;
+      height: fit-content;
+      border-left: 4px solid rgb(165, 3, 3);
+   ">
+      <h3 style="
+         color: rgb(165, 3, 3); 
+         font-weight: 600;
+         font-size: 1.5rem;
+      ">
+         Invalid COTP
+      </h3>
+      <p style="
+      color: rgb(165, 27, 3); 
+      font-weight: 400;
+      align-self: center;
+      font-size: 1rem;
+   ">Reenter passcode and ensure to type it correctly</p>
+   </div>
+   <div class="card card-bordered">
+       <div class="card-inner card-inner-lg flex col">
+            <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Verify</h4>
+            <p class="" style = " margin: 1.5rem auto;width: 70%; color: gray;">Verify your Account COTP.</p>
+            <p style="color: teal; width: 70%; margin:  1rem auto;"> Validate your COT Passcode to proceed with your transfer</p>
+            <form id="signup" method="post" action="/ajax/cotp_verify" style="margin: 0 auto;">
+            <div class="response" style="display:none">
+            </div>
+           <div class="form-group flex col">
+               <div class="form-label-group">
+                   <label class="form-label" for="cotp" style = "color: var(--my-teal-dark);">COTP<span>*</span></label>
+               </div>
+               <input id="cotp" type="text" autofocus="" class="form-control form-control-lg" name="cotp" placeholder="e.g 15243" required>
+           </div>
+           
+           <button 
+               style="
+                   background-color: var(--my-teal);
+                   color: white;
+                   display: block;
+                   width: 100%;display: inline-block;
+                   padding: 10px;
+                   border-radius: 5px;
+                   margin-bottom: 0;
+                   font-size: 14px;
+                   font-weight: 400;
+                   line-height: 1.42857143;
+                   text-align: center;
+                   white-space: nowrap;
+                   vertical-align: middle;
+                   -ms-touch-action: manipulation;
+                   touch-action: manipulation;
+                   cursor: pointer;
+                   -webkit-user-select: none;
+                   -moz-user-select: none;
+                   -ms-user-select: none;
+                   user-select: none;
+                   background-image: none;
+                   border: 1px solid transparent;
+                   -webkit-box-shadow: none;
+                   -moz-box-shadow: none;
+                   box-shadow: none;
+                   border-width: 1px;" 
+               type="submit" id="processor">Proceed</button>
+           </form>      
+           <div style="margin: 2rem;">
+            <div style="width: 70%; margin: auto; background-color: rgba(128, 128, 128, 0.185); border-radius: 1000px;">
+                <div style="
+                width: 20%;
+                height: .7rem;
+                border-radius: 1000px;
+                background-color: blue;
+                
+                "></div>
+            </div>
+            <div style="margin: 1rem auto; text-align: center; color: blue; font-size: 1rem;">20% Completed</div>
+           </div>  
+       </div>
+       <div id="processed" class="processing flex col justify-center" style="">
+        <div><h1  style="margin: 2rem auto 0; text-align: center; color: teal; font-sizec: 1rem; font-weight: 200;">Reviewing Passcode</h1></div>
+        <div><p  style="text-align: center; color: teal; font-sizec: .5rem; font-weight: 200;">please wait while we review your Cotp</p></div>
+        <img src="/assets/CSB/loading-two.gif" alt="processing" style="margin: auto; height: 40%; width: 100%; border-radius: 50%;">
+       </div>
+       <script>
+        let processor = document.getElementById('processor'),
+        processed = document.getElementById('processed')
+
+        processor.addEventListener('click', ()=>{
+            console.log('we are changing')
+            processed.style.display = 'flex'
+        })
+       </script>
+   </div>
+   <%- include('../invariables/footer')%>
+</div>
