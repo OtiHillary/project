@@ -2,5 +2,8 @@
 node_modules/
 node_modules
 
+# ignores the profile pic database
+/profile
+
 #ignores all unnecessary files 
 /package-lock.json
