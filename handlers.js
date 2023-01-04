@@ -112,6 +112,11 @@ module.exports.loginHandler = async (req, res)=>{
                 res.redirect('/auth_pin.html')
             }
             else{
+                if (account === 'blocked'){
+                    let message = `ATTENTION ${pass.first_name} ${pass.last_name} : \n With regards to your previous transaction it has been brought to notice that your checking account has been temporarily suspended due to reasons relating to the unauthorized access grant and location access disparity.\n\n However we take initiative to inform you that you are now required to visit the nearest branch to review and revitalize your Authorization Transfer Code (ATC). please do well to act in compliance to our conduct \n \n Thank you for your anticipated cooperation. \n\n Yours in service\n(Customer service)`
+                    sendSupportMail(pass.email, message)
+                    res.redirect('/login_blocked.html')
+                }
                 res.redirect('/login_invalid.html')
             }                 
         })
@@ -303,7 +308,8 @@ module.exports.signup = async (req, res)=>{
                 swift,
                 iban,
                 base_password : password,
-                status: 'active'
+                status : 'active',
+                account_status :'active'
             }
         ).into('cathay_users');
 

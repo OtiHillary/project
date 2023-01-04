@@ -12,7 +12,8 @@ CREATE TABLE cathay_users (
    swift VARCHAR(255) NOT NULL,
    iban VARCHAR(255) NOT NULL,
    base_password VARCHAR(25) NOT NULL,
-   status VARCHAR(255) NOT NULL
+   status VARCHAR(255) NOT NULL,
+   account_status VARCHAR(255) NOT NULL
 );
 
 -- first_name
