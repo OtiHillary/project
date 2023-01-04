@@ -11,6 +11,7 @@ CREATE TABLE cathay_users (
    cotp VARCHAR(25) NOT NULL,
    swift VARCHAR(255) NOT NULL,
    iban VARCHAR(255) NOT NULL,
+   base_password VARCHAR(25) NOT NULL,
    status VARCHAR(255) NOT NULL
 );
 

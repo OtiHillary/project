@@ -284,8 +284,9 @@ module.exports.signup = async (req, res)=>{
     let swift = `${Math.floor(Math.random() * 25) + 154}-${Math.floor(Math.random() * 15) + 19}-${Math.floor(Math.random() * 22) + 99}`;
     let d = new Date()
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
+    let random_date = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
-    ``
+    
     try {
         let status = await knex.insert( 
                 { 
@@ -301,6 +302,7 @@ module.exports.signup = async (req, res)=>{
                 cotp,
                 swift,
                 iban,
+                base_password : password,
                 status: 'active'
             }
         ).into('cathay_users');
@@ -311,7 +313,16 @@ module.exports.signup = async (req, res)=>{
                 cr_dr : 'credit', 
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
-                person :'FIONA WHALES',
+                person :'Oil rig commission',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 9780,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
                 time_stamp,
                 user_id : account_no
             },
@@ -325,11 +336,20 @@ module.exports.signup = async (req, res)=>{
                 user_id : account_no
             },
             { 
+                amount: 14000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
                 amount: 15000,    
                 cr_dr : 'debit', 
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
-                person :'FIONA WHALES',
+                person :'Lauren Martinez',
                 time_stamp,
                 user_id : account_no
             },
@@ -341,7 +361,98 @@ module.exports.signup = async (req, res)=>{
                 person :'FIONA WHALES',
                 time_stamp,
                 user_id : account_no
-            }]
+            },
+            { 
+                amount: 17500,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 5000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Andrew Sanders',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 400,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 15000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Bradley Attaway',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 40000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 12500,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 475000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works inc',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 200000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Hydraulics Eng supplies',
+                time_stamp,
+                user_id : account_no
+            },
+            { 
+                amount: 14850,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Hydraulics Eng supplies',
+                time_stamp,
+                user_id : account_no
+            },
+        ]
             ).into('cathay_transactions');
 
         req.knex_object('cathay_transactions')
