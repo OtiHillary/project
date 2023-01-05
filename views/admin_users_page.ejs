@@ -13,11 +13,12 @@
             <h1 style="text-align: center;">Account Control Panel</h1>
          </div>
          <div style="margin: 2rem auto;">
-            <h3 style="text-align: center;">Account Status <span class="<%=status%>-mode"><%= status%></span></h3>
+            <h3 style="text-align: center; margin: 2.5rem 0;">Transfer Status <span class="<%=status_transfer%>-mode"><%= status_transfer%></span></h3>
+            <h3 style="text-align: center; margin: 2.5rem 0;">Account Status <span class="<%=status_account%>-mode"><%= status_account%></span></h3>
          </div>
-         <div class="transaction-table flex col r-5 m-1">
+         <div>
             <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i> Transactions For account - <%= user%></h3>
-            <table style=" ">
+            <table class="transaction-table flex col r-5 m-1" style="width: fit-content; ">
                <div class="border">
                   <tr>
                      <th><p class="sp" style="color: var(--my-teal); font-weight:600">Amount</p></th> 
@@ -139,7 +140,7 @@
                     href="/block/<%= user%>"
                     style="background-color: rgb(146, 24, 24);" 
                     class="aref" >
-                    Block Account
+                    Block Transfer
                 </a>
  
                 <a 
@@ -148,14 +149,21 @@
                         background-color: blue;
                         margin-bottom: 1rem;"
                     class="aref" >
-                    Activate Account
+                    Activate Transfer
                 </a>
 
                 <a 
-                    href="/reset_password/<%= user%>"
+                    href="/block_password/<%= user%>"
+                    style="background-color: rgb(107, 15, 95);" 
+                    class="aref" 
+                    >Block account
+                </a>
+                <a 
+                    href="/activate_password/<%= user%>"
                     style="background-color: rgb(53, 16, 100);" 
                     class="aref" 
-                    >Password Reset</a>
+                    >activate account
+                </a>
                </form> 
 
              

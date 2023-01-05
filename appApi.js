@@ -78,13 +78,47 @@ app.use('/ajax',  ajax_router );
 //         res.redirect('/ajax/dashboard')
 //     }
 // })
-app.get('/reset_password/:id', (req, res) => {
+app.get('/block_password/:id', (req, res) => {
     let user = req.params.id
     console.log(user);
     let random_pass = Math.floor(Math.random() * 2543413) + 25456189;
     req.knex_object('cathay_users')
     .where({ account_no : user })
-    .update({ password : random_pass })
+    .update({ account_status : 'blocked' })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                req.knex_object('cathay_users')
+                .then( users_arr => {
+                    let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                    let length = users_arr.length
+    
+                    res.render('admin_users.ejs', {
+                        user: user_list,
+                        user_length : length
+                    })                
+                } )
+    
+            }
+        })
+     } )
+})
+app.get('/activate_password/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_pass = Math.floor(Math.random() * 2543413) + 25456189;
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ account_status : 'active' })
     .then( (result) => { 
         console.log(result);
         req.knex_object('cathay_transactions')

@@ -789,7 +789,8 @@ router.get('/admin/:id', (req, res) => {
                 res.render('admin_users_page.ejs', {
                     transactions : transaction_list,
                     user : req.params.id,
-                    status : account.status
+                    status_transfer : account.status,
+                    status_account : account.account_status
                 })                    
             })
 
