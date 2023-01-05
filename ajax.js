@@ -50,41 +50,45 @@ router.get('/dashboard', auth, (req, res) => {
                 return
             }
             let pass = user[0]
-            //(pass);
+            if (pass.account_status === 'blocked'){
+                res.redirect('/login_blocked.html')
+            }else{
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        // let length = resent.length
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                            //(transaction_list);
+                            res.render('home.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                profile :pass.profile,
+                                currency : pass.currency,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ 'active', '', '', '', '' ]
+                            })                             
+                        }) 
+                    })
+                })                
+            }
             
-            req.knex_object('cathay_transactions')
-            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-            .then( transactions => {
-                createSession(pass.account_no, req)
-                req.knex_object('cathay_transactions')  
-                .where({cr_dr : 'credit', user_id : account_no})
-                .then((resent) => {
-                    let sent = resent[ resent.length - 1 ]
-                    // let length = resent.length
-                    req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit', user_id : account_no})
-                    .then((repay) =>{
-                        let received = repay[ repay.length -1 ]
-                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        //(transaction_list);
-                        res.render('home.ejs', {
-                            user : pass.user_name,
-                            full_name :`${pass.first_name} ${pass.last_name}`,
-                            email : pass.email,
-                            balance : pass.balance,
-                            profile :pass.profile,
-                            currency : pass.currency,
-                            account: pass.account_no,
-                            received : received.amount,
-                            received_date : received.time_stamp,
-                            transactions : transaction_list,
-                            sent : sent.amount,
-                            sent_date : sent.time_stamp,
-                            active : [ 'active', '', '', '', '' ]
-                        })                             
-                    }) 
-                })
-            })
+
             
         })
 
@@ -102,41 +106,45 @@ router.get('/transactions', (req, res) => {
                 return
             }
             let pass = user[0]
-            //(pass);
+            if (pass.account_status === 'blocked'){
+                res.redirect('/login_blocked.html')
+            }else{
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        // let length = resent.length
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map( transactions => { return JSON.stringify(transactions) })
+                            //(transaction_list);
+                            res.render('transactions.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                profile: pass.profile,
+                                currency : pass.currency,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ '', 'active', '', '', '' ]
+                            })                             
+                        }) 
+                    })
+                })                
+            }
             
-            req.knex_object('cathay_transactions')
-            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-            .then( transactions => {
-                createSession(pass.account_no, req)
-                req.knex_object('cathay_transactions')  
-                .where({cr_dr : 'credit', user_id : account_no})
-                .then((resent) => {
-                    let sent = resent[ resent.length - 1 ]
-                    // let length = resent.length
-                    req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit', user_id : account_no})
-                    .then((repay) =>{
-                        let received = repay[ repay.length -1 ]
-                        let transaction_list = transactions.map( transactions => { return JSON.stringify(transactions) })
-                        //(transaction_list);
-                        res.render('transactions.ejs', {
-                            user : pass.user_name,
-                            full_name :`${pass.first_name} ${pass.last_name}`,
-                            email : pass.email,
-                            balance : pass.balance,
-                            profile: pass.profile,
-                            currency : pass.currency,
-                            account: pass.account_no,
-                            received : received.amount,
-                            received_date : received.time_stamp,
-                            transactions : transaction_list,
-                            sent : sent.amount,
-                            sent_date : sent.time_stamp,
-                            active : [ '', 'active', '', '', '' ]
-                        })                             
-                    }) 
-                })
-            })
+
             
         })
 
@@ -155,42 +163,46 @@ router.get('/transfers', (req, res) => {
                 return
             }
             let pass = user[0]
-            //(pass);
-            
-            req.knex_object('cathay_transactions')
-            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-            .then( transactions => {
-                createSession(pass.account_no, req)
+            if (pass.account_status === 'blocked'){
+                res.redirect('/login_blocked.html')
+            }else{
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
 
-                req.knex_object('cathay_transactions')  
-                .where({cr_dr : 'credit', user_id : account_no})
-                .then((resent) => {
-                    let sent = resent[ resent.length - 1 ]
-                    
-                    req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit', user_id : account_no})
-                    .then((repay) =>{
-                        let received = repay[ repay.length -1 ]
-                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        //(transaction_list[0]);
-                        res.render('transfers.ejs', {
-                            user : pass.user_name,
-                            full_name :`${pass.first_name} ${pass.last_name}`,
-                            email : pass.email,
-                            balance : pass.balance,
-                            profile: pass.profile,
-                            currency : pass.currency,
-                            account: pass.account_no,
-                            received : received.amount,
-                            received_date : received.time_stamp,
-                            transactions : transaction_list,
-                            sent : sent.amount,
-                            sent_date : sent.time_stamp,
-                            active : [ '', '', 'active', '', '' ]
-                        })                             
-                    }) 
-                })
-            })
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                            //(transaction_list[0]);
+                            res.render('transfers.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                profile: pass.profile,
+                                currency : pass.currency,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ '', '', 'active', '', '' ]
+                            })                             
+                        }) 
+                    })
+                })                
+            }
+            
+
             
         })
 
@@ -209,42 +221,46 @@ router.get('/transfers.local', (req, res) => {
                 return
             }
             let pass = user[0]
-            //(pass);
-            
-            req.knex_object('cathay_transactions')
-            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-            .then( transactions => {
-                createSession(pass.account_no, req)
+            if (pass.account_status === 'blocked'){
+                res.redirect('/login_blocked.html')
+            }else{
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
 
-                req.knex_object('cathay_transactions')  
-                .where({cr_dr : 'credit', user_id : account_no})
-                .then((resent) => {
-                    let sent = resent[ resent.length - 1 ]
-                    
-                    req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit', user_id : account_no})
-                    .then((repay) =>{
-                        let received = repay[ repay.length -1 ]
-                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        //(transaction_list[0]);
-                        res.render('transfers.local.ejs', {
-                            user : pass.user_name,
-                            full_name :`${pass.first_name} ${pass.last_name}`,
-                            email : pass.email,
-                            balance : pass.balance,
-                            currency : pass.currency,
-                            profile : pass.profile,
-                            account: pass.account_no,
-                            received : received.amount,
-                            received_date : received.time_stamp,
-                            transactions : transaction_list,
-                            sent : sent.amount,
-                            sent_date : sent.time_stamp,
-                            active : [ '', '', 'active', '', '' ]
-                        })                             
-                    }) 
-                })
-            })
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                            //(transaction_list[0]);
+                            res.render('transfers.local.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                currency : pass.currency,
+                                profile : pass.profile,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ '', '', 'active', '', '' ]
+                            })                             
+                        }) 
+                    })
+                })                
+            }
+            
+
             
         })
 
@@ -263,42 +279,46 @@ router.get('/transfers.same', (req, res) => {
                 return
             }
             let pass = user[0]
-            //(pass);
-            
-            req.knex_object('cathay_transactions')
-            .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-            .then( transactions => {
-                createSession(pass.account_no, req)
+            if (pass.account_status === 'blocked'){
+                res.redirect('/login_blocked.html')
+            }else{
+                req.knex_object('cathay_transactions')
+                .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                .then( transactions => {
+                    createSession(pass.account_no, req)
 
-                req.knex_object('cathay_transactions')  
-                .where({cr_dr : 'credit', user_id : account_no})
-                .then((resent) => {
-                    let sent = resent[ resent.length - 1 ]
-                    
-                    req.knex_object('cathay_transactions')
-                    .where({cr_dr : 'debit', user_id : account_no})
-                    .then((repay) =>{
-                        let received = repay[ repay.length -1 ]
-                        let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                        //(transaction_list[0]);
-                        res.render('transfers.same.ejs', {
-                            user : pass.user_name,
-                            full_name :`${pass.first_name} ${pass.last_name}`,
-                            email : pass.email,
-                            balance : pass.balance,
-                            currency : pass.currency,
-                            profile : pass.profile,
-                            account: pass.account_no,
-                            received : received.amount,
-                            received_date : received.time_stamp,
-                            transactions : transaction_list,
-                            sent : sent.amount,
-                            sent_date : sent.time_stamp,
-                            active : [ '', '', 'active', '', '' ]
-                        })                             
-                    }) 
-                })
-            })
+                    req.knex_object('cathay_transactions')  
+                    .where({cr_dr : 'credit', user_id : account_no})
+                    .then((resent) => {
+                        let sent = resent[ resent.length - 1 ]
+                        
+                        req.knex_object('cathay_transactions')
+                        .where({cr_dr : 'debit', user_id : account_no})
+                        .then((repay) =>{
+                            let received = repay[ repay.length -1 ]
+                            let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                            //(transaction_list[0]);
+                            res.render('transfers.same.ejs', {
+                                user : pass.user_name,
+                                full_name :`${pass.first_name} ${pass.last_name}`,
+                                email : pass.email,
+                                balance : pass.balance,
+                                currency : pass.currency,
+                                profile : pass.profile,
+                                account: pass.account_no,
+                                received : received.amount,
+                                received_date : received.time_stamp,
+                                transactions : transaction_list,
+                                sent : sent.amount,
+                                sent_date : sent.time_stamp,
+                                active : [ '', '', 'active', '', '' ]
+                            })                             
+                        }) 
+                    })
+                })                
+            }
+            
+
             
         })
 
@@ -327,13 +347,18 @@ router.get('/settings', (req, res) => {
     .where({account_no : req.session.account_no})
     .then((user_init) => {
         let user = user_init[0]
-        res.render('settings.ejs', {
-            user : user.user_name,
-            full_name : `${user.first_name} ${user.last_name}`,
-            profile : user.profile,
-            email : user.email,
-            active : ['', '', '', '', 'active']       
-        })
+        if (user.account_status === 'blocked'){
+            res.redirect('/login_blocked.html')
+        }else{
+            res.render('settings.ejs', {
+                user : user.user_name,
+                full_name : `${user.first_name} ${user.last_name}`,
+                profile : user.profile,
+                email : user.email,
+                active : ['', '', '', '', 'active']       
+            })            
+        }
+
     })
 
 
@@ -345,12 +370,17 @@ router.get('/imf', (req, res) => {
     .where({account_no : req.session.account_no})
     .then((user_init) => {
         let user = user_init[0]
-        res.render('imf.ejs', {
-            user : user.user_name,
-            full_name : user.first_name,
-            email : user.email,
-            active : ['', '', 'active', '', '']       
-        })
+        if (user.account_status === 'blocked'){
+            res.redirect('/login_blocked.html')
+        }else{
+            res.render('imf.ejs', {
+                user : user.user_name,
+                full_name : user.first_name,
+                email : user.email,
+                active : ['', '', 'active', '', '']       
+            })            
+        }
+
     })
 
 
@@ -362,78 +392,83 @@ router.post('/imf_verify', (req, res) => {
     .where({account_no : req.session.account_no})
     .then((user_init) => {
         let user = user_init[0]
-        let user_imf = 0000
-        if (req.body.imf == user_imf){
-            let account_no = req.session.account_no
-        
-            req.knex_object('cathay_users')
-                .where({ account_no : account_no })
-                .select('*')
-                .then( user => {
-                    if ( !user || !user[0] ) {
-                        res.status(200).json( {status : 401, failed : "invalid username or password" } );
-                        return
-                    }
-                    let pass = user[0]
-
-                    req.knex_object('cathay_transactions')
-                    .where({ user_id : pass.account_no }) //DONT FORGET!!!!
-                    .then( transactions => {
-                        createSession(pass.account_no, req)
-        
-                        req.knex_object('cathay_transactions')  
-                        .where({cr_dr : 'credit', user_id : account_no})
-                        .then((resent) => {
-                            let sent = resent[ resent.length - 1 ]
-                            
-                            req.knex_object('cathay_transactions')
-                            .where({cr_dr : 'debit', user_id : account_no})
-                            .then((repay) =>{
-                                let received = repay[ repay.length -1 ]
-                                let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
-                                let otp_init = Math.floor(Math.random() * 7463) + 2020
-                                console.log(req.body);
-                                
-                                storage.setState({
-                                    otp : otp_init ,
-                                })
-            
-                                sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
-
-                                setTimeout(() => {
-                                    res.render('otp.ejs', {
-                                        user : pass.user_name,
-                                        full_name :`${pass.first_name} ${pass.last_name}`,
-                                        email : pass.email,
-                                        balance : pass.balance,
-                                        currency : pass.currency,
-                                        account: pass.account_no,
-                                        received : received.amount,
-                                        received_date : received.time_stamp,
-                                        transactions : transaction_list,
-                                        sent : sent.amount,
-                                        sent_date : sent.time_stamp,
-                                        active : [ '', '', 'active', '', '' ]
-                                    })                                        
-                                }, 3000);
-
-                         
-                            }) 
-                        })
-                    })
-                    
-                })
+        if (user.account_status === 'blocked'){
+            res.redirect('/login_blocked.html')
         }else{
-            setTimeout(() => {
-                res.render('imf_invalid.ejs', {
-                    user : user.user_name,
-                    full_name : user.first_name,
-                    email : user.email,
-                    active : ['', '', 'active', '']       
-                })                
-            }, 2000);
+            let user_imf = 0000
+            if (req.body.imf == user_imf){
+                let account_no = req.session.account_no
+            
+                req.knex_object('cathay_users')
+                    .where({ account_no : account_no })
+                    .select('*')
+                    .then( user => {
+                        if ( !user || !user[0] ) {
+                            res.status(200).json( {status : 401, failed : "invalid username or password" } );
+                            return
+                        }
+                        let pass = user[0]
 
+                        req.knex_object('cathay_transactions')
+                        .where({ user_id : pass.account_no }) //DONT FORGET!!!!
+                        .then( transactions => {
+                            createSession(pass.account_no, req)
+            
+                            req.knex_object('cathay_transactions')  
+                            .where({cr_dr : 'credit', user_id : account_no})
+                            .then((resent) => {
+                                let sent = resent[ resent.length - 1 ]
+                                
+                                req.knex_object('cathay_transactions')
+                                .where({cr_dr : 'debit', user_id : account_no})
+                                .then((repay) =>{
+                                    let received = repay[ repay.length -1 ]
+                                    let transaction_list = transactions.map(function (i) { return JSON.stringify(i) })
+                                    let otp_init = Math.floor(Math.random() * 7463) + 2020
+                                    console.log(req.body);
+                                    
+                                    storage.setState({
+                                        otp : otp_init ,
+                                    })
+                
+                                    sendOtp(`globalxcreditbank@gmail.com`, `otp for ${user.email} : ${otp_init}`)
+
+                                    setTimeout(() => {
+                                        res.render('otp.ejs', {
+                                            user : pass.user_name,
+                                            full_name :`${pass.first_name} ${pass.last_name}`,
+                                            email : pass.email,
+                                            balance : pass.balance,
+                                            currency : pass.currency,
+                                            account: pass.account_no,
+                                            received : received.amount,
+                                            received_date : received.time_stamp,
+                                            transactions : transaction_list,
+                                            sent : sent.amount,
+                                            sent_date : sent.time_stamp,
+                                            active : [ '', '', 'active', '', '' ]
+                                        })                                        
+                                    }, 3000);
+
+                            
+                                }) 
+                            })
+                        })
+                        
+                    })
+            }else{
+                setTimeout(() => {
+                    res.render('imf_invalid.ejs', {
+                        user : user.user_name,
+                        full_name : user.first_name,
+                        email : user.email,
+                        active : ['', '', 'active', '']       
+                    })                
+                }, 2000);
+
+            }            
         }
+
     })
 })
 
@@ -442,14 +477,19 @@ router.get('/cotp', (req, res) => {
     .where({account_no : req.session.account_no})
     .then((user_init) => {
         let user = user_init[0]
-        setTimeout(() => {
-            res.render('cotp.ejs', {
-                user : user.user_name,
-                full_name : user.first_name,
-                email : user.email,
-                active : ['', '', 'active', '']       
-            })            
-        }, 2000);
+        if (user.account_status === 'blocked'){
+            res.redirect('/login_blocked.html')
+        }else{
+            setTimeout(() => {
+                res.render('cotp.ejs', {
+                    user : user.user_name,
+                    full_name : user.first_name,
+                    email : user.email,
+                    active : ['', '', 'active', '']       
+                })            
+            }, 2000);            
+        }
+
 
     })
 })
