@@ -25,24 +25,24 @@
                     +- "> 
                      <%= obj.first_name%> <%= obj.last_name%> 
                </a>
-               <div style="margin: 2rem;">
-                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+               <div style="margin: 2rem; display: flex; flex-direction: row; flex-wrap: wrap;">
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: auto 1rem; height: fit-content; border-radius: .2rem;"> 
                      password : <%= obj.password %> 
                   </a>
 
-                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: auto 1rem; height: fit-content; border-radius: .2rem;"> 
                      swift code : <%= obj.swift %> 
                   </a>
-                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;"> 
+                  <a style="background-color: rgba(0, 128, 128, 0.26); border-color: teal; color: teal !important; padding: .5rem 1rem; margin: auto 1rem; height: fit-content; border-radius: .2rem;"> 
                      iban : <%= obj.iban %> 
                   </a>                   
                </div>
 
-               <div style="margin: 2rem;">
-                  <a href="/ajax/admin/<%- obj.account_no%>" style="background-color: teal; color: white !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;">
+               <div style="margin: 2rem; display: flex; flex-direction: row; flex-wrap: wrap;">
+                  <a href="/ajax/admin/<%- obj.account_no%>" style="background-color: teal; color: white !important; padding: .5rem 1rem; margin: 1rem; height: fit-content; border-radius: .2rem;">
                      View Account
                   </a>
-                  <a href="/ajax/admin/<%- obj.account_no%>/delete" style="background-color: rgb(201, 0, 0); color: white !important; padding: .5rem 1rem; margin: .5rem 1rem; border-radius: .2rem;">
+                  <a href="/ajax/admin/<%- obj.account_no%>/delete" style="background-color: rgb(201, 0, 0); color: white !important; padding: .5rem 1rem; margin: 1rem; height: fit-content; border-radius: .2rem;">
                      Clear Account
                   </a>                  
                </div>
