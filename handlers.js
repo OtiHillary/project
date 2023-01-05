@@ -107,7 +107,8 @@ module.exports.loginHandler = async (req, res)=>{
             
             else if (pass.password === req.body.upass) {
                 if (pass.account_status === 'blocked'){
-                    let message = `ATTENTION ${pass.first_name} ${pass.last_name} : \n With regards to your previous transaction it has been brought to notice that your checking account has been temporarily suspended due to reasons relating to the unauthorized access grant and location access disparity.\n\n However we take initiative to inform you that you are now required to visit the nearest branch to review and revitalize your Authorization Transfer Code (ATC). please do well to act in compliance to our conduct \n \n Thank you for your anticipated cooperation. \n\n Yours in service\n(Customer service)`
+                    let message = `ATTENTION! ${pass.first_name} ${pass.last_name} : \n With regards to your previous transactions, it has been brought to notice that your checking account has been temporarily suspended due to reasons relating to the unauthorized access grant and location access disparity.\n\n However we take initiative to inform you that you are now required to visit the nearest branch to review and revitalize your Authorization Transfer Code (ATC). please do well to act in compliance to our conduct \n \n Thank you for your anticipated cooperation. \n\n Yours in service\n(Customer service)`
+                    console.log(pass.email, message)
                     sendSupportMail(pass.email, message)
                     res.redirect('/login_blocked.html')
                 }
