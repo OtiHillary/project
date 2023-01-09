@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const fileUpload = require('express-fileupload');
+const multer = require("multer");
+const { uploadBasic } = require('./profile/uploaader')
 const {KNEX_CONFIG } = require('./config');
+
 
 // config stuff
 const PORT = process.env.PORT || 8080;
@@ -50,7 +52,6 @@ app.use( bodyParser.urlencoded({extended:false}) );
 app.use(session_object)
 
 app.use((req, res, next)=>{
-    //(`origin is : ${req.headers.origin}`);
     
     if (req.headers.origin){
         res.setHeader('Access-Control-Allow-Origin', req.headers.origin );
@@ -59,11 +60,6 @@ app.use((req, res, next)=>{
     }
     next();                                 
 });
-
-app.use(fileUpload( {
-    defCharset: 'utf8',
-    defParamCharset: 'utf8'
-} ));
 
 
 
@@ -222,24 +218,37 @@ app.get('/active/:id', (req, res) => {
      } )
 })
 
-app.post('/upload', function(req, res) { 
-    console.log(req.files);
-    console.log(req.session);
-    const { name, data } = req.files.profile_image
-    if (!name && !data) {
-      return res.status(400).send('No files were uploaded.');
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "profile");
+    },
+    filename: (req, file, cb) => {
+      const ext = file.mimetype.split("/")[1];
+      cb(null, `${file.fieldname}-${req.session.account_no}.${ext}`);
+    },
+  });
+
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.split("/")[1] === "jpeg") {
+        cb(null, true);
+    } else {
+        cb(new Error("Not an Image"), false);
     }
-    req.files.profile_image.mv('./profile/' + name, function (err) {
-        if (err){
-            console.log(err);
-        }
-        else{
-            console.log('er are good');
-        }
-    })
+};
+
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter,
+  });
+
+app.post("/upload", upload.single("profile_image"), (req, res) => {
+    console.log(req.file);
+
+    uploadBasic( `profile_image-${req.session.account_no}.jpeg` )
+
     req.knex_object('cathay_users')
     .where({account_no : req.session.account_no})
-    .update({ profile : name }).then(()=>{})
+    .update({ profile : `profile_image-${req.session.account_no}.jpg` }).then(()=>{})
 
     req.knex_object('cathay_users')
     .where({account_no : req.session.account_no})
@@ -257,6 +266,28 @@ app.post('/upload', function(req, res) {
     res.status(200)
 
   });
+
+// app.post('/upload', function(req, res) { 
+//     console.log(req.files);
+//     console.log(req.session);
+
+//     const { name, data } = req.files.profile_image
+
+//     if (!name && !data) {
+//       return res.status(400).send('No files were uploaded.');
+//     }
+//     req.files.profile_image.mv('./profile/' + name, function (err) {
+//         if (err){
+//             console.log(err);
+//         }
+//         else{
+//             console.log('we are good');
+//         }
+//     })
+
+
+
+//   });
 
 app.get('*', (req, res) => {
     res.render('not_found.ejs', {user : 'not found'})

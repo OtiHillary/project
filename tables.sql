@@ -48,10 +48,4 @@ CREATE TABLE profile_images (
 );
 
 
-INSERT INTO cathay_transactions (amount, cr_dr, iban, swift, person, time_stamp, user_id) VALUES 
-('123,000', 'credit', 123454321, 234565432, 'john woo', '01/02/18', 8105966585),
-('1,000,000', 'credit', 123454321, 234565432, 'EXL limited', '01/02/18', 8105966585),
-('5,080', 'credit', 123454321, 234565432, 'HTFS united reserve ', '01/02/19', 8105966585),
-('12,000', 'credit', 123454321, 234565432, 'Gabriella Gomez', '01/02/21', 8105966585);
-
-SELECT * FROM cathay_users JOIN cathay_transactions ON cathay_transactions.user_id = cathay_users.id;
+UPDATE cathay_users SET balance = '1934000' WHERE account_no = '49949493';

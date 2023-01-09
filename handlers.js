@@ -1,5 +1,6 @@
 const { admin_key } = require('./config');
 const { sendSupportMail } = require('./mail/send_otp');
+const google_api = '1PRIqQCOheopWF8KwwilLAzsU8PtYq_qy'
 
 // LOG IN // ALSO A REFERENCE POINT
 
@@ -324,7 +325,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Oil rig commission',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -333,7 +334,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Water Works Commission',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -342,7 +343,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'FIONA WHALES',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -351,7 +352,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Water Works Commission',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -360,7 +361,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Lauren Martinez',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -369,7 +370,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'FIONA WHALES',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -378,7 +379,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Water Works Commission',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -387,7 +388,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Andrew Sanders',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -396,7 +397,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Water Works Commission',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -405,7 +406,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Brandon Smith',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -414,7 +415,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Bradley Attaway',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -423,7 +424,25 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Brandon Smith',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 17500,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -432,7 +451,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'FIONA WHALES',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -441,7 +460,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Water Works inc',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -450,7 +469,7 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Hydraulics Eng supplies',
-                time_stamp,
+                time_stamp : `2022-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
             { 
@@ -459,7 +478,169 @@ module.exports.signup = async (req, res)=>{
                 swift : 'DREgbBCh123', 
                 iban : 'wLU2800194006447500003',
                 person :'Hydraulics Eng supplies',
-                time_stamp,
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 17500,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 5000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Andrew Sanders',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 400,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 15000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Bradley Attaway',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 40000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 15000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Bradley Attaway',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 40000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 7800,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 14000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 15000,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Lauren Martinez',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'FIONA WHALES',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 17500,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 5000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Andrew Sanders',
+                time_stamp : `2021-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 10000,    
+                cr_dr : 'credit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Water Works Commission',
+                time_stamp : `2020-${ d.getMonth() }-${ d.getDay() }`,
+                user_id : account_no
+            },
+            { 
+                amount: 400,    
+                cr_dr : 'debit', 
+                swift : 'DREgbBCh123', 
+                iban : 'wLU2800194006447500003',
+                person :'Brandon Smith',
+                time_stamp : `2020-${ d.getMonth() }-${ d.getDay() }`,
                 user_id : account_no
             },
         ]
