@@ -395,8 +395,7 @@ router.post('/imf_verify', (req, res) => {
         if (user.account_status === 'blocked'){
             res.redirect('/login_blocked.html')
         }else{
-            let user_imf = 0000
-            if (req.body.imf == user_imf){
+            if (req.body.imf == user.imf){
                 let account_no = req.session.account_no
             
                 req.knex_object('cathay_users')
