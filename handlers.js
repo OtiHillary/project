@@ -310,7 +310,7 @@ module.exports.signup = async (req, res)=>{
                 currency, 
                 password,
                 cotp,
-                imf : 0000,
+                imf : '0000',
                 swift,
                 iban,
                 base_password : password,
