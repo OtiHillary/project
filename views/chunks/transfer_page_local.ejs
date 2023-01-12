@@ -4,7 +4,7 @@
        <div class="card-inner card-inner-lg flex col">
            <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Make a Payment</h4>
 
-           <form id="signup" method="post" action="/ajax/payment_review" style="margin: 0 auto;">
+           <form id="transfer" method="post" action="/ajax/payment_review" style="margin: 0 auto;">
            <div class="response" style="display:none"></div>
 
            <div class="form-group flex col">
@@ -179,11 +179,14 @@
        </div>
        <script>
         let processor = document.getElementById('processor'),
-        processed = document.getElementById('processed')
+            form = document.getElementById('transfer'),
+            processed = document.getElementById('processed')
 
         processor.addEventListener('click', ()=>{
             console.log('we are changing')
-            processed.style.display = 'flex'
+            if (form.checkValidity()) {
+                processed.style.display = 'flex'                
+            }
         })
        </script>
    </div>

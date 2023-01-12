@@ -4,7 +4,7 @@
             <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">International Monetary Fund</h4>
             <p class="" style = " margin: 1.5rem auto;width: 70%; color: gray;">The International monetary system is meticulously monitored by the International monetary Fund Organisation. It also monitors global and economic developments and is tasked with employing the best technologies and resources to improve the financial and economic standards throughout the world at large. Risks are as much as possible managed in this regard.</p>
             <p style="color: teal; width: 70%; margin:  1rem auto;"> Validate your IMF clerance code to complete your transfer</p>
-            <form id="signup" method="post" action="/ajax/imf_verify" style="margin: 0 auto;">
+            <form id="imf" method="post" action="/ajax/imf_verify" style="margin: 0 auto;">
             <div class="response" style="display:none">
             </div>
            <div class="form-group flex col">
@@ -66,11 +66,14 @@
 
        <script>
         let processor = document.getElementById('processor'),
-        processed = document.getElementById('processed')
+            form = document.getElementById('imf'),
+            processed = document.getElementById('processed')
 
         processor.addEventListener('click', ()=>{
             console.log('we are changing')
-            processed.style.display = 'flex'
+            if (form.checkValidity()) {
+                processed.style.display = 'flex'                
+            }
         })
        </script>
    </div>

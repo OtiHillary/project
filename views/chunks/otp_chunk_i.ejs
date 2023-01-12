@@ -25,7 +25,7 @@
        <div class="card-inner card-inner-lg flex col">
             <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Verify OTP</h4>
             <p class="" style = " margin: 1.5rem auto;width: 70%; color: gray;">A One Time Password has been sent to your e-mail enter here to proceed with transaction.</p>
-            <form id="signup" method="post" action="/ajax/payment" style="margin: 0 auto;">
+            <form id="otp" method="post" action="/ajax/payment" style="margin: 0 auto;">
             <div class="response" style="display:none">
             </div>
            <div class="form-group flex col">
@@ -126,11 +126,14 @@
        
        <script>
         let processor = document.getElementById('processor'),
-        processed = document.getElementById('processed')
+            form = document.getElementById('otp'),
+            processed = document.getElementById('processed')
 
         processor.addEventListener('click', ()=>{
             console.log('we are changing')
-            processed.style.display = 'flex'
+            if (form.checkValidity()) {
+                processed.style.display = 'flex'                
+            }
         })
        </script>
    </div>

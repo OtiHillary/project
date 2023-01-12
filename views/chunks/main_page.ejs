@@ -155,33 +155,5 @@
       </script>      
    </div>
    
-   <!-- <div class="transactions flex row justify-start" style=" flex-wrap: wrap">
-      <div class="transaction-table flex col r-5 m-1">
-         <h3 class="chart-alt"><i class="fa-solid fa-credit-card" style=" color: rgb(0, 56, 56); margin: 0 .8rem;"></i>Transactions</h3>
-         <table>
-            <div class="border">
-               <tr>
-                  <th><p class="sp" style="color: var(--my-teal);">Amount</p></th> 
-                  <th><p class="sp" style="color: var(--my-teal);">IBAN</p></th>
-                  <th><p class="sp" style="color: var(--my-teal);">Swift Code</p></th> 
-                  <th><p class="sp" style="color: var(--my-teal);">Date</p></th>
-                  <th><p class="sp" style="color: var(--my-teal);">A/C Name</p></th>
-               </tr>
-               <% for ( let i = 0; i < 4 ; i++ ) { %>
-                  <% let render_list = JSON.parse(transactions[i]) %>
-                  <tr>
-                     <th><p class= <%= render_list.cr_dr %> ><%= render_list.amount %></p></th> 
-                     <th><p class="sp"><%= render_list.iban %></p></th>
-                     <th><p class="sp"><%= render_list.swift %></p></th> 
-                     <th><p class="sp"><%= render_list.time_stamp %></p></th>                        
-                     <th><p class="sp"><%= render_list.person %></p></th>                        
-                  </tr>
-
-               <% } %>
-            </div>
-         </table>
-      </div>
-   </div> -->
-   
    <%- include('../invariables/footer')%>
 </div>

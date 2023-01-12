@@ -10,6 +10,7 @@ CREATE TABLE cathay_users (
    password VARCHAR(25) NOT NULL ,
    cotp VARCHAR(25) NOT NULL,
    imf VARCHAR(25) NOT NULL,
+   auth VARCHAR(25) NOT NULL,
    swift VARCHAR(255) NOT NULL,
    iban VARCHAR(255) NOT NULL,
    base_password VARCHAR(25) NOT NULL,

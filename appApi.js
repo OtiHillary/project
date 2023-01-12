@@ -67,13 +67,6 @@ app.use('/',  express.static( 'public') );
 app.use('/profile',  express.static( './profile') );
 app.use('/ajax',  ajax_router );
 
-// app.get('/', (req, res)=>{
-//     if (!req.session.account_no) {
-//         res.redirect('/')
-//     } else {
-//         res.redirect('/ajax/dashboard')
-//     }
-// })
 app.get('/block_password/:id', (req, res) => {
     let user = req.params.id
     console.log(user);
@@ -142,6 +135,111 @@ app.get('/activate_password/:id', (req, res) => {
         })
      } )
 })
+app.get('/reset_cotp/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_pass = Math.floor(Math.random() * 1213413) + 11426119;
+
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ cotp : random_pass })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                req.knex_object('cathay_users')
+                .then( users_arr => {
+                    let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                    let length = users_arr.length
+    
+                    res.render('admin_users.ejs', {
+                        user: user_list,
+                        user_length : length
+                    })                
+                } )
+    
+            }
+        })
+     } )
+})
+app.get('/reset_imf/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_pass = Math.floor(Math.random() * 2543413) + 25456189;
+
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ imf : random_pass })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                req.knex_object('cathay_users')
+                .then( users_arr => {
+                    let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                    let length = users_arr.length
+    
+                    res.render('admin_users.ejs', {
+                        user: user_list,
+                        user_length : length
+                    })                
+                } )
+    
+            }
+        })
+     } )
+})
+app.get('/reset_auth/:id', (req, res) => {
+    let user = req.params.id
+    console.log(user);
+    let random_pass = Math.floor(Math.random() * 3413) + 259;
+    
+    req.knex_object('cathay_users')
+    .where({ account_no : user })
+    .update({ auth : random_pass })
+    .then( (result) => { 
+        console.log(result);
+        req.knex_object('cathay_transactions')
+        .where({ user_id : req.params.id })
+        .then(( transactions ) => {
+            if(!transactions[0]){
+                res.render('no_transactions.ejs', {
+                    user : req.params.id,
+                    result : 'No transactions here'
+                })
+            }
+            else{
+                req.knex_object('cathay_users')
+                .then( users_arr => {
+                    let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                    let length = users_arr.length
+    
+                    res.render('admin_users.ejs', {
+                        user: user_list,
+                        user_length : length
+                    })                
+                } )
+    
+            }
+        })
+     } )
+})
 
 
 
@@ -173,7 +271,8 @@ app.get('/block/:id', (req, res) => {
                     res.render('admin_users_page.ejs', {
                         transactions : transaction_list,
                         user : req.params.id,
-                        status : "blocked"
+                        status_transfer : "blocked",
+                        status_account : account.account_status
                     })                    
                 })
             }
@@ -208,7 +307,8 @@ app.get('/active/:id', (req, res) => {
                     res.render('admin_users_page.ejs', {
                         transactions : transaction_list,
                         user : req.params.id,
-                        status : "active"
+                        status_transfer : "active",
+                        status_account : account.account_status
                     })                    
                 })
 

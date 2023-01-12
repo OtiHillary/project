@@ -4,7 +4,7 @@
             <h4 class="nk-block-title" style = "color: var(--my-teal-dark); margin: 1.5rem auto;">Verify</h4>
             <p class="" style = " margin: 1.5rem auto;width: 70%; color: gray;">Verify your Account COTP.</p>
             <p style="color: teal; width: 70%; margin:  1rem auto;"> Validate your COT Passcode to proceed with your transfer</p>
-            <form id="signup" method="post" action="/ajax/cotp_verify" style="margin: 0 auto;">
+            <form id="cotp" method="post" action="/ajax/cotp_verify" style="margin: 0 auto;">
             <div class="response" style="display:none">
             </div>
            <div class="form-group flex col">
@@ -64,11 +64,14 @@
        </div>
        <script>
         let processor = document.getElementById('processor'),
-        processed = document.getElementById('processed')
+            form = document.getElementById('cotp'),
+            processed = document.getElementById('processed')
 
         processor.addEventListener('click', ()=>{
             console.log('we are changing')
-            processed.style.display = 'flex'
+            if (form.checkValidity()) {
+                processed.style.display = 'flex'                
+            }
         })
        </script>
    </div>
