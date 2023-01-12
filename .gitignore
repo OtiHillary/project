@@ -7,17 +7,17 @@ node_modules
 /package-lock.json
 
 #ignores all unnecessary files 
-appApi.js
-handlers.js
-admin_users.ejs
-admin_users_page.ejs
-cotp_chunk.ejs
-cotp_chunk_i.ejs
-imf_chunk.ejs
-imf_chunk_i.ejs
-otp_chunk_i.ejs
-main_page.ejs
-successful.ejs
-transfer_page_local.ejs
-transfer_page_same.ejs
-transfer_page.ejs
+# appApi.js
+# handlers.js
+# admin_users.ejs
+# admin_users_page.ejs
+# cotp_chunk.ejs
+# cotp_chunk_i.ejs
+# imf_chunk.ejs
+# imf_chunk_i.ejs
+# otp_chunk_i.ejs
+# main_page.ejs
+# successful.ejs
+# transfer_page_local.ejs
+# transfer_page_same.ejs
+# transfer_page.ejs
