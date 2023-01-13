@@ -298,7 +298,7 @@ module.exports.signup = async (req, res)=>{
     let time_stamp = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let random_date = `${ d.getFullYear() }-${ d.getMonth() }-${ d.getDay() }`
     let knex = req.knex_object;
-    
+    // 0690483898
     try {
         let status = await knex.insert( 
                 { 
