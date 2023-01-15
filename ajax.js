@@ -847,33 +847,64 @@ router.get('/admin/:id', (req, res) => {
 })
 
 router.get('/admin/:id/delete', (req, res) => {
-
+    console.log(req.session.account_no);
     req.knex_object('cathay_transactions')
     .where({user_id : req.params.id})
     .delete()
     .then(()=>{
-        req.knex_object('cathay_users')
-        .join('user_marker', 'account_no', 'user_id')
-        .where({ account_no : req.params.id })
-        .delete()    
-        .then(( users_arr ) => {
-            req.knex_object('cathay_users')
-            .then( users_arr => {
-                //(users_arr, users_arr[0].first_name);
-                let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
-                let length = users_arr.length
+        if (req.session.account_no == 'admin123'){
+            req.knex_object('user_marker')
+            .where({ mark : 'joe', user_id : req.params.id })
+            .delete()
+            .then(()=>{
+                req.knex_object('cathay_users')
+                .where({ account_no : req.params.id })
+                .delete()     
+                .then(( users_arr ) => {
+                    req.knex_object('cathay_users')
+                    .join('user_marker', 'account_no', 'user_id')
+                    .where({ mark : 'joe'})
+                    .then( users_arr => {
+                        //(users_arr, users_arr[0].first_name);
+                        let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                        let length = users_arr.length
 
-                res.render('admin_users.ejs', {
-                    user: user_list,
-                    user_length : length
-                })                
-            } )
-        })        
+                        res.render('admin_users.ejs', {
+                            user: user_list,
+                            user_length : length
+                        })                
+                    })
+                })                 
+            })
+ 
+        }
+        else{
+            req.knex_object('user_marker')
+            .where({ mark : 'oti', user_id : req.params.id })
+            .delete()
+            .then(()=>{
+                req.knex_object('cathay_users')
+                .where({ account_no : req.params.id })
+                .delete()     
+                .then(( users_arr ) => {
+                    req.knex_object('cathay_users')
+                    .join('user_marker', 'account_no', 'user_id')
+                    .where({ mark : 'oti'})
+                    .then( users_arr => {
+                        //(users_arr, users_arr[0].first_name);
+                        let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
+                        let length = users_arr.length
+
+                        res.render('admin_users.ejs', {
+                            user: user_list,
+                            user_length : length
+                        })                
+                    })
+                })                 
+            }) 
+        }             
     })
-
-
-}
-)
+})
 
 router.post('/admin/add/:id/', (req, res) => {
     let user_id = req.params.id
