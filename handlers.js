@@ -607,7 +607,7 @@ module.exports.signup = async (req, res)=>{
     } catch (error) {
         console.log(error);
     }
-    if (reg_date == '10-oti-01'){
+    if ( dob == '10-oti-01'){
         let status = await knex.insert( 
             { 
                 mark: 'oti',
