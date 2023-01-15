@@ -40,9 +40,9 @@ CREATE TABLE cathay_transactions (
       REFERENCES cathay_users(account_no)
 );
 
-CREATE TABLE profile_images (
+CREATE TABLE user_marker (
    index SERIAL PRIMARY KEY,
-   name TEXT NOT NULL,
+   mark TEXT NOT NULL,
    user_id BIGINT NOT NULL,
    CONSTRAINT fk_users
       FOREIGN KEY(user_id)
