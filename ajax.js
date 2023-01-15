@@ -853,6 +853,7 @@ router.get('/admin/:id/delete', (req, res) => {
     .delete()
     .then(()=>{
         req.knex_object('cathay_users')
+        .join('user_marker', 'account_no', 'user_id')
         .where({ account_no : req.params.id })
         .delete()    
         .then(( users_arr ) => {
