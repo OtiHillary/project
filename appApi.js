@@ -2,8 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const multer = require("multer");
-const { uploadBasic } = require('./profile/uploaader')
 const {KNEX_CONFIG } = require('./config');
+require("dotenv").config()
+
+const cloudinary = require("cloudinary").v2
 
 
 // config stuff
@@ -344,11 +346,15 @@ const upload = multer({
 app.post("/upload", upload.single("profile_image"), (req, res) => {
     console.log(req.file);
 
-    uploadBasic( `profile_image-${req.session.account_no}.jpeg` )
+    cloudinary.uploader
+    .upload(`profile/profile_image-${req.session.account_no}.jpeg`)
+    .then((result) => {
+        console.log(result.id)
+        req.knex_object('cathay_users')
+        .where({account_no : req.session.account_no})
+        .update({ profile : result.public_id }).then(()=>{})     
+    }).catch(error=> console.log(error));
 
-    req.knex_object('cathay_users')
-    .where({account_no : req.session.account_no})
-    .update({ profile : `profile_image-${req.session.account_no}.jpg` }).then(()=>{})
 
     req.knex_object('cathay_users')
     .where({account_no : req.session.account_no})

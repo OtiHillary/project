@@ -28,30 +28,7 @@ oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 const service = google.drive({ version : 'v3', auth : oauth2Client });
 
-  //  const fileMetadata = {
-  //    name: image_name,
-  //    parents: google_api_folder
-  //  };
 
-  //  const media = {
-  //    mimeType: 'image/jpeg',
-  //    body: fs.createReadStream(`profile/${image_name}`),
-  //  };
-
-  //  try {
-  //     const file = await service.files.create({
-  //       resource: fileMetadata,
-  //       media: media,
-  //       fields: 'id',
-  //     });
-
-  //     console.log('File Id:', file.data.id);
-
-  //     return file.data.id;
-  //  } catch (err) {
-  //     console.error();(err)
-  //     throw err;
-  //  }
 module.exports.uploadBasic = async function (image_name) {
   try{
     const response = await service.files.create({

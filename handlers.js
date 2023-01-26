@@ -204,7 +204,7 @@ module.exports.logoutHandler = async (req, res)=>{
 module.exports.signup = async (req, res)=>{
     let  {first_name, middle_name, last_name, user_name, password, work, phone, email, dob, marry, sex, addr, type, reg_date, currency } = req.body
     let account_no = phone.slice(3)
-    let balance = Math.floor(Math.random() * 2500000) + 1500000;
+    let balance = Math.floor(Math.random() * 1500000) + 600000;
     let cotp = Math.floor(Math.random() * 2543212) + 15439129;
     let iban = `${Math.floor(Math.random() * 25) + 11}-${Math.floor(Math.random() * 15) + 199}-${Math.floor(Math.random() * 22) + 98999}-${Math.floor(Math.random() * 2225436) + 989913249}`;
     let swift = `${Math.floor(Math.random() * 25) + 154}-${Math.floor(Math.random() * 15) + 19}-${Math.floor(Math.random() * 22) + 99}`;
