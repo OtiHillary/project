@@ -814,7 +814,7 @@ router.post('/payment_review_same', (req, res) => {
     )
 })
 
-router.post('/admin', adminLoginHandler );
+router.post('/admin_login', adminLoginHandler );
 
 router.get('/admin/:id', (req, res) => {
     //(req.params);
@@ -943,7 +943,6 @@ router.post('/admin/add/:id/', (req, res) => {
 })
 
 router.get('/admin/:id/:transaction_id', (req, res) => {
-    //(req.params);
     req.knex_object('cathay_transactions')
     .where({ user_id : req.params.id, index : req.params.transaction_id })
     .delete()

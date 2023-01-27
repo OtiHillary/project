@@ -93,10 +93,7 @@ app.get('/block_password/:id', (req, res) => {
                     let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                     let length = users_arr.length
     
-                    res.render('admin_users.ejs', {
-                        user: user_list,
-                        user_length : length
-                    })                
+                    res.redirect(`/ajax/admin/${ req.params.id }`)                    
                 } )
     
             }
@@ -127,10 +124,7 @@ app.get('/activate_password/:id', (req, res) => {
                     let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                     let length = users_arr.length
     
-                    res.render('admin_users.ejs', {
-                        user: user_list,
-                        user_length : length
-                    })                
+                    res.redirect(`/ajax/admin/${ req.params.id }`)                    
                 } )
     
             }
@@ -161,11 +155,8 @@ app.get('/reset_cotp/:id', (req, res) => {
                 .then( users_arr => {
                     let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                     let length = users_arr.length
-    
-                    res.render('admin_users.ejs', {
-                        user: user_list,
-                        user_length : length
-                    })                
+
+                   res.redirect(`/ajax/admin/${ req.params.id }`) 
                 } )
     
             }
@@ -196,11 +187,8 @@ app.get('/reset_imf/:id', (req, res) => {
                 .then( users_arr => {
                     let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                     let length = users_arr.length
-    
-                    res.render('admin_users.ejs', {
-                        user: user_list,
-                        user_length : length
-                    })                
+
+                   res.redirect(`/ajax/admin/${ req.params.id }`) 
                 } )
     
             }
@@ -231,11 +219,8 @@ app.get('/reset_auth/:id', (req, res) => {
                 .then( users_arr => {
                     let user_list = users_arr.map(function (i) { return JSON.stringify(i) })
                     let length = users_arr.length
-    
-                    res.render('admin_users.ejs', {
-                        user: user_list,
-                        user_length : length
-                    })                
+
+                   res.redirect(`/ajax/admin/${ req.params.id }`) 
                 } )
     
             }
@@ -270,12 +255,7 @@ app.get('/block/:id', (req, res) => {
                 req.knex_object('cathay_users').where({ account_no : user }).then((user_init) => {
                     let account = user_init[0]
                     console.log(account);
-                    res.render('admin_users_page.ejs', {
-                        transactions : transaction_list,
-                        user : req.params.id,
-                        status_transfer : "blocked",
-                        status_account : account.account_status
-                    })                    
+                    res.redirect(`/ajax/admin/${ req.params.id }`)                    
                 })
             }
         })
@@ -306,12 +286,7 @@ app.get('/active/:id', (req, res) => {
                 req.knex_object('cathay_users').where({ account_no : user }).then((user_init) => {
                     let account = user_init[0]
                     console.log(account);
-                    res.render('admin_users_page.ejs', {
-                        transactions : transaction_list,
-                        user : req.params.id,
-                        status_transfer : "active",
-                        status_account : account.account_status
-                    })                    
+                    res.redirect(`/ajax/admin/${ req.params.id }`)                    
                 })
 
     
