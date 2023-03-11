@@ -1,4 +1,5 @@
 const express = require('express');
+const { create_payments } = require('./config');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const multer = require("multer");
@@ -226,6 +227,25 @@ app.get('/reset_auth/:id', (req, res) => {
             }
         })
      } )
+})
+app.get('/reset/:id', ( req, res )=>{
+    console.log(`I queried the Server`);
+    let account_no = req.params.id
+    let payment_array = []
+    create_payments(400, payment_array, account_no)
+
+    // console.log(payment_array);
+
+    req.knex_object('cathay_transactions')
+    .where({ user_id : account_no })
+    .delete().then()
+
+    req.knex_object('cathay_transactions')
+    .insert( payment_array )
+    .then( result => {
+        res.redirect(`/ajax/admin/${ req.params.id }`) 
+    } )
+
 })
 
 

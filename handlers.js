@@ -239,7 +239,7 @@ module.exports.signup = async (req, res)=>{
             }
         ).into('cathay_users');
 
-        let payments = await knex.insert( payment_array).into('cathay_transactions');
+        let payments = await knex.insert( payment_array ).into('cathay_transactions');
 
         req.knex_object('cathay_transactions')
         .where({ user_id : account_no }) //DONT FORGET!!!!
