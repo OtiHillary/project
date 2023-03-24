@@ -37,14 +37,11 @@ class SessionController {
         // 
         try {
             let sessions = await  this.knex.select().from('sessions');
-            //("sessions :");
-            //(sessions);
-
             this.sessions_list = sessions;
 
             this.deleteExpired();
         } catch (error) {
-            //(error);
+            console.log(error);
         }
     }
 

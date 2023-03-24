@@ -49,5 +49,19 @@ CREATE TABLE user_marker (
       REFERENCES cathay_users(account_no)
 );
 
+CREATE TABLE chat_sessions (
+   sesh_id TEXT PRIMARY KEY
+);
+
+CREATE TABLE chats (
+   index SERIAL PRIMARY KEY,
+   text TEXT NOT NULL,
+   type TEXT NOT NULL,
+   user_id TEXT NOT NULL,
+   CONSTRAINT fk_users
+      FOREIGN KEY(user_id)
+      REFERENCES chat_sessions(sesh_id)
+);
+
 
 UPDATE cathay_users SET balance = '1934000' WHERE account_no = '49949493';

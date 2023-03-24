@@ -2,7 +2,6 @@ const express = require('express');
 const { create_payments } = require('./config');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const multer = require("multer");
 const {KNEX_CONFIG } = require('./config');
 require("dotenv").config()
 
@@ -39,6 +38,10 @@ const session_object =  sessions( {
     resave: false,
     store,
 })  
+
+const createSession = (sesh_id, req)=>{
+    req.session.sesh_id = sesh_id;
+}
 
 app.set('view-engine', 'ejs')
 app.set('trust proxy', true)
@@ -234,21 +237,124 @@ app.get('/reset/:id', ( req, res )=>{
     let payment_array = []
     create_payments(400, payment_array, account_no)
 
-    // console.log(payment_array);
-
     req.knex_object('cathay_transactions')
     .where({ user_id : account_no })
     .delete().then()
 
     req.knex_object('cathay_transactions')
-    .insert( payment_array )
+   .insert( payment_array )
     .then( result => {
         res.redirect(`/ajax/admin/${ req.params.id }`) 
     } )
 
 })
 
+// livechat API section
 
+app.get('/livechat/customer/:id', (req, res) => {
+    let sesh_id = req.params.id
+    req.knex_object('chat_sessions').where({sesh_id : sesh_id}).then((result)=>{
+        console.log('i checked the', result)
+
+        if (result == "") {
+            console.log('start create session');
+
+            req.knex_object('chat_sessions')
+            .insert({sesh_id: sesh_id})
+            .then()
+
+            req.knex_object('chats')
+            .where({ user_id: sesh_id })
+            .then(result => {
+                // console.log(result);
+                res.status(200).json(result)
+            })
+        }
+        else{
+            console.log(' start end session');
+
+            req.knex_object('chats')
+            .where({ user_id: sesh_id })
+            .then(result => {
+                res.status(200).json(result)
+            })        
+        }
+    })
+
+    createSession( sesh_id, req )
+})
+
+app.get('/livechat/end/:id', (req, res) => {
+    let sesh_id = req.params.id
+    req.session.destroy((err) => { res.status(200).json('success') })
+
+    req.knex_object('chats')
+    .where({ user_id : sesh_id })
+    .delete()
+    .then()
+
+    req.knex_object('chat_sessions')
+    .where({ sesh_id : sesh_id })
+    .delete()
+    .then(() => {
+        console.log('deleted');
+    })
+})
+
+app.post('/livechat/customer/post', (req, res) => {
+    let user_id = req.session.sesh_id
+    console.log( req.session);
+
+    let text_message = req.body.text__input
+    req.knex_object('chats')
+    .insert( {text: text_message, type: 'sent', user_id: user_id} )
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result)
+    })
+})
+
+app.get('/livechat/admin', (req, res) => {
+    req.knex_object('chats')
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result)
+    })
+})
+
+app.get('/livechat/admin/:id', (req, res) =>{
+    let user_id = req.params.id
+
+    req.knex_object('chats')
+    .insert( {text: text_message, type: 'received'} )
+    .then( () => {
+        return req.knex_object('chats')
+    })
+    .where({ user_id: user_id })
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result)
+    })
+})
+
+app.post('/livechat/admin', (req, res) => {
+    console.log(req.body);
+
+    let text_message = req.body.text__input
+    req.knex_object('chats')
+    .insert( {text: text_message, type: 'received'} )
+    .then( () => {
+        return req.knex_object('chats')
+    })
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result)
+    })
+})
+
+app.get('/admin_chats', (req, res) => {
+    res.render('admin_chatlist.ejs')
+})
 
 app.get('/block/:id', (req, res) => {
     let user = req.params.id
@@ -315,30 +421,7 @@ app.get('/active/:id', (req, res) => {
      } )
 })
 
-const multerStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "profile");
-    },
-    filename: (req, file, cb) => {
-      const ext = file.mimetype.split("/")[1];
-      cb(null, `${file.fieldname}-${req.session.account_no}.${ext}`);
-    },
-  });
-
-const multerFilter = (req, file, cb) => {
-    if (file.mimetype.split("/")[1] === "jpeg") {
-        cb(null, true);
-    } else {
-        cb(new Error("Not an Image"), false);
-    }
-};
-
-const upload = multer({
-    storage: multerStorage,
-    fileFilter: multerFilter,
-  });
-
-app.post("/upload", upload.single("profile_image"), (req, res) => {
+app.post("/upload", (req, res) => {
     console.log(req.file);
 
     cloudinary.uploader
@@ -367,28 +450,6 @@ app.post("/upload", upload.single("profile_image"), (req, res) => {
     res.status(200)
 
   });
-
-// app.post('/upload', function(req, res) { 
-//     console.log(req.files);
-//     console.log(req.session);
-
-//     const { name, data } = req.files.profile_image
-
-//     if (!name && !data) {
-//       return res.status(400).send('No files were uploaded.');
-//     }
-//     req.files.profile_image.mv('./profile/' + name, function (err) {
-//         if (err){
-//             console.log(err);
-//         }
-//         else{
-//             console.log('we are good');
-//         }
-//     })
-
-
-
-//   });
 
 app.get('*', (req, res) => {
     res.render('not_found.ejs', {user : 'not found'})

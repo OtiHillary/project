@@ -1,0 +1,37 @@
+
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>users</title>
+</head>
+<body>
+   <%- include('./invariables/styles') %>
+   <nav class="admin_nav">
+      <!-- <a href="" class="chat"><strong class="neutral">&larr;</strong></a> -->
+   </nav>
+   <div class="flex col r-7" style="margin: auto;">
+      <h3>Chats</h3>
+      <ul>
+         <% for ( let i = 0; i < 2; i++ ) { %>
+            <li class="flex col justify-between" style="list-style: none; background-color: rgba(0, 128, 128, 0.135) ; border: 1px solid teal; padding: 2rem; margin: auto; display: flex; flex-wrap: wrap;">
+               <a style="
+                  text-decoration: none;
+                  color: teal;
+                  font-size: 1.5rem;
+                  text-transform: capitalize;
+                  display: flex;
+                  justify-content: space-between;
+                  text-align: center;
+                  font-family: monospace;"
+                  class="neutral" > 
+                  <strong class="neutral">userId-2234ca1</strong>
+                  <strong class="red">9</strong>
+               </a>
+            </li>
+         <% } %>
+      </ul>   
+   </div>   
+</body>
+</html>
