@@ -322,27 +322,38 @@ app.get('/livechat/admin', (req, res) => {
     })
 })
 
-app.get('/livechat/admin/:id', (req, res) =>{
-    let user_id = req.params.id
-
-    req.knex_object('chats')
-    .insert( {text: text_message, type: 'received'} )
-    .then( () => {
-        return req.knex_object('chats')
-    })
-    .where({ user_id: user_id })
-    .then(result => {
-        console.log(result);
-        res.status(200).json(result)
+app.get('/livechat/admin_chat_sessions', (req, res) =>{
+    req.knex_object('chat_sessions')
+    .then( (result) => {
+        // let session_list = result[0]
+        let session_list = result.map(function (i) { return JSON.stringify(i) })
+        let length = result.length
+        res.render('admin_chatlist.ejs', {
+            session_list : session_list,
+            length : length,
+        })
     })
 })
 
-app.post('/livechat/admin', (req, res) => {
-    console.log(req.body);
+app.get('/livechat/admin/:id', (req, res) => {
+    let sesh_id = req.params.id
+    req.knex_object('chats')
+    .where({user_id : sesh_id})
+    .then(result => {
+        let text_list = result.map(function (i) { return JSON.stringify(i) })
+        let length = result.length
+        res.render('admin_chat.ejs', {
+            text_list : text_list,
+            length : length,
+            sesh_id : sesh_id
+        })
+    })
+})
 
+app.post('/livechat/admin/:id', (req, res) => {
     let text_message = req.body.text__input
     req.knex_object('chats')
-    .insert( {text: text_message, type: 'received'} )
+    .insert( {text: text_message, type: 'received', user_id: req.params.id} )
     .then( () => {
         return req.knex_object('chats')
     })
@@ -352,8 +363,7 @@ app.post('/livechat/admin', (req, res) => {
     })
 })
 
-app.get('/admin_chats', (req, res) => {
-    res.render('admin_chatlist.ejs')
+app.get('', (req, res) => {
 })
 
 app.get('/block/:id', (req, res) => {

@@ -1,0 +1,282 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>livechat sessions</title>
+</head>
+<body>
+   <style>
+       .livechat{
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         height: 80%;
+         width: 70%;
+         padding-bottom: 1rem;
+         background-color: white;
+			box-shadow: .1px .1px 10px grey;
+         border-radius: .5rem;
+			transition: all .2s;
+      }
+		.livechat__header{
+			background-color: teal;
+			color: white;
+			display: flex;
+			padding: .3rem;
+			height: 10%;
+			flex-direction: row;
+			justify-content: space-between;
+			border-radius: .5rem .5rem 0 0;
+		}
+		.livechat__body{
+			height:90%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.livechat__main{
+			overflow-y: scroll;
+			height: 90%;
+			position: relative;
+		}
+		.livechat__details{
+			display: flex;
+			flex-direction: row;
+		}
+		.livechat__header_image{
+			height: 2rem;
+			width: 2rem;
+			background-color: white;
+			border-radius: 50%;
+			margin: auto .3rem;
+			position: relative;
+		}
+		.online{
+			height: .6rem;
+			width: .6rem;
+			background-color: greenyellow;
+			border-radius: 50%;
+			position: absolute;
+			right: 0%;			
+		}
+		.livechat__header_details{
+			margin: auto 0;
+		}
+		.livechat__header_details p{
+			font-size: 13px;
+			line-height: 1;
+		}
+		.livechat__close{
+			cursor: pointer;
+		}
+		.livechat__close:hover p{
+			color: red;
+		}
+		.text p{
+			font-size: .6rem;
+		}
+		.received__text{
+			background-color: cornflowerblue;
+			color: white;
+			max-width: 80%;
+			margin: .8rem;
+			margin-right: auto;
+			padding: .5rem;
+			border-radius: 1rem 1rem 1rem 0;
+		}
+		.sent__text{
+			background-color: rgb(144, 251, 255);
+			color: black;
+			max-width: 80%;
+			margin: .8rem;
+			margin-left: auto;
+			padding: .5rem;
+			border-radius: 1rem 1rem 0 1rem;
+		}
+		.colm{
+			flex-direction: column;
+		}
+		.text__box{
+			width: 95%;
+			margin: .5rem auto;
+			height: 7%;
+			color: black;
+			background-color: white;
+			border-radius: 5px;
+			display: flex;
+			flex-direction: row;
+		}
+		.texter, .textbox{
+			width: 80%;
+			height: 100%;
+			border-radius: 5px;
+		}
+		.texter{
+			width: 100%;
+			border: 1px solid black;
+		}
+		.button{
+			height:100%;
+			outline: 0px;
+			width: 18%;
+			margin: auto;
+		}
+		.send{
+			width: 100%;
+			height: 100%;
+			border: 0px;
+			background-color: teal;
+			color: white;
+			font-size: .6rem;
+			border-radius: 5px;
+		}
+		.livechat__evoke{
+         position: fixed;
+         bottom: 5%;
+			right: 5%;
+			height: 3rem;
+			width: 3rem;
+			border-radius: 50%;
+			color: white;
+			background-color: teal;
+			transition: all .2s;
+		}
+
+   </style>
+
+
+
+   <!-- livechat -->
+<div id="switch_nought" class="livechat">
+	<form action="" style="height:100%">
+		<div class="livechat__header">
+			<div class="livechat__details">
+				<div class="livechat__header_image">
+					<img src="" alt="">
+					<div class="online"></div>
+				</div>
+				<div class="livechat__header_details">
+					<p><strong>GXC chatbot</strong></p>
+					<p style="font-size: 10px;">online</p>
+				</div>
+			</div>
+	
+			<div id="closer" class="livechat__close">
+				<p style="font-size: 2.2rem; margin: auto 0; line-height: .8;">&times;</p>
+			</div>
+		</div>
+		<div class="livechat__body">
+			<div class="livechat__main">
+				<div class="sent__text text">
+					<p>
+						Hello!, welcome to globalx-credit customer care live chat support,
+						Please kindly select your issue and send your account number.				
+					</p>
+				</div>
+				<div id = "from__db">	
+               <% for ( let i = 0; i < length; i++ ) { %>
+                  <% let obj = JSON.parse(text_list[i]) %>
+                  <div class="received__text text">
+                     <p><%= obj.text %></p>
+                  </div>
+               <% } %>				
+				</div>
+
+			</div>
+         <div id="sid" class="<%= sesh_id %>"></div>
+			<div class="text__box">
+				<div class="textbox">
+					<input type="text" name="" id="text__input" class="texter">
+				</div>
+				<div class="button">
+					<input id="submit" type="submit" value="Send" class="send">
+				</div>
+			</div>		
+		</div>	
+	</form>
+</div>
+
+<script>
+   let chatter = document.getElementById('submit'),
+      from__db = document.getElementById('from__db'),
+      db__array = []
+
+
+
+   function postData (event) {
+      event.preventDefault()
+      let sesh_id = document.getElementById('sid').className
+      text__input = document.getElementById('text__input')
+      body = {
+         text__input: text__input.value,
+      },
+
+      fetch(`http://localhost:8080/livechat/admin/${sesh_id}`,
+      {
+         method: 'POST',
+         credentials: 'include',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(body) ,
+      } 
+      ).then(res => {
+         return res.json()
+      }).then((value)=>{
+         db__array = value
+         text__input.value = ''
+         console.log(db__array)
+
+         // clear the div and refill it
+
+         from__db.innerHTML = null
+
+         db__array.map((index) => {
+            let div = document.createElement('div')
+            let p = document.createElement('p')
+            div.className = (index.type = 'text')? "sent__text text":"received__text text"
+            let text = document.createTextNode( `${index.text}` )
+            div.appendChild(p)
+            p.appendChild(text)
+            from__db.appendChild(div)
+         })
+
+      }
+      )
+   }
+   function fetchData(){
+      let sesh_id = document.getElementById('sid').className
+      fetch(`http://localhost:8080/livechat/customer/${sesh_id}`)
+      .then(res => res.json())
+      .then((value)=>{
+         db__array = value
+         console.log(db__array)
+
+         // clear the div and refill it
+
+         from__db.innerHTML = null
+
+         db__array.map((index) => {
+            let div = document.createElement('div')
+            let p = document.createElement('p')
+            div.className = (index.type = 'sent')?"received__text text":  "sent__text text"
+            let text = document.createTextNode( `${index.text}` )
+            div.appendChild(p)
+            p.appendChild(text)
+            from__db.appendChild(div)
+         })
+      }
+      )
+      setTimeout( fetchData, 3000);
+   
+   }
+   
+   chatter.addEventListener('click',postData)
+
+   setTimeout( fetchData, 3000);
+</script> 
+<!-- livechat -->
+</body>
+</html>

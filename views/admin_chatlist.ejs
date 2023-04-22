@@ -14,7 +14,9 @@
    <div class="flex col r-7" style="margin: auto;">
       <h3>Chats</h3>
       <ul>
-         <% for ( let i = 0; i < 2; i++ ) { %>
+         <% for ( let i = 0; i < length; i++ ) { %>
+            <% let obj = JSON.parse(session_list[i]) %>
+
             <li class="flex col justify-between" style="list-style: none; background-color: rgba(0, 128, 128, 0.135) ; border: 1px solid teal; padding: 2rem; margin: auto; display: flex; flex-wrap: wrap;">
                <a style="
                   text-decoration: none;
@@ -25,8 +27,9 @@
                   justify-content: space-between;
                   text-align: center;
                   font-family: monospace;"
-                  class="neutral" > 
-                  <strong class="neutral">userId-2234ca1</strong>
+                  class="neutral"
+                  href="/livechat/admin/<%= obj.sesh_id %>"> 
+                  <strong class="neutral">Livechat  ID : <%= obj.sesh_id %></strong>
                   <strong class="red">9</strong>
                </a>
             </li>
