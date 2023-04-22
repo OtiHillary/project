@@ -9,7 +9,7 @@ const { adminLoginHandler, loginHandler, logoutHandler, deleteHandler, signup, g
 const { password } = require('./mail/credentials');
 const { sendOtp, sendSupportMail, sendEmail } = require('./mail/send_otp');
 
-const storage = new HandyStorage('./tmp/store.json');
+const storage = new HandyStorage('/tmp/store.json');
 
 storage.setState({
     otp: 0000 ,
