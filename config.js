@@ -11,15 +11,22 @@ const KNEX_CONFIG =
     }
 }
 :
-{
+// {
+//     client: 'pg',
+//     connection: {
+//         host: '127.0.0.1',
+//         // host: '0.0.0.0',
+//         database: 'cathay',//
+//         port: 5432,
+//         user: 'postgres',
+//         password: 'HillaryOdezy123'
+//     }
+// };
+{  
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        // host: '0.0.0.0',
-        database: 'cathay',//
-        port: 5432,
-        user: 'postgres',
-        password: 'HillaryOdezy123'
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
     }
 };
 
