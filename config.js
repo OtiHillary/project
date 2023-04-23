@@ -14,7 +14,8 @@ const KNEX_CONFIG =
 {
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
+        // host: '127.0.0.1',
+        host: '0.0.0.0',
         database: 'cathay',//
         port: 5432,
         user: 'postgres',
